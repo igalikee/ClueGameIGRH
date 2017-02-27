@@ -1,6 +1,7 @@
 package experiment;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
@@ -21,7 +22,19 @@ public class IntBoard {
 	
 	public void calcAdjacencies(){
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		
+		for(int i = 0; i < 4; i++){
+			for(int j = 0; j < 4; j++){
+				Set tempSet = new HashSet<BoardCell>();
+				
+				if(i != 0){
+					tempSet.add(grid[i-1][j])
+				}
+				
+				tempSet.add(grid[i+1][j])
+				
+				adjMtx.put(grid[i][j], tempSet);
+			}
+		}
 	}
 
 	public void calcTargets(BoardCell startCell, int pathLength){
