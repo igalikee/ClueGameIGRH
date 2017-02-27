@@ -12,6 +12,8 @@ public class IntBoard {
 	Map<BoardCell, Set<BoardCell>> adjMtx;
 	
 	public IntBoard() {
+		targets = new HashSet<BoardCell>();
+		visited = new HashSet<BoardCell>();
 		grid = new BoardCell[4][4];
 		for(int i = 0; i < 4; i++){
 			for(int j = 0; j < 4; j++){
@@ -61,12 +63,24 @@ public class IntBoard {
 		}
 	}
 
-	public void calcTargets(BoardCell startCell, int pathLength){
+	public void calcTargets(BoardCell startCell, int numSteps){
+		
+		visited.add(startCell);
+		
+		for(BoardCell adjCell: adjMtx.get(startCell)){
+			if(visited.contains(adjCell)) continue;
+			visited.add(adjCell);
+			if(numSteps == 1) targets.add(adjCell);
+			else{
+				calcTargets(adjCell, numSteps-1);
+			}
+			visited.remove(adjCell);
+		}
 		
 	}
 	
 	public Set<BoardCell> getTargets(){
-		return null;
+		return targets;
 	}
 	
 	public Set<BoardCell> getAdjList(BoardCell cell){
