@@ -18,20 +18,44 @@ public class IntBoard {
 				grid[i][j] = new BoardCell(i,j);
 			}
 		}
+		calcAdjacencies();
 	}
 	
 	public void calcAdjacencies(){
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		for(int i = 0; i < 4; i++){
 			for(int j = 0; j < 4; j++){
-				Set tempSet = new HashSet<BoardCell>();
+				Set<BoardCell> tempSet = new HashSet<BoardCell>();
 				
-				if(i != 0){
-					tempSet.add(grid[i-1][j])
+				if(i > 0){
+					tempSet.add(grid[i-1][j]);
+					if (j > 0){
+						tempSet.add(grid[i][j - 1]);
+					}
+					
 				}
-				
-				tempSet.add(grid[i+1][j])
-				
+				if(i > 0){
+					tempSet.add(grid[i-1][j]);
+					if (j < 3){
+						tempSet.add(grid[i][j + 1]);
+					}
+					
+				}
+				if(i < 3){
+					tempSet.add(grid[i+1][j]);
+					if (j < 3){
+						tempSet.add(grid[i][j + 1]);
+					}
+					
+				}
+				if(i < 3){
+					tempSet.add(grid[i+1][j]);
+					if (j > 0){
+						tempSet.add(grid[i][j - 1]);
+					}
+					
+				}
+								
 				adjMtx.put(grid[i][j], tempSet);
 			}
 		}
@@ -46,11 +70,11 @@ public class IntBoard {
 	}
 	
 	public Set<BoardCell> getAdjList(BoardCell cell){
-		return null;
+		return adjMtx.get(cell);
 	}
 
 	public BoardCell getCell(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return grid[i][j];
 	}
 }
