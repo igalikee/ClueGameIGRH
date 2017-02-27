@@ -1,5 +1,6 @@
 package experiment;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -10,10 +11,16 @@ public class IntBoard {
 	Map<BoardCell, Set<BoardCell>> adjMtx;
 	
 	public IntBoard() {
-		// TODO Auto-generated constructor stub
+		grid = new BoardCell[4][4];
+		for(int i = 0; i < 4; i++){
+			for(int j = 0; j < 4; j++){
+				grid[i][j] = new BoardCell(i,j);
+			}
+		}
 	}
 	
 	public void calcAdjacencies(){
+		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		
 	}
 

@@ -4,9 +4,13 @@ public class BoardCell {
 	private int row;
 	private int column;
 
-	public BoardCell() {
-		//FIXME
+	public BoardCell(){
+		
 	}
-	//It works!!!!
+	
+	public BoardCell(int r, int c) {
+		row = r;
+		column = c;
+	}
 
 }
