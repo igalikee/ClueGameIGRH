@@ -5,10 +5,17 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import clueGame.BoardCell;
+
 public class Board {
 	private BoardCell[][] grid;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
+	
+	public static Map<Character, String> legend = null;
+	public static int rows;
+	public static int columns;
+	
 	Map<BoardCell, Set<BoardCell>> adjMtx;
 	
 	public Board() {
@@ -90,5 +97,37 @@ public class Board {
 	public BoardCell getCell(int i, int j) {
 		
 		return grid[i][j];
+	}
+
+	public static Board getInstance() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void setConfigFiles(String string, String string2) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void initialize() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public Map<Character, String> getLegend() {
+		return legend;
+	}
+
+	public int getNumRows() {
+		return rows;
+	}
+
+	public int getNumColumns() {
+		return columns;
+	}
+
+	public BoardCell getCellAt(int i, int j) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
