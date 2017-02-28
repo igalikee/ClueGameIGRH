@@ -8,15 +8,15 @@ import org.junit.Before;
 import org.junit.Test;
 
 import experiment.BoardCell;
-import experiment.IntBoard;
+import experiment.Board;
 
 public class IntBoardTests {
 
-	IntBoard board;
+	Board board;
 	
 	@Before
 	public void setup(){
-		board = new IntBoard();
+		board = new Board();
 	}
 	
 	/*

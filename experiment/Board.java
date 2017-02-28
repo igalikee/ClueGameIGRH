@@ -5,13 +5,13 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class IntBoard {
+public class Board {
 	private BoardCell[][] grid;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	Map<BoardCell, Set<BoardCell>> adjMtx;
 	
-	public IntBoard() {
+	public Board() {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
 		grid = new BoardCell[4][4];
