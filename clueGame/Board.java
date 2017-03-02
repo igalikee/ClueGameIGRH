@@ -104,12 +104,12 @@ public class Board {
 		return null;
 	}
 
-	public void setConfigFiles(String string, String string2) {
+	public static void setConfigFiles(String string, String string2) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void initialize() {
+	public static void initialize() {
 		// TODO Auto-generated method stub
 		
 	}

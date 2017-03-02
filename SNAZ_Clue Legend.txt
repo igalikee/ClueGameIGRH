@@ -1,0 +1,11 @@
+R, Rainbow Road, Card
+B, Bowser's Castle, Card
+L, Luigi Raceway, Card
+K, Kalimari Desert, card
+M, Moo Moo Meadows, card
+T, Toad's Factory, card
+G, Ghost Valley, card
+D, Donut Plains, card
+S, Shroom Ridge, card
+W, Walkway, Other
+X, closet, Other
