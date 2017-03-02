@@ -1,8 +1,10 @@
 package clueGame;
 
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 import clueGame.BoardCell;
@@ -17,6 +19,9 @@ public class Board {
 	public static int columns;
 	
 	Map<BoardCell, Set<BoardCell>> adjMtx;
+	
+	private static String legendString;
+	private static String layoutString;
 	
 	public Board() {
 		targets = new HashSet<BoardCell>();
@@ -105,13 +110,54 @@ public class Board {
 	}
 
 	public static void setConfigFiles(String string, String string2) {
-		// TODO Auto-generated method stub
+		layoutString = string;
+		legendString = string2;
 		
 	}
 
 	public static void initialize() {
-		// TODO Auto-generated method stub
 		
+		
+		
+		
+	}
+	
+	private static void createLayout() {
+		FileReader reader = null;
+		Scanner in = null;
+		
+		reader = new FileReader(layoutString);
+		in = new Scanner(reader);
+		
+		while (in.hasNextLine()){
+			
+		}
+		
+		
+	}
+	
+	private static void createLegend() {
+		FileReader reader = null;
+		Scanner in = null;
+		
+		reader = new FileReader(legendString);
+		in = new Scanner(reader);
+		
+		String symbol;
+		String room;
+		String temp;
+		
+		while (in.hasNextLine()){
+			symbol = in.next();
+			room = in.next();
+			
+			room.substring(0, room.length() - 2);
+			
+			legend.put(symbol.charAt(0), room);
+			
+			temp = in.next();
+			
+		}
 	}
 
 	public Map<Character, String> getLegend() {

@@ -24,8 +24,8 @@ public class IntBoardTests {
 	 */
 	@Test
 	public void testAdjacency0() {
-		clueGame.BoardCell cell = board.getCell(0,0);
-		Set<clueGame.BoardCell> testList = board.getAdjList(cell);
+		experiment.BoardCell cell = board.getCell(0,0);
+		Set<experiment.BoardCell> testList = board.getAdjList(cell);
 		assertTrue(testList.contains(board.getCell(1, 0)));
 		assertTrue(testList.contains(board.getCell(0, 1)));
 		assertEquals(2, testList.size());
@@ -36,8 +36,8 @@ public class IntBoardTests {
 	 */
 	@Test
 	public void testAdjacency1() {
-		clueGame.BoardCell cell = board.getCell(3,3);
-		Set<clueGame.BoardCell> testList = board.getAdjList(cell);
+		experiment.BoardCell cell = board.getCell(3,3);
+		Set<experiment.BoardCell> testList = board.getAdjList(cell);
 		assertTrue(testList.contains(board.getCell(3, 2)));
 		assertTrue(testList.contains(board.getCell(2, 3)));
 		assertEquals(2, testList.size());
@@ -48,8 +48,8 @@ public class IntBoardTests {
 	 */
 	@Test
 	public void testAdjacency2() {
-		clueGame.BoardCell cell = board.getCell(1,3);
-		Set<clueGame.BoardCell> testList = board.getAdjList(cell);
+		experiment.BoardCell cell = board.getCell(1,3);
+		Set<experiment.BoardCell> testList = board.getAdjList(cell);
 		assertTrue(testList.contains(board.getCell(0, 3)));
 		assertTrue(testList.contains(board.getCell(1, 2)));
 		assertTrue(testList.contains(board.getCell(2, 3)));
@@ -61,8 +61,8 @@ public class IntBoardTests {
 	 */
 	@Test
 	public void testAdjacency3() {
-		clueGame.BoardCell cell = board.getCell(3,0);
-		Set<clueGame.BoardCell> testList = board.getAdjList(cell);
+		experiment.BoardCell cell = board.getCell(3,0);
+		Set<experiment.BoardCell> testList = board.getAdjList(cell);
 		assertTrue(testList.contains(board.getCell(2, 0)));
 		assertTrue(testList.contains(board.getCell(3, 1)));
 		assertEquals(2, testList.size());
@@ -73,8 +73,8 @@ public class IntBoardTests {
 	 */
 	@Test
 	public void testAdjacency4() {
-		clueGame.BoardCell cell = board.getCell(1,1);
-		Set<clueGame.BoardCell> testList = board.getAdjList(cell);
+		experiment.BoardCell cell = board.getCell(1,1);
+		Set<experiment.BoardCell> testList = board.getAdjList(cell);
 		assertTrue(testList.contains(board.getCell(0, 1)));
 		assertTrue(testList.contains(board.getCell(1, 0)));
 		assertTrue(testList.contains(board.getCell(2, 1)));
@@ -87,8 +87,8 @@ public class IntBoardTests {
 	 */
 	@Test
 	public void testAdjacency5() {
-		clueGame.BoardCell cell = board.getCell(2,2);
-		Set<clueGame.BoardCell> testList = board.getAdjList(cell);
+		experiment.BoardCell cell = board.getCell(2,2);
+		Set<experiment.BoardCell> testList = board.getAdjList(cell);
 		assertTrue(testList.contains(board.getCell(1, 2)));
 		assertTrue(testList.contains(board.getCell(2, 1)));
 		assertTrue(testList.contains(board.getCell(2, 3)));
@@ -102,7 +102,7 @@ public class IntBoardTests {
 	@Test
 	public void testTargets0_1()
 	{
-		clueGame.BoardCell cell = board.getCell(0, 0);
+		experiment.BoardCell cell = board.getCell(0, 0);
 		board.calcTargets(cell, 1);
 		Set targets = board.getTargets();
 		assertEquals(2, targets.size());
@@ -116,7 +116,7 @@ public class IntBoardTests {
 	@Test
 	public void testTargets0_2()
 	{
-		clueGame.BoardCell cell = board.getCell(0, 0);
+		experiment.BoardCell cell = board.getCell(0, 0);
 		board.calcTargets(cell, 2);
 		Set targets = board.getTargets();
 		assertEquals(3, targets.size());
@@ -131,7 +131,7 @@ public class IntBoardTests {
 	@Test
 	public void testTargets0_3()
 	{
-		clueGame.BoardCell cell = board.getCell(0, 0);
+		experiment.BoardCell cell = board.getCell(0, 0);
 		board.calcTargets(cell, 3);
 		Set targets = board.getTargets();
 		assertEquals(6, targets.size());
@@ -149,7 +149,7 @@ public class IntBoardTests {
 	@Test
 	public void testTargets3_4()
 	{
-		clueGame.BoardCell cell = board.getCell(3, 3);
+		experiment.BoardCell cell = board.getCell(3, 3);
 		board.calcTargets(cell, 4);
 		Set targets = board.getTargets();
 		assertEquals(6, targets.size());
@@ -167,7 +167,7 @@ public class IntBoardTests {
 	@Test
 	public void testTargets3_5()
 	{
-		clueGame.BoardCell cell = board.getCell(3, 3);
+		experiment.BoardCell cell = board.getCell(3, 3);
 		board.calcTargets(cell, 5);
 		Set targets = board.getTargets();
 		assertEquals(8, targets.size());
@@ -187,7 +187,7 @@ public class IntBoardTests {
 	@Test
 	public void testTargets3_6()
 	{
-		clueGame.BoardCell cell = board.getCell(3, 3);
+		experiment.BoardCell cell = board.getCell(3, 3);
 		board.calcTargets(cell, 6);
 		Set targets = board.getTargets();
 		assertEquals(7, targets.size());

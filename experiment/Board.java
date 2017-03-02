@@ -1,8 +1,10 @@
 package experiment;
 
+import java.io.FileReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 import clueGame.BoardCell;
@@ -18,6 +20,11 @@ public class Board {
 	
 	Map<BoardCell, Set<BoardCell>> adjMtx;
 	
+	private static String legendString;
+	private static String layoutString;
+	
+
+	
 	public Board() {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
@@ -28,6 +35,8 @@ public class Board {
 			}
 		}
 		calcAdjacencies();
+		
+		
 	}
 	
 	public void calcAdjacencies(){
@@ -99,35 +108,5 @@ public class Board {
 		return grid[i][j];
 	}
 
-	public static Board getInstance() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public static void setConfigFiles(String string, String string2) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public static void initialize() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public Map<Character, String> getLegend() {
-		return legend;
-	}
-
-	public int getNumRows() {
-		return rows;
-	}
-
-	public int getNumColumns() {
-		return columns;
-	}
-
-	public BoardCell getCellAt(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 }

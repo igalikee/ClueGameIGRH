@@ -3,6 +3,8 @@ package clueGame;
 public class BoardCell {
 	private int row;
 	private int column;
+	private char initial;
+	private DoorDirection direction;
 
 	public BoardCell(){
 		
@@ -14,18 +16,18 @@ public class BoardCell {
 	}
 
 	public boolean isDoorway() {
-		// TODO Auto-generated method stub
-		return false;
+		
+		return direction != DoorDirection.NONE;
 	}
 
-	public Object[] getDoorDirection() {
+	public DoorDirection getDoorDirection() {
 		// TODO Auto-generated method stub
-		return null;
+		return direction;
 	}
 
-	public Object getInitial() {
+	public char getInitial() {
 		// TODO Auto-generated method stub
-		return null;
+		return initial;
 	}
 
 
