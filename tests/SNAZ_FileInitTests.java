@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.BoardCell;
+import clueGame.DoorDirection;
 import experiment.Board;
 
 public class SNAZ_FileInitTests {
@@ -31,6 +32,7 @@ public class SNAZ_FileInitTests {
 			// Initialize will load BOTH config files 
 			board.initialize();
 		}
+		
 		@Test
 		public void testRooms() {
 			// Get the map of initial => room 
@@ -96,7 +98,7 @@ public class SNAZ_FileInitTests {
 					if (cell.isDoorway())
 						numDoors++;
 				}
-			Assert.assertEquals(16, numDoors);
+			Assert.assertEquals(13, numDoors);
 		}
 
 		// Test a few room cells to ensure the room initial is correct.

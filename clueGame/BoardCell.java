@@ -28,9 +28,5 @@ public class BoardCell {
 		return null;
 	}
 
-	public Object getInitial() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 }
