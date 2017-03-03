@@ -24,11 +24,18 @@ public class Board {
 	private static String legendString;
 	private static String layoutString;
 	
-	public Board() {
+	// variable used for singleton pattern
+	private static Board theInstance = new Board();
+	// ctor is private to ensure only one can be created
+	private Board() {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
 		grid = new BoardCell[25][25];
 		calcAdjacencies();
+	}
+	// this method returns the only Board
+	public static Board getInstance() {
+		return theInstance;
 	}
 	
 	public void calcAdjacencies(){
@@ -100,11 +107,6 @@ public class Board {
 		return grid[i][j];
 	}
 
-	public static Board getInstance() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	public static void setConfigFiles(String string, String string2) {
 		layoutString = string;
 		legendString = string2;
@@ -112,10 +114,8 @@ public class Board {
 	}
 
 	public static void initialize() {
-		
-		
-		
-		
+		createLayout();
+		createLegend();
 	}
 	
 	private static void createLayout() {
