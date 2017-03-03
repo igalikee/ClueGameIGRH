@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.Set;
 import clueGame.BoardCell;
 
 public class Board {
-	private BoardCell[][] grid;
+	private static BoardCell[][] grid;
 	private Set<BoardCell> targets;
 	private Set<BoardCell> visited;
 	
@@ -26,19 +27,14 @@ public class Board {
 	public Board() {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
-		grid = new BoardCell[4][4];
-		for(int i = 0; i < 4; i++){
-			for(int j = 0; j < 4; j++){
-				grid[i][j] = new BoardCell(i,j);
-			}
-		}
+		grid = new BoardCell[25][25];
 		calcAdjacencies();
 	}
 	
 	public void calcAdjacencies(){
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		for(int i = 0; i < 4; i++){
-			for(int j = 0; j < 4; j++){
+		for(int i = 0; i < 25; i++){
+			for(int j = 0; j < 25; j++){
 				Set<BoardCell> tempSet = new HashSet<BoardCell>();
 				
 				if(i > 0){
@@ -50,21 +46,21 @@ public class Board {
 				}
 				if(i > 0){
 					tempSet.add(grid[i-1][j]);
-					if (j < 3){
+					if (j < 25){
 						tempSet.add(grid[i][j + 1]);
 					}
 					
 				}
 				if(i < 3){
 					tempSet.add(grid[i+1][j]);
-					if (j < 3){
+					if (j < 25){
 						tempSet.add(grid[i][j + 1]);
 					}
 					
 				}
 				if(i < 3){
 					tempSet.add(grid[i+1][j]);
-					if (j > 0){
+					if (j > 25){
 						tempSet.add(grid[i][j - 1]);
 					}
 					
@@ -126,11 +122,23 @@ public class Board {
 		FileReader reader = null;
 		Scanner in = null;
 		
-		reader = new FileReader(layoutString);
+		try {
+			reader = new FileReader(layoutString);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		in = new Scanner(reader);
 		
+		int counter = 0;
+		
 		while (in.hasNextLine()){
-			
+			String[] temp = in.nextLine().split(",");
+			for(int i = 0; i < temp.length; i++){
+				BoardCell tempCell = new BoardCell(counter,i,temp[i]);
+				grid[counter][i] = tempCell;
+			}
+			counter++;
 		}
 		
 		
@@ -140,7 +148,12 @@ public class Board {
 		FileReader reader = null;
 		Scanner in = null;
 		
-		reader = new FileReader(legendString);
+		try {
+			reader = new FileReader(legendString);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		in = new Scanner(reader);
 		
 		String symbol;
