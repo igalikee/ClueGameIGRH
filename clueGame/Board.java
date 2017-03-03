@@ -107,14 +107,6 @@ public class Board {
 		return grid[i][j];
 	}
 
-<<<<<<< HEAD
-=======
-	public static Board getInstance() {
-		
-		return null;
-	}
-
->>>>>>> dc0628f2c2da0642e68fff7adcce92adc7330b3e
 	public static void setConfigFiles(String string, String string2) {
 		layoutString = string;
 		legendString = string2;
@@ -124,11 +116,6 @@ public class Board {
 	public static void initialize() {
 		createLayout();
 		createLegend();
-<<<<<<< HEAD
-=======
-		
-		
->>>>>>> dc0628f2c2da0642e68fff7adcce92adc7330b3e
 	}
 	
 	private static void createLayout() {
