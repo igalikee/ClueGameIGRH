@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.HashMap;
@@ -12,8 +13,8 @@ import clueGame.BoardCell;
 
 public class Board {
 	private static BoardCell[][] grid;
-	private Set<BoardCell> targets;
-	private Set<BoardCell> visited;
+	private static Set<BoardCell> targets;
+	private static Set<BoardCell> visited;
 	
 	public static Map<Character, String> legend = null;
 	public static int rows;
@@ -28,10 +29,7 @@ public class Board {
 	private static Board theInstance = new Board();
 	// ctor is private to ensure only one can be created
 	private Board() {
-		targets = new HashSet<BoardCell>();
-		visited = new HashSet<BoardCell>();
-		grid = new BoardCell[25][25];
-		//calcAdjacencies();
+		
 	}
 	// this method returns the only Board
 	public static Board getInstance() {
@@ -114,11 +112,15 @@ public class Board {
 	}
 
 	public static void initialize() {
-		createLayout();
-		createLegend();
+		targets = new HashSet<BoardCell>();
+		visited = new HashSet<BoardCell>();
+		grid = new BoardCell[25][25];
+		//calcAdjacencies();
+		loadBoardConfig();
+		loadRoomConfig();
 	}
 	
-	private static void createLayout() {
+	public static void loadBoardConfig() {
 		FileReader reader = null;
 		Scanner in = null;
 		
@@ -146,7 +148,7 @@ public class Board {
 		in.close();
 	}
 	
-	private static void createLegend() {
+	public static void loadRoomConfig() {
 		legend = new HashMap<Character, String>();
 		
 		FileReader reader = null;
@@ -196,4 +198,5 @@ public class Board {
 		// TODO Auto-generated method stub
 		return grid[i][j];
 	}
+	
 }

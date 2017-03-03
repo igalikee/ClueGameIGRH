@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
-import clueGame.BoardCell;
+import experiment.BoardCell;
 
 public class Board {
 	private BoardCell[][] grid;
