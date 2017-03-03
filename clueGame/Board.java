@@ -101,7 +101,7 @@ public class Board {
 	}
 
 	public static Board getInstance() {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
@@ -112,8 +112,8 @@ public class Board {
 	}
 
 	public static void initialize() {
-		
-		
+		createLayout();
+		createLegend();
 		
 		
 	}
@@ -139,7 +139,9 @@ public class Board {
 				grid[counter][i] = tempCell;
 			}
 			counter++;
+			rows = temp.length;
 		}
+		columns = counter;
 		
 		
 	}

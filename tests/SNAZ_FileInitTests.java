@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import clueGame.BoardCell;
 import clueGame.DoorDirection;
-import experiment.Board;
+import clueGame.Board;
 
 public class SNAZ_FileInitTests {
 
@@ -28,7 +28,7 @@ public class SNAZ_FileInitTests {
 			// Board is singleton, get the only instance
 			board = Board.getInstance();
 			// set the file names to use my config files
-			board.setConfigFiles("CR_ClueLayout.csv", "CR_ClueLegend.txt");		
+			board.setConfigFiles("SNAZ_ClueLayout.csv", "SNAZ_ClueLegend.txt");		
 			// Initialize will load BOTH config files 
 			board.initialize();
 		}
