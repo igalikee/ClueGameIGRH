@@ -139,9 +139,9 @@ public class Board {
 				grid[counter][i] = tempCell;
 			}
 			counter++;
-			rows = temp.length;
+			columns = temp.length;
 		}
-		columns = counter;
+		rows = counter;
 		
 		in.close();
 	}
@@ -167,10 +167,6 @@ public class Board {
 		while (in.hasNextLine()){
 			
 			String[] temp = in.nextLine().split(", ");
-			
-			for (int i = 0; i < temp.length; i++){
-				System.out.println(temp[i]);
-			}
 			
 			symbol = temp[0];
 			room = temp[1];
@@ -198,6 +194,6 @@ public class Board {
 
 	public BoardCell getCellAt(int i, int j) {
 		// TODO Auto-generated method stub
-		return null;
+		return grid[i][j];
 	}
 }

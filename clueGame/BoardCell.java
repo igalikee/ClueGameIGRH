@@ -38,7 +38,7 @@ public class BoardCell {
 
 	public boolean isDoorway() {
 		
-		return direction != DoorDirection.NONE;
+		return !direction.equals(DoorDirection.NONE);
 	}
 
 	public DoorDirection getDoorDirection() {

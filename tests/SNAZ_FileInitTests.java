@@ -45,7 +45,7 @@ public class SNAZ_FileInitTests {
 			assertEquals("Bowser's Castle", legend.get('B'));
 			assertEquals("Luigi Raceway", legend.get('L'));
 			assertEquals("Kalimari Desert", legend.get('K'));
-			assertEquals("Moo Moo Meadoes", legend.get('M'));
+			assertEquals("Moo Moo Meadows", legend.get('M'));
 			assertEquals("Toad's Factory", legend.get('T'));
 			assertEquals("Ghost Valley", legend.get('G'));
 			assertEquals("Donut Plains", legend.get('D'));
@@ -66,23 +66,23 @@ public class SNAZ_FileInitTests {
 		// These cells are white on the planning spreadsheet
 		@Test
 		public void FourDoorDirections() {
-			BoardCell room = board.getCellAt(4, 3);
+			BoardCell room = board.getCellAt(2, 3);
 			assertTrue(room.isDoorway());
 			assertEquals(DoorDirection.RIGHT, room.getDoorDirection());
-			room = board.getCellAt(4, 8);
+			room = board.getCellAt(4, 9);
 			assertTrue(room.isDoorway());
 			assertEquals(DoorDirection.DOWN, room.getDoorDirection());
-			room = board.getCellAt(15, 18);
+			room = board.getCellAt(12, 16);
 			assertTrue(room.isDoorway());
 			assertEquals(DoorDirection.LEFT, room.getDoorDirection());
-			room = board.getCellAt(14, 11);
+			room = board.getCellAt(14, 2);
 			assertTrue(room.isDoorway());
 			assertEquals(DoorDirection.UP, room.getDoorDirection());
 			// Test that room pieces that aren't doors know it
-			room = board.getCellAt(14, 14);
+			room = board.getCellAt(9, 0);
 			assertFalse(room.isDoorway());	
 			// Test that walkways are not doors
-			BoardCell cell = board.getCellAt(0, 6);
+			BoardCell cell = board.getCellAt(13, 0);
 			assertFalse(cell.isDoorway());		
 
 		}
