@@ -38,6 +38,7 @@ public class SNAZ_FileInitTests {
 			// Get the map of initial => room 
 			Map<Character, String> legend = board.getLegend();
 			// Ensure we read the correct number of rooms
+
 			assertEquals(LEGEND_SIZE, legend.size());
 			// To ensure data is correctly loaded, test retrieving a few rooms 
 			// from the hash, including the first and last in the file and a few others

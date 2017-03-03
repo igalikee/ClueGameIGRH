@@ -23,7 +23,7 @@ public class CR_ExceptionTests {
 		Board board = Board.getInstance();
 		board.setConfigFiles("CR_ClueLayoutBadColumns.csv", "CR_ClueLegend.txt");
 		// Instead of initialize, we call the two load functions directly.
-		// This is necessary because initialize contains a try-catch. 
+		// This is necessary because initialize contains a try-catch.
 		board.loadRoomConfig();
 		// This one should throw an exception
 		board.loadBoardConfig();

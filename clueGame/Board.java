@@ -15,71 +15,74 @@ public class Board {
 	private static BoardCell[][] grid;
 	private static Set<BoardCell> targets;
 	private static Set<BoardCell> visited;
-	
+
 	public static Map<Character, String> legend = null;
 	public static int rows;
 	public static int columns;
-	
+
 	Map<BoardCell, Set<BoardCell>> adjMtx;
-	
+
 	private static String legendString;
 	private static String layoutString;
-	
+
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
 	// ctor is private to ensure only one can be created
 	private Board() {
-		
+		targets = new HashSet<BoardCell>();
+		visited = new HashSet<BoardCell>();
+		grid = new BoardCell[25][25];
+		legend = new HashMap<Character, String>();
 	}
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
 	}
-	
+
 	public void calcAdjacencies(){
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		for(int i = 0; i < 25; i++){
 			for(int j = 0; j < 25; j++){
 				Set<BoardCell> tempSet = new HashSet<BoardCell>();
-				
+
 				if(i > 0){
 					tempSet.add(grid[i-1][j]);
 					if (j > 0){
 						tempSet.add(grid[i][j - 1]);
 					}
-					
+
 				}
 				if(i > 0){
 					tempSet.add(grid[i-1][j]);
 					if (j < 25){
 						tempSet.add(grid[i][j + 1]);
 					}
-					
+
 				}
 				if(i < 3){
 					tempSet.add(grid[i+1][j]);
 					if (j < 25){
 						tempSet.add(grid[i][j + 1]);
 					}
-					
+
 				}
 				if(i < 3){
 					tempSet.add(grid[i+1][j]);
 					if (j > 25){
 						tempSet.add(grid[i][j - 1]);
 					}
-					
+
 				}
-								
+
 				adjMtx.put(grid[i][j], tempSet);
 			}
 		}
 	}
 
 	public void calcTargets(BoardCell startCell, int numSteps){
-		
+
 		visited.add(startCell);
-		
+
 		for(BoardCell adjCell: adjMtx.get(startCell)){
 			if(visited.contains(adjCell)) continue;
 			visited.add(adjCell);
@@ -89,96 +92,116 @@ public class Board {
 			}
 			visited.remove(adjCell);
 		}
-		
+
 	}
-	
+
 	public Set<BoardCell> getTargets(){
 		return targets;
 	}
-	
+
 	public Set<BoardCell> getAdjList(BoardCell cell){
 		return adjMtx.get(cell);
 	}
 
 	public BoardCell getCell(int i, int j) {
-		
+
 		return grid[i][j];
 	}
 
 	public static void setConfigFiles(String string, String string2) {
 		layoutString = string;
 		legendString = string2;
-		
+
 	}
 
 	public static void initialize() {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
 		grid = new BoardCell[25][25];
+		legend = new HashMap<Character, String>();
 		//calcAdjacencies();
-		loadBoardConfig();
-		loadRoomConfig();
+		try {
+			loadRoomConfig();
+			loadBoardConfig();
+		} catch (BadConfigFormatException e) {
+			System.out.println(e.getMessage());
+		}
+		catch (FileNotFoundException e) {
+			e.getStackTrace();
+		}
 	}
-	
-	public static void loadBoardConfig() {
+
+	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
+		
 		FileReader reader = null;
 		Scanner in = null;
-		
+
+
 		try {
 			reader = new FileReader(layoutString);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+
 		in = new Scanner(reader);
-		
+
 		int counter = 0;
-		
+		int c = 0;
+
 		while (in.hasNextLine()){
 			String[] temp = in.nextLine().split(",");
+			if(counter == 0) c = temp.length;
+
 			for(int i = 0; i < temp.length; i++){
-				BoardCell tempCell = new BoardCell(counter,i,temp[i]);
-				grid[counter][i] = tempCell;
+				grid[counter][i] = new BoardCell(counter,i,temp[i]);
+				//System.out.println(legend.size());
+				//System.out.println(legend.containsKey(grid[counter][i].getInitial()));
+				if (!legend.containsKey(grid[counter][i].getInitial()))  throw new BadConfigFormatException("Wrong legend in board");
 			}
 			counter++;
+			if (temp.length != c) throw new BadConfigFormatException("Number of columns is not consistent");
 			columns = temp.length;
+			
 		}
-		rows = counter;
 		
+		rows = counter;
 		in.close();
 	}
-	
-	public static void loadRoomConfig() {
+
+	public static void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException{
 		legend = new HashMap<Character, String>();
-		
+
 		FileReader reader = null;
 		Scanner in = null;
-		
+
 		try {
 			reader = new FileReader(legendString);
 		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 		in = new Scanner(reader);
-		
+
 		String symbol;
 		String room;
 		String type;
-		
+
 		while (in.hasNextLine()){
-			
+
 			String[] temp = in.nextLine().split(", ");
-			
+
 			symbol = temp[0];
 			room = temp[1];
 			type = temp[2];
-			
+			//System.out.println(type + " " + (!type.equals("Card") && !type.equals("Other")));
+			System.out.println("here");
 			legend.put(symbol.charAt(0), room);
-			
-			
+			System.out.println(legend.size());
+			if((!type.equals("Card") && !type.equals("Other"))) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
+			//if(type.equals("X")) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 		}
-		
+
 		in.close();
 	}
 
@@ -198,5 +221,5 @@ public class Board {
 		// TODO Auto-generated method stub
 		return grid[i][j];
 	}
-	
+
 }
