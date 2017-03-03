@@ -31,7 +31,7 @@ public class Board {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
 		grid = new BoardCell[25][25];
-		calcAdjacencies();
+		//calcAdjacencies();
 	}
 	// this method returns the only Board
 	public static Board getInstance() {
@@ -143,10 +143,12 @@ public class Board {
 		}
 		columns = counter;
 		
-		
+		in.close();
 	}
 	
 	private static void createLegend() {
+		legend = new HashMap<Character, String>();
+		
 		FileReader reader = null;
 		Scanner in = null;
 		
@@ -160,19 +162,26 @@ public class Board {
 		
 		String symbol;
 		String room;
-		String temp;
+		String type;
 		
 		while (in.hasNextLine()){
-			symbol = in.next();
-			room = in.next();
 			
-			room.substring(0, room.length() - 2);
+			String[] temp = in.nextLine().split(", ");
+			
+			for (int i = 0; i < temp.length; i++){
+				System.out.println(temp[i]);
+			}
+			
+			symbol = temp[0];
+			room = temp[1];
+			type = temp[2];
 			
 			legend.put(symbol.charAt(0), room);
 			
-			temp = in.next();
 			
 		}
+		
+		in.close();
 	}
 
 	public Map<Character, String> getLegend() {
