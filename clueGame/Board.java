@@ -230,11 +230,29 @@ public class Board {
 	}
 	public Set<BoardCell> getAdjList(int i, int j) {
 		
+		
+		
+		
+		
 		return adjMtx.get(grid[i][j]);
 	}
 	public void calcTargets(int i, int j, int k) {
 		
+		BoardCell startCell = new BoardCell();
 		
+		
+		visited.add(startCell);
+
+		for(BoardCell adjCell: adjMtx.get(startCell)){
+			if(visited.contains(adjCell)) continue;
+			visited.add(adjCell);
+			if(numSteps == 1) targets.add(adjCell);
+			else{
+				calcTargets(adjCell, numSteps-1);
+			}
+			visited.remove(adjCell);
+		}
+
 	}
 
 }
