@@ -35,7 +35,6 @@ public class Board {
 		grid = new BoardCell[25][25];
 		legend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		calcAdjacencies();
 	}
 	// this method returns the only Board
 	public static Board getInstance() {
@@ -47,38 +46,58 @@ public class Board {
 		for(int i = 0; i < 25; i++){
 			for(int j = 0; j < 25; j++){
 				Set<BoardCell> tempSet = new HashSet<BoardCell>();
+				System.out.println(grid[i][j].getInitial() != 'W');
 				
-				/*
-				if(i > 0){
-					tempSet.add(grid[i-1][j]);
-					if (j > 0){
-						tempSet.add(grid[i][j - 1]);
+				if(grid[i][j].getInitial() != 'W'){
+					switch (grid[i][j].getDoorDirection()) {
+					case UP:
+						tempSet.add(grid[i-1][j]);
+						break;
+					case DOWN:
+						tempSet.add(grid[1+1][j]);
+						break;
+					case LEFT:
+						tempSet.add(grid[1][j-1]);
+						break;
+					case RIGHT:
+						tempSet.add(grid[1][j+1]);
+						break;
+					default:
+						break;
 					}
-
 				}
-				if(i > 0){
-					tempSet.add(grid[i-1][j]);
-					if (j < 25){
-						tempSet.add(grid[i][j + 1]);
+				else{
+					if(i > 0){
+						if(grid[i-1][j].getInitial() == 'W' || grid[i-1][j].isDoorway()) tempSet.add(grid[i-1][j]);
+						if (j > 0){
+							if(grid[i][j-1].getInitial() == 'W' || grid[i][j-1].isDoorway()) tempSet.add(grid[i][j - 1]);
+						}
+
 					}
+					if(i > 0){
+						if(grid[i-1][j].getInitial() == 'W' || grid[i-1][j].isDoorway()) tempSet.add(grid[i-1][j]);
+						if (j < 25){
+							if(grid[i][j+1].getInitial() == 'W' || grid[i][j+1].isDoorway()) tempSet.add(grid[i][j + 1]);
+						}
 
-				}
-				if(i < 3){
-					tempSet.add(grid[i+1][j]);
-					if (j < 25){
-						tempSet.add(grid[i][j + 1]);
 					}
+					if(i < 25){
+						if(grid[i+1][j].getInitial() == 'W' || grid[i+1][j].isDoorway()) tempSet.add(grid[i+1][j]);
+						if (j < 25){
+							if(grid[i][j+1].getInitial() == 'W' || grid[i][j+1].isDoorway()) tempSet.add(grid[i][j + 1]);
+						}
 
-				}
-				if(i < 3){
-					tempSet.add(grid[i+1][j]);
-					if (j > 25){
-						tempSet.add(grid[i][j - 1]);
 					}
+					if(i < 25){
+						if(grid[i+1][j].getInitial() == 'W' || grid[i+1][j].isDoorway()) tempSet.add(grid[i+1][j]);
+						if (j > 25){
+							if(grid[i][j-1].getInitial() == 'W' || grid[i][j-1].isDoorway()) tempSet.add(grid[i][j - 1]);
+						}
 
+					}
 				}
-				*/
-				
+
+
 				adjMtx.put(grid[i][j], getAdjList(grid[i][j]));
 			}
 		}
@@ -106,7 +125,7 @@ public class Board {
 
 	public static Set<BoardCell> getAdjList(BoardCell cell){
 		Set<BoardCell> adj = new HashSet<BoardCell>();
-		
+
 		return adj;
 	}
 
@@ -127,7 +146,6 @@ public class Board {
 		grid = new BoardCell[25][25];
 		legend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		calcAdjacencies();
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
@@ -137,10 +155,11 @@ public class Board {
 		catch (FileNotFoundException e) {
 			e.getStackTrace();
 		}
+		calcAdjacencies();
 	}
 
 	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
-		
+
 		FileReader reader = null;
 		Scanner in = null;
 
@@ -170,9 +189,9 @@ public class Board {
 			counter++;
 			if (temp.length != c) throw new BadConfigFormatException("Number of columns is not consistent");
 			columns = temp.length;
-			
+
 		}
-		
+
 		rows = counter;
 		in.close();
 	}
@@ -203,9 +222,9 @@ public class Board {
 			room = temp[1];
 			type = temp[2];
 			//System.out.println(type + " " + (!type.equals("Card") && !type.equals("Other")));
-			System.out.println("here");
+			//System.out.println("here");
 			legend.put(symbol.charAt(0), room);
-			System.out.println(legend.size());
+			//System.out.println(legend.size());
 			if((!type.equals("Card") && !type.equals("Other"))) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 			//if(type.equals("X")) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 		}
@@ -229,18 +248,18 @@ public class Board {
 		return grid[i][j];
 	}
 	public Set<BoardCell> getAdjList(int i, int j) {
-		
-		
-		
-		
-		
+
+
+
+
+
 		return adjMtx.get(grid[i][j]);
 	}
 	public void calcTargets(int i, int j, int k) {
-		
+/*
 		BoardCell startCell = new BoardCell();
-		
-		
+
+
 		visited.add(startCell);
 
 		for(BoardCell adjCell: adjMtx.get(startCell)){
@@ -252,7 +271,8 @@ public class Board {
 			}
 			visited.remove(adjCell);
 		}
-
+*/
 	}
+	
 
 }
