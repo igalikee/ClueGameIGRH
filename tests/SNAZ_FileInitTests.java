@@ -28,7 +28,7 @@ public class SNAZ_FileInitTests {
 			// Board is singleton, get the only instance
 			board = Board.getInstance();
 			// set the file names to use my config files
-			board.setConfigFiles("SNAZ_Clue Layout.csv", "SNAZ_Clue Legend.txt");		
+			board.setConfigFiles("SNAZ_ClueLayout.csv", "SNAZ_ClueLegend.txt");		
 			// Initialize will load BOTH config files 
 			board.initialize();
 		}

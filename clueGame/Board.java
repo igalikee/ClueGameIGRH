@@ -3,6 +3,7 @@ package clueGame;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class Board {
 	public static int rows;
 	public static int columns;
 
-	Map<BoardCell, Set<BoardCell>> adjMtx;
+	private static Map<BoardCell, Set<BoardCell>> adjMtx;
 
 	private static String legendString;
 	private static String layoutString;
@@ -33,18 +34,21 @@ public class Board {
 		visited = new HashSet<BoardCell>();
 		grid = new BoardCell[25][25];
 		legend = new HashMap<Character, String>();
+		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
+		calcAdjacencies();
 	}
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
 	}
 
-	public void calcAdjacencies(){
+	public static void calcAdjacencies(){
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		for(int i = 0; i < 25; i++){
 			for(int j = 0; j < 25; j++){
 				Set<BoardCell> tempSet = new HashSet<BoardCell>();
-
+				
+				/*
 				if(i > 0){
 					tempSet.add(grid[i-1][j]);
 					if (j > 0){
@@ -73,8 +77,9 @@ public class Board {
 					}
 
 				}
-
-				adjMtx.put(grid[i][j], tempSet);
+				*/
+				
+				adjMtx.put(grid[i][j], getAdjList(grid[i][j]));
 			}
 		}
 	}
@@ -99,8 +104,10 @@ public class Board {
 		return targets;
 	}
 
-	public Set<BoardCell> getAdjList(BoardCell cell){
-		return adjMtx.get(cell);
+	public static Set<BoardCell> getAdjList(BoardCell cell){
+		Set<BoardCell> adj = new HashSet<BoardCell>();
+		
+		return adj;
 	}
 
 	public BoardCell getCell(int i, int j) {
@@ -119,7 +126,8 @@ public class Board {
 		visited = new HashSet<BoardCell>();
 		grid = new BoardCell[25][25];
 		legend = new HashMap<Character, String>();
-		//calcAdjacencies();
+		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
+		calcAdjacencies();
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
@@ -218,15 +226,14 @@ public class Board {
 	}
 
 	public BoardCell getCellAt(int i, int j) {
-		// TODO Auto-generated method stub
 		return grid[i][j];
 	}
 	public Set<BoardCell> getAdjList(int i, int j) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return adjMtx.get(grid[i][j]);
 	}
 	public void calcTargets(int i, int j, int k) {
-		// TODO Auto-generated method stub
+		
 		
 	}
 
