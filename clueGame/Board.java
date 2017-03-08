@@ -53,13 +53,13 @@ public class Board {
 						tempSet.add(grid[i-1][j]);
 						break;
 					case DOWN:
-						tempSet.add(grid[1+1][j]);
+						tempSet.add(grid[i+1][j]);
 						break;
 					case LEFT:
-						tempSet.add(grid[1][j-1]);
+						tempSet.add(grid[i][j-1]);
 						break;
 					case RIGHT:
-						tempSet.add(grid[1][j+1]);
+						tempSet.add(grid[i][j+1]);
 						break;
 					default:
 						break;
@@ -97,8 +97,7 @@ public class Board {
 					}
 				}
 
-
-				adjMtx.put(grid[i][j], getAdjList(grid[i][j]));
+				adjMtx.put(grid[i][j], tempSet);
 			}
 		}
 	}
@@ -125,7 +124,7 @@ public class Board {
 
 	public static Set<BoardCell> getAdjList(BoardCell cell){
 		Set<BoardCell> adj = new HashSet<BoardCell>();
-
+		adj = adjMtx.get(cell);
 		return adj;
 	}
 
@@ -188,19 +187,10 @@ public class Board {
 			counter++;
 			if (temp.length != c) throw new BadConfigFormatException("Number of columns is not consistent");
 			columns = temp.length;
-			System.out.println(columns);
 			
 		}
 
 		rows = counter;
-		System.out.println(rows);
-		
-		for (int i = 0; i < rows; i++){
-			for (int j = 0; j < columns; j++){
-				System.out.println(grid[i][j] + " ");
-			}
-			System.out.println("\n");
-		}
 		
 		in.close();
 	}
