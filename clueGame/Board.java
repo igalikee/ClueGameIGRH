@@ -46,7 +46,6 @@ public class Board {
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
 				Set<BoardCell> tempSet = new HashSet<BoardCell>();
-				System.out.println(grid[i][j].getInitial() != 'W');
 				
 				if(grid[i][j].getInitial() != 'W'){
 					switch (grid[i][j].getDoorDirection()) {
@@ -84,15 +83,15 @@ public class Board {
 					}
 					if(i < rows - 1){
 						if(grid[i+1][j].getInitial() == 'W' || grid[i+1][j].isDoorway()) tempSet.add(grid[i+1][j]);
-						if (j < columns - 1){
-							if(grid[i][j+1].getInitial() == 'W' || grid[i][j+1].isDoorway()) tempSet.add(grid[i][j + 1]);
+						if (j > 0){
+							if(grid[i][j-1].getInitial() == 'W' || grid[i][j-1].isDoorway()) tempSet.add(grid[i][j - 1]);
 						}
 
 					}
 					if(i < rows - 1){
 						if(grid[i+1][j].getInitial() == 'W' || grid[i+1][j].isDoorway()) tempSet.add(grid[i+1][j]);
-						if (j > columns - 1){
-							if(grid[i][j-1].getInitial() == 'W' || grid[i][j-1].isDoorway()) tempSet.add(grid[i][j - 1]);
+						if (j < columns - 1){
+							if(grid[i][j+1].getInitial() == 'W' || grid[i][j+1].isDoorway()) tempSet.add(grid[i][j + 1]);
 						}
 
 					}
