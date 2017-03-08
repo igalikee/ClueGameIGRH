@@ -18,8 +18,8 @@ public class Board {
 	private static Set<BoardCell> visited;
 
 	public static Map<Character, String> legend = null;
-	public static int rows;
-	public static int columns;
+	public static int rows = 22;
+	public static int columns = 23;
 
 	private static Map<BoardCell, Set<BoardCell>> adjMtx;
 
@@ -32,7 +32,7 @@ public class Board {
 	private Board() {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
-		grid = new BoardCell[25][25];
+		grid = new BoardCell[rows][columns];
 		legend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 	}
@@ -43,8 +43,8 @@ public class Board {
 
 	public static void calcAdjacencies(){
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		for(int i = 0; i < 25; i++){
-			for(int j = 0; j < 25; j++){
+		for(int i = 0; i < rows; i++){
+			for(int j = 0; j < columns; j++){
 				Set<BoardCell> tempSet = new HashSet<BoardCell>();
 				System.out.println(grid[i][j].getInitial() != 'W');
 				
@@ -65,6 +65,7 @@ public class Board {
 					default:
 						break;
 					}
+					
 				}
 				else{
 					if(i > 0){
@@ -76,21 +77,21 @@ public class Board {
 					}
 					if(i > 0){
 						if(grid[i-1][j].getInitial() == 'W' || grid[i-1][j].isDoorway()) tempSet.add(grid[i-1][j]);
-						if (j < 25){
+						if (j < columns - 1){
 							if(grid[i][j+1].getInitial() == 'W' || grid[i][j+1].isDoorway()) tempSet.add(grid[i][j + 1]);
 						}
 
 					}
-					if(i < 25){
+					if(i < rows - 1){
 						if(grid[i+1][j].getInitial() == 'W' || grid[i+1][j].isDoorway()) tempSet.add(grid[i+1][j]);
-						if (j < 25){
+						if (j < columns - 1){
 							if(grid[i][j+1].getInitial() == 'W' || grid[i][j+1].isDoorway()) tempSet.add(grid[i][j + 1]);
 						}
 
 					}
-					if(i < 25){
+					if(i < rows - 1){
 						if(grid[i+1][j].getInitial() == 'W' || grid[i+1][j].isDoorway()) tempSet.add(grid[i+1][j]);
-						if (j > 25){
+						if (j > columns - 1){
 							if(grid[i][j-1].getInitial() == 'W' || grid[i][j-1].isDoorway()) tempSet.add(grid[i][j - 1]);
 						}
 
@@ -143,7 +144,7 @@ public class Board {
 	public static void initialize() {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
-		grid = new BoardCell[25][25];
+		grid = new BoardCell[rows][columns];
 		legend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		try {
@@ -179,7 +180,6 @@ public class Board {
 		while (in.hasNextLine()){
 			String[] temp = in.nextLine().split(",");
 			if(counter == 0) c = temp.length;
-
 			for(int i = 0; i < temp.length; i++){
 				grid[counter][i] = new BoardCell(counter,i,temp[i]);
 				//System.out.println(legend.size());
@@ -189,10 +189,20 @@ public class Board {
 			counter++;
 			if (temp.length != c) throw new BadConfigFormatException("Number of columns is not consistent");
 			columns = temp.length;
-
+			System.out.println(columns);
+			
 		}
 
 		rows = counter;
+		System.out.println(rows);
+		
+		for (int i = 0; i < rows; i++){
+			for (int j = 0; j < columns; j++){
+				System.out.println(grid[i][j] + " ");
+			}
+			System.out.println("\n");
+		}
+		
 		in.close();
 	}
 
