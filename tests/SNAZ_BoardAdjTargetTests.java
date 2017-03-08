@@ -162,12 +162,13 @@ public class SNAZ_BoardAdjTargetTests {
 	public void testTargetsTwoSteps() {
 		board.calcTargets(13, 14, 2);
 		Set<BoardCell> targets= board.getTargets();
-		assertEquals(5, targets.size());
+		assertEquals(6, targets.size());
 		assertTrue(targets.contains(board.getCellAt(14, 15)));
 		assertTrue(targets.contains(board.getCellAt(14, 13)));
 		assertTrue(targets.contains(board.getCellAt(12, 15)));
 		assertTrue(targets.contains(board.getCellAt(11, 14)));
 		assertTrue(targets.contains(board.getCellAt(13, 12)));
+		assertTrue(targets.contains(board.getCellAt(15, 14)));
 		
 	}
 
@@ -233,7 +234,7 @@ public class SNAZ_BoardAdjTargetTests {
 		// directly up
 		assertTrue(targets.contains(board.getCellAt(14, 18)));
 		// up and left
-		assertTrue(targets.contains(board.getCellAt(15, 16)));
+		assertTrue(targets.contains(board.getCellAt(15, 17)));
 		// down and left
 		assertTrue(targets.contains(board.getCellAt(17, 17)));
 		// up and right

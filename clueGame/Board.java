@@ -18,8 +18,11 @@ public class Board {
 	private static Set<BoardCell> visited;
 
 	public static Map<Character, String> legend = null;
-	public static int rows = 22;
-	public static int columns = 23;
+	private static int rows;
+	private static int columns;
+	
+	public static final int MAX_ROWS = 50;
+	public static final int MAX_COLUMNS = 50;
 
 	private static Map<BoardCell, Set<BoardCell>> adjMtx;
 
@@ -32,7 +35,7 @@ public class Board {
 	private Board() {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
-		grid = new BoardCell[rows][columns];
+		grid = new BoardCell[MAX_ROWS][MAX_COLUMNS];
 		legend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 	}
@@ -101,17 +104,25 @@ public class Board {
 			}
 		}
 	}
+	
+	public void calcTargets(int i, int j, int numSteps){
+		targets.clear();
+		BoardCell startCell = new BoardCell();
+		startCell = grid[i][j];
+		calculateTargets(startCell, numSteps);
+	}
 
-	public void calcTargets(BoardCell startCell, int numSteps){
+	private void calculateTargets(BoardCell startCell, int numSteps){
 
 		visited.add(startCell);
 
 		for(BoardCell adjCell: adjMtx.get(startCell)){
 			if(visited.contains(adjCell)) continue;
 			visited.add(adjCell);
+			if(adjCell.isDoorway()) targets.add(adjCell);
 			if(numSteps == 1) targets.add(adjCell);
 			else{
-				calcTargets(adjCell, numSteps-1);
+				calculateTargets(adjCell, numSteps-1);
 			}
 			visited.remove(adjCell);
 		}
@@ -142,7 +153,7 @@ public class Board {
 	public static void initialize() {
 		targets = new HashSet<BoardCell>();
 		visited = new HashSet<BoardCell>();
-		grid = new BoardCell[rows][columns];
+		grid = new BoardCell[MAX_ROWS][MAX_COLUMNS];
 		legend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		try {
@@ -155,6 +166,8 @@ public class Board {
 			e.getStackTrace();
 		}
 		calcAdjacencies();
+		
+
 	}
 
 	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
@@ -248,29 +261,7 @@ public class Board {
 	}
 	public Set<BoardCell> getAdjList(int i, int j) {
 
-
-
-
-
 		return adjMtx.get(grid[i][j]);
-	}
-	public void calcTargets(int i, int j, int k) {
-/*
-		BoardCell startCell = new BoardCell();
-
-
-		visited.add(startCell);
-
-		for(BoardCell adjCell: adjMtx.get(startCell)){
-			if(visited.contains(adjCell)) continue;
-			visited.add(adjCell);
-			if(numSteps == 1) targets.add(adjCell);
-			else{
-				calcTargets(adjCell, numSteps-1);
-			}
-			visited.remove(adjCell);
-		}
-*/
 	}
 	
 
