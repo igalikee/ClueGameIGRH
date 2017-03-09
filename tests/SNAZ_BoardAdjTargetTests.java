@@ -19,7 +19,7 @@ public class SNAZ_BoardAdjTargetTests {
 		// Board is singleton, get the only instance and initialize it		
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setConfigFiles("SNAZ_ClueLayout.csv", "SNAZ_ClueLegend.txt");		
+		board.setConfigFiles("data/SNAZ_ClueLayout.csv", "data/SNAZ_ClueLegend.txt");		
 		board.initialize();
 	}
 
