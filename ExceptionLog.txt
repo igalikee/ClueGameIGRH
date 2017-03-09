@@ -1,1 +1,0 @@
-Not of type 'Card' or 'Other'
