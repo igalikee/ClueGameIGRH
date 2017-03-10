@@ -1,0 +1,11 @@
+C, CryoChamber, Card
+B, SpaceBasketBall Court, Card
+A, Abduction Chamber, Card
+Y, Galaxy Bar, Card
+Q, Captains Quarters, Card
+G, Gravity Room, Card
+O, Observatory, Card
+L, Wookie Slave Chambers, Card
+P, Space Pool, Card
+X, AirLock, Other
+W, Walkway, Other

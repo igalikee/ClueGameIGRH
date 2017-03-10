@@ -20,7 +20,7 @@ public class Board {
 	public static Map<Character, String> legend = null;
 	private static int rows;
 	private static int columns;
-	
+
 	public static final int MAX_ROWS = 50;
 	public static final int MAX_COLUMNS = 50;
 
@@ -49,7 +49,7 @@ public class Board {
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
 				Set<BoardCell> tempSet = new HashSet<BoardCell>();
-				
+
 				if(grid[i][j].getInitial() != 'W'){
 					switch (grid[i][j].getDoorDirection()) {
 					case UP:
@@ -66,10 +66,10 @@ public class Board {
 						break;
 					default:
 						break;
-					}
-					
+					}				
 				}
-				else{
+
+				else {
 					if(i > 0){
 						if(grid[i-1][j].getInitial() == 'W' || (grid[i-1][j].isDoorway() && grid[i-1][j].getDoorDirection().equals(DoorDirection.DOWN))) tempSet.add(grid[i-1][j]);
 						if (j > 0){
@@ -104,7 +104,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	public void calcTargets(int i, int j, int numSteps){
 		targets.clear();
 		BoardCell startCell = new BoardCell();
@@ -166,7 +166,7 @@ public class Board {
 			e.getStackTrace();
 		}
 		calcAdjacencies();
-		
+
 
 	}
 
@@ -200,11 +200,11 @@ public class Board {
 			counter++;
 			if (temp.length != c) throw new BadConfigFormatException("Number of columns is not consistent");
 			columns = temp.length;
-			
+
 		}
 
 		rows = counter;
-		
+
 		in.close();
 	}
 
@@ -263,6 +263,6 @@ public class Board {
 
 		return adjMtx.get(grid[i][j]);
 	}
-	
+
 
 }

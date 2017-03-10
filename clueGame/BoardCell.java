@@ -36,6 +36,12 @@ public class BoardCell {
 		else direction = DoorDirection.NONE;
 	}
 
+	@Override
+	public String toString() {
+		return "BoardCell [row=" + row + ", column=" + column + ", initial=" + initial + ", direction=" + direction
+				+ "]";
+	}
+
 	public boolean isDoorway() {
 		
 		return !direction.equals(DoorDirection.NONE);
