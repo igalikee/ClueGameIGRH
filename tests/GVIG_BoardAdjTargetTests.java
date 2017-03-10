@@ -70,7 +70,6 @@ public class GVIG_BoardAdjTargetTests {
 		assertTrue(testList.contains(board.getCellAt(12, 16)));
 		//TEST DOORWAY DOWN
 		testList = board.getAdjList(4, 9);
-		System.out.println(testList.toString());
 		assertEquals(1, testList.size());
 		assertTrue(testList.contains(board.getCellAt(5, 9)));
 		//TEST DOORWAY UP

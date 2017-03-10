@@ -1,9 +1,7 @@
 package clueGame;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -139,15 +137,9 @@ public class Board {
 		return adj;
 	}
 
-	public BoardCell getCell(int i, int j) {
-
-		return grid[i][j];
-	}
-
 	public static void setConfigFiles(String string, String string2) {
 		layoutString = string;
 		legendString = string2;
-
 	}
 
 	public static void initialize() {
@@ -170,17 +162,14 @@ public class Board {
 
 	}
 
+	@SuppressWarnings("resource")
 	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
 
 		FileReader reader = null;
 		Scanner in = null;
 
 
-		try {
-			reader = new FileReader(layoutString);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		reader = new FileReader(layoutString);
 
 
 		in = new Scanner(reader);
@@ -208,6 +197,7 @@ public class Board {
 		in.close();
 	}
 
+	@SuppressWarnings("resource")
 	public static void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException{
 		legend = new HashMap<Character, String>();
 

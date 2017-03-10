@@ -1,10 +1,8 @@
 package experiment;
 
-import java.io.FileReader;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
-import java.util.Scanner;
 import java.util.Set;
 
 import experiment.BoardCell;
@@ -19,9 +17,6 @@ public class Board {
 	public static int columns;
 	
 	Map<BoardCell, Set<BoardCell>> adjMtx;
-	
-	private static String legendString;
-	private static String layoutString;
 	
 
 	

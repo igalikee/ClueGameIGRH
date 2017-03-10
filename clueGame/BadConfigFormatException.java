@@ -3,6 +3,7 @@ package clueGame;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 
+@SuppressWarnings("serial")
 public class BadConfigFormatException extends Exception {
 	
 	public BadConfigFormatException(){
