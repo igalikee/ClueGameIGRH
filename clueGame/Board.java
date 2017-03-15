@@ -71,7 +71,7 @@ public class Board {
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
-			loadPlayerConfig();
+			//loadPlayerConfig();
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
@@ -79,6 +79,18 @@ public class Board {
 			e.getStackTrace();
 		}
 		calcAdjacencies();
+	}
+	
+	public static void initializePlayers() {
+		players = new ArrayList<Player>();
+		
+		try {
+			loadPlayerConfig();
+		}
+		
+		catch (FileNotFoundException e) {
+			System.out.println("Error Loading Players");
+		}
 	}
 	
 	@SuppressWarnings("resource")
@@ -154,14 +166,13 @@ public class Board {
 	}
 	
 	public static void loadPlayerConfig() throws FileNotFoundException {
-		players = new ArrayList<Player>();
-		
+			
 		Scanner in = new Scanner(new File(PlayerString));
 		while (in.hasNextLine()) {
-			String[] temp = in.nextLine().split(",");
-			players.add(new Player(temp[0], temp[1]));
+			String[] temp = in.nextLine().split(", ");
+			if (temp[2].equals("P")) players.add(new HumanPlayer(temp[0], temp[1]));
+			else players.add(new ComputerPlayer(temp[0], temp[1]));
 		}
-		
 		in.close();
 	}
 	
@@ -297,8 +308,7 @@ public class Board {
 	}
 
 	public ArrayList<Player> getPlayers() {
-		// TODO Auto-generated method stub
-		return null;
+		return players;
 	}
 
 }
