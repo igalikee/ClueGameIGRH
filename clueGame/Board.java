@@ -24,24 +24,28 @@ public class Board {
 	public static final int MAX_COLUMNS = 50;
 	public static final int NUM_PLAYERS = 6;
 	
+	//data structures
 	private static BoardCell[][] grid;
 	private static Set<BoardCell> targets;
 	private static Set<BoardCell> visited;
 	private static Map<BoardCell, Set<BoardCell>> adjMtx;
-	
 	public static Map<Character, String> legend ;
+
+	private static ArrayList<Player> players;
+	private static ArrayList<String> weapons;
 	
 	private static int rows;
 	private static int columns;
 
 
-	private static ArrayList<Player> players; 
+	
 	
 
 	// Text File Names
 	private static String legendString;
 	private static String layoutString;
 	private static String PlayerString;
+	private static String WeaponString;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -68,10 +72,10 @@ public class Board {
 		grid = new BoardCell[MAX_ROWS][MAX_COLUMNS];
 		legend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
+		
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
-			//loadPlayerConfig();
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
@@ -81,17 +85,20 @@ public class Board {
 		calcAdjacencies();
 	}
 	
-	public static void initializePlayers() {
+	public static void initializeWeaponsPlayers() {
 		players = new ArrayList<Player>();
+		weapons = new ArrayList<String>();
 		
 		try {
-			loadPlayerConfig();
+		loadPlayerConfig();
+		loadWeaponConfig();
 		}
 		
 		catch (FileNotFoundException e) {
-			System.out.println("Error Loading Players");
+			System.out.println("Error Loading in Players or Weapons");
 		}
 	}
+	
 	
 	@SuppressWarnings("resource")
 	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
@@ -170,10 +177,17 @@ public class Board {
 		Scanner in = new Scanner(new File(PlayerString));
 		while (in.hasNextLine()) {
 			String[] temp = in.nextLine().split(", ");
-			if (temp[2].equals("P")) players.add(new HumanPlayer(temp[0], temp[1]));
-			else players.add(new ComputerPlayer(temp[0], temp[1]));
+			if (temp[2].equals("P")) players.add(new HumanPlayer(temp[0], temp[1], Integer.parseInt(temp[3]), Integer.parseInt(temp[4])));
+			else players.add(new ComputerPlayer(temp[0], temp[1], Integer.parseInt(temp[3]), Integer.parseInt(temp[4])));
 		}
 		in.close();
+	}
+	
+	public static void loadWeaponConfig() throws FileNotFoundException {
+		Scanner in = new Scanner(new File(WeaponString));
+		while (in.hasNextLine()) {
+			weapons.add(in.nextLine());
+		}
 	}
 	
 	//=========================================================================================
@@ -274,8 +288,9 @@ public class Board {
 		legendString = string2;
 	}
 	
-	public static void setPlayerFile(String string) {
+	public static void setCardFiles(String string, String string2) {
 		PlayerString = string;
+		WeaponString = string2;
 	}
 	
 	public Set<BoardCell> getTargets(){
@@ -311,4 +326,7 @@ public class Board {
 		return players;
 	}
 
+	public ArrayList<String> getWeapons() {
+		return weapons;
+	}
 }

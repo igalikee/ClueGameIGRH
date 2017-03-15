@@ -1,6 +1,0 @@
-Captain Zapp, RED, P
-Wookie Slave, DARK_GRAY, C
-Bruce Willis, YELLOW, C
-Leeloo, ORANGE, C
-Murph, BLUE, C
-Mark Watney, BLACK, C

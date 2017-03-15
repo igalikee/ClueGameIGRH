@@ -8,9 +8,11 @@ public class Player {
 	private int row;
 	private int col;
 	
-	public Player(String playerName, String color) {
+	public Player(String playerName, String color, int row, int col) {
 		this.playerName = playerName;
 		this.color = convertStringtoColor(color);
+		this.row = row;
+		this.col = col;	
 	}
 
 	private Color convertStringtoColor(String string) { //converts the String from the file read in to color
@@ -34,16 +36,22 @@ public class Player {
 	public Color getColor() {
 		return color;
 	}
+	
+	public int getRow() {
+		return row;
+	}
+
+	public int getCol() {
+		return col;
+	}
 
 	@Override
 	public String toString() {
 		return "Player [playerName=" + playerName + ", color=" + color + "]";
 	}
 	
-	
-	
 //	public Card disproveSuggestion(Solution suggestion) {
-//		//TO DO - implement this shit
+//		//TODO - implement this shit
 //	}
 	
 	
