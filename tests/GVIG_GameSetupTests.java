@@ -17,7 +17,7 @@ import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
 import clueGame.Player;
 
-public class IG_GameSetupTests {
+public class GVIG_GameSetupTests {
 	
 	//constants to use for tests
 	private static final int NUM_PLAYERS = 6;
