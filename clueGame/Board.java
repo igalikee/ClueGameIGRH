@@ -289,31 +289,27 @@ public class Board {
 
 	private static void populateSolution() {
 		Random rand = new Random();
-		String room;
-		String person;
-		String weapon;
-
+		
+		solution = new Solution();
+		
 		int n = rand.nextInt(9);
-		//solution.room = cards.get(n).getCardName() "solution.room" gives us a null pointer exception
-		room = cards.get(n).getCardName();
-		//cards.remove(n);
-		
-		
+		solution.room = cards.get(n).getCardName() ;
+
 		n = rand.nextInt(6) + 9;
-		//solution.person = cards.get(n).getCardName();
-		person = cards.get(n).getCardName();
-		//cards.remove(n);
+		solution.person = cards.get(n).getCardName();
 		
 		n = rand.nextInt(6) + 15;
-		//solution.weapon = cards.get(n).getCardName();
-		weapon = cards.get(n).getCardName();
-		Solution boardSolution = new Solution(room, person, weapon);
-		//cards.remove(n);
+		solution.weapon = cards.get(n).getCardName();
+		
 
 	}
 	
 	private static void dealCards() {
-		deck = new ArrayList<Card>(cards); 
+		deck = new ArrayList<Card>(cards);
+		deck.remove(solution.person);
+		deck.remove(solution.room);
+		deck.remove(solution.weapon);
+		
 		Collections.shuffle(deck);
 		while (!deck.isEmpty()) {
 			

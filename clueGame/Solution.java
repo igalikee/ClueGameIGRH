@@ -6,7 +6,11 @@ public class Solution {
 	public String weapon;
 	
 	
-	
+	public Solution () {
+		String person = "";
+		String room = "";
+		String weapon = "";
+	}
 	public void setPerson(String person) {
 		this.person = person;
 	}
