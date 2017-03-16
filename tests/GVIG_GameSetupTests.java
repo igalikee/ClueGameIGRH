@@ -92,4 +92,9 @@ public class GVIG_GameSetupTests {
 		//TODO check individual cards
 		
 	}
+	
+	@Test
+	public void testDeal() {
+		fail("Do this");
+	}
 }

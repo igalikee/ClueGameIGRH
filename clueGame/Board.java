@@ -93,7 +93,7 @@ public class Board {
 		}
 		calcAdjacencies();
 		populateSolution();
-		dealCards();
+		//dealCards();
 	}
 	
 	@SuppressWarnings("resource")
