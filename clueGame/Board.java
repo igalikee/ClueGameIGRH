@@ -251,6 +251,7 @@ public class Board {
 		}
 	}
 
+	
 	public void calcTargets(int i, int j, int numSteps){
 		targets.clear();
 		BoardCell startCell = new BoardCell();
