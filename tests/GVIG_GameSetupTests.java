@@ -10,9 +10,11 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.Card;
+import clueGame.CardType;
 import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
 import clueGame.Player;
+import clueGame.Solution;
 
 public class GVIG_GameSetupTests {
 	
@@ -85,7 +87,37 @@ public class GVIG_GameSetupTests {
 		cards = board.getCards();
 		
 		//test individual card names
+		assertEquals(cards.get(0).getCardName(),"CryoChamber");
+		assertEquals(cards.get(6).getCardName(),"Observatory");
+		assertEquals(cards.get(10).getCardName(), "Wookie Slave");
+		assertEquals(cards.get(14).getCardName(),"Mark Watney");
+		assertEquals(cards.get(18).getCardName(),"Poison");
+		assertEquals(cards.get(20).getCardName(),"Butter Knife");
+		
+		//test number of rooms, players, and weapons correct
+		int numRooms = 0;
+		int numPlayers = 0;
+		int numWeapons = 0;
+		for (int i = 0; i < cards.size(); i++) {
+			CardType tempType = cards.get(i).getCardType();
+			if (tempType.equals(CardType.ROOM)) {
+				numRooms++;
+			}
+			else if (tempType.equals(CardType.PLAYER)) {
+				numPlayers++;
+			}
+			else if (tempType.equals(CardType.WEAPON)) {
+				numWeapons++;
+			}
+		}
+		assertEquals(9, numRooms);
+		assertEquals(6, numPlayers);
+		assertEquals(6, numWeapons);
+		
 		//test solution
+		
+		
+		
 		
 		assertEquals(NUM_CARDS, cards.size());
 		

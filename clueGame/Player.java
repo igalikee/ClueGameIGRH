@@ -1,12 +1,14 @@
 package clueGame;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public class Player {
 	private String playerName;
 	private Color color;
 	private int row;
 	private int col;
+	private static ArrayList<Card> hand = new ArrayList<>();
 	
 	public Player(String playerName, String color, int row, int col) {
 		this.playerName = playerName;
@@ -43,6 +45,15 @@ public class Player {
 
 	public int getCol() {
 		return col;
+	}
+	
+
+	public static ArrayList<Card> getHand() {
+		return hand;
+	}
+
+	public static void addCard(Card card) {
+		hand.add(card);
 	}
 
 	@Override

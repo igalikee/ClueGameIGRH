@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -33,10 +34,13 @@ public class Board {
 	private static Map<BoardCell, Set<BoardCell>> adjMtx;
 	public static Map<Character, String> legend ;
 	public static ArrayList<Card> cards;
+	private static ArrayList<Card> deck;
 	public static Solution solution;
 
 	private static ArrayList<Player> players;
 	private static ArrayList<String> weapons;
+	
+	
 	
 	private static int rows;
 	private static int columns;
@@ -79,6 +83,7 @@ public class Board {
 		players = new ArrayList<Player>();
 		weapons = new ArrayList<String>();
 		cards = new ArrayList<Card>();
+		
 	
 		try {
 			loadRoomConfig();
@@ -93,8 +98,9 @@ public class Board {
 		}
 		calcAdjacencies();
 		populateSolution();
-		//dealCards();
+		dealCards();
 	}
+	
 	
 	@SuppressWarnings("resource")
 	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
@@ -283,16 +289,41 @@ public class Board {
 
 	private static void populateSolution() {
 		Random rand = new Random();
+		String room;
+		String person;
+		String weapon;
 
 		int n = rand.nextInt(9);
-		solution.room = cards.get(n).getCardName();
+		//solution.room = cards.get(n).getCardName() "solution.room" gives us a null pointer exception
+		room = cards.get(n).getCardName();
+		//cards.remove(n);
+		
 		
 		n = rand.nextInt(6) + 9;
-		solution.person = cards.get(n).getCardName();
+		//solution.person = cards.get(n).getCardName();
+		person = cards.get(n).getCardName();
+		//cards.remove(n);
 		
 		n = rand.nextInt(6) + 15;
-		solution.weapon = cards.get(n).getCardName();		
+		//solution.weapon = cards.get(n).getCardName();
+		weapon = cards.get(n).getCardName();
+		Solution boardSolution = new Solution(room, person, weapon);
+		//cards.remove(n);
 
+	}
+	
+	private static void dealCards() {
+		deck = new ArrayList<Card>(cards); 
+		Collections.shuffle(deck);
+		while (!deck.isEmpty()) {
+			
+			//fix. Not sure how to implement
+			Player.addCard(deck.get(0));
+			deck.remove(0);
+		}
+		
+		
+		
 	}
 	
 	//========================================================================================
