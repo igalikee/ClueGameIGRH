@@ -84,6 +84,9 @@ public class GVIG_GameSetupTests {
 		ArrayList<Card> cards = new ArrayList<Card>();
 		cards = board.getCards();
 		
+		//test individual card names
+		//test solution
+		
 		assertEquals(NUM_CARDS, cards.size());
 		
 		//TODO check individual cards

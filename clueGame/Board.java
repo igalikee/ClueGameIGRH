@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
 import clueGame.BoardCell;
+
 
 public class Board {
 	
@@ -31,6 +33,7 @@ public class Board {
 	private static Map<BoardCell, Set<BoardCell>> adjMtx;
 	public static Map<Character, String> legend ;
 	public static ArrayList<Card> cards;
+	public static Solution solution;
 
 	private static ArrayList<Player> players;
 	private static ArrayList<String> weapons;
@@ -89,6 +92,8 @@ public class Board {
 			e.getStackTrace();
 		}
 		calcAdjacencies();
+		populateSolution();
+		dealCards();
 	}
 	
 	@SuppressWarnings("resource")
@@ -276,6 +281,19 @@ public class Board {
 
 	}
 
+	private static void populateSolution() {
+		Random rand = new Random();
+
+		int n = rand.nextInt(9);
+		solution.room = cards.get(n).getCardName();
+		
+		n = rand.nextInt(6) + 9;
+		solution.person = cards.get(n).getCardName();
+		
+		n = rand.nextInt(6) + 15;
+		solution.weapon = cards.get(n).getCardName();		
+
+	}
 	
 	//========================================================================================
 	// GETTERS & SETTERS 
