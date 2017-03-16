@@ -9,6 +9,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import clueGame.Board;
+import clueGame.Card;
 import clueGame.ComputerPlayer;
 import clueGame.HumanPlayer;
 import clueGame.Player;
@@ -18,6 +19,7 @@ public class GVIG_GameSetupTests {
 
 	//constants to use for tests
 	private static final int NUM_PLAYERS = 6;
+	private static final int NUM_CARDS = 21;
 
 	private static Board board;
 
@@ -25,9 +27,9 @@ public class GVIG_GameSetupTests {
 	public static void setUp() {
 		board = Board.getInstance();
 		// set the file names to use my config files
-		board.setCardFiles("data/GVIG_Players.txt", "data/GVIG_Weapons.txt");
+		board.setConfigFiles("data/GVIG_ClueLayout.csv", "data/GVIG_ClueLegend.txt","data/GVIG_Players.txt", "data/GVIG_Weapons.txt");
 		// Initialize will load ALL config files 
-		board.initializeWeaponsPlayers();
+		board.initialize();
 	}
 
 	@Test
@@ -79,6 +81,12 @@ public class GVIG_GameSetupTests {
 
 	@Test
 	public void testCards() {
-		fail("Do this thang");
+		ArrayList<Card> cards = new ArrayList<Card>();
+		cards = board.getCards();
+		
+		assertEquals(NUM_CARDS, cards.size());
+		
+		//TODO check individual cards
+		
 	}
 }

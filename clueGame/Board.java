@@ -30,6 +30,7 @@ public class Board {
 	private static Set<BoardCell> visited;
 	private static Map<BoardCell, Set<BoardCell>> adjMtx;
 	public static Map<Character, String> legend ;
+	public static ArrayList<Card> cards;
 
 	private static ArrayList<Player> players;
 	private static ArrayList<String> weapons;
@@ -38,8 +39,6 @@ public class Board {
 	private static int columns;
 
 
-	
-	
 
 	// Text File Names
 	private static String legendString;
@@ -56,13 +55,15 @@ public class Board {
 		grid = new BoardCell[MAX_ROWS][MAX_COLUMNS];
 		legend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
+		players = new ArrayList<Player>();
+		weapons = new ArrayList<String>();
+		cards = new ArrayList<Card>();
 	}
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
 	}
 
-	
 	//=========================================================================================
 	//INITIALIZATION AND LOADING DATA
 	//=========================================================================================
@@ -72,10 +73,15 @@ public class Board {
 		grid = new BoardCell[MAX_ROWS][MAX_COLUMNS];
 		legend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		
+		players = new ArrayList<Player>();
+		weapons = new ArrayList<String>();
+		cards = new ArrayList<Card>();
+	
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
+			loadPlayerConfig();
+			loadWeaponConfig();	
 		} catch (BadConfigFormatException e) {
 			System.out.println(e.getMessage());
 		}
@@ -84,21 +90,6 @@ public class Board {
 		}
 		calcAdjacencies();
 	}
-	
-	public static void initializeWeaponsPlayers() {
-		players = new ArrayList<Player>();
-		weapons = new ArrayList<String>();
-		
-		try {
-		loadPlayerConfig();
-		loadWeaponConfig();
-		}
-		
-		catch (FileNotFoundException e) {
-			System.out.println("Error Loading in Players or Weapons");
-		}
-	}
-	
 	
 	@SuppressWarnings("resource")
 	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
@@ -157,18 +148,20 @@ public class Board {
 		while (in.hasNextLine()){
 
 			String[] temp = in.nextLine().split(", ");
-
+			
 			symbol = temp[0];
 			room = temp[1];
 			type = temp[2];
-			//System.out.println(type + " " + (!type.equals("Card") && !type.equals("Other")));
-			//System.out.println("here");
+			//add room cards
+			if (type.equals("Card")) {
+				cards.add(new Card(temp[1], CardType.ROOM));
+			}
+			
 			legend.put(symbol.charAt(0), room);
 			//System.out.println(legend.size());
 			if((!type.equals("Card") && !type.equals("Other"))) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 			//if(type.equals("X")) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 		}
-
 		in.close();
 	}
 	
@@ -177,6 +170,7 @@ public class Board {
 		Scanner in = new Scanner(new File(PlayerString));
 		while (in.hasNextLine()) {
 			String[] temp = in.nextLine().split(", ");
+			cards.add(new Card(temp[0], CardType.PLAYER));
 			if (temp[2].equals("P")) players.add(new HumanPlayer(temp[0], temp[1], Integer.parseInt(temp[3]), Integer.parseInt(temp[4])));
 			else players.add(new ComputerPlayer(temp[0], temp[1], Integer.parseInt(temp[3]), Integer.parseInt(temp[4])));
 		}
@@ -184,9 +178,12 @@ public class Board {
 	}
 	
 	public static void loadWeaponConfig() throws FileNotFoundException {
+		String weaponName;
 		Scanner in = new Scanner(new File(WeaponString));
 		while (in.hasNextLine()) {
-			weapons.add(in.nextLine());
+			weaponName = in.nextLine();
+			weapons.add(weaponName);
+			cards.add(new Card(weaponName, CardType.WEAPON));
 		}
 	}
 	
@@ -283,14 +280,12 @@ public class Board {
 	// GETTERS & SETTERS 
 	//========================================================================================
 	
-	public static void setConfigFiles(String string, String string2) {
+	
+	public void setConfigFiles(String string, String string2, String string3, String string4) {
 		layoutString = string;
 		legendString = string2;
-	}
-	
-	public static void setCardFiles(String string, String string2) {
-		PlayerString = string;
-		WeaponString = string2;
+		PlayerString = string3;
+		WeaponString = string4;
 	}
 	
 	public Set<BoardCell> getTargets(){
@@ -329,4 +324,8 @@ public class Board {
 	public ArrayList<String> getWeapons() {
 		return weapons;
 	}
+	public ArrayList<Card> getCards() {
+		return cards;
+	}
+
 }
