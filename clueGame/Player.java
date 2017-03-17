@@ -8,13 +8,15 @@ public class Player {
 	private Color color;
 	private int row;
 	private int col;
-	private static ArrayList<Card> hand = new ArrayList<>();
+	private ArrayList<Card> hand;
 	
 	public Player(String playerName, String color, int row, int col) {
 		this.playerName = playerName;
 		this.color = convertStringtoColor(color);
 		this.row = row;
 		this.col = col;	
+		
+		hand = new ArrayList<>();
 	}
 
 	private Color convertStringtoColor(String string) { //converts the String from the file read in to color
@@ -48,11 +50,11 @@ public class Player {
 	}
 	
 
-	public static ArrayList<Card> getHand() {
+	public ArrayList<Card> getHand() {
 		return hand;
 	}
 
-	public static void addCard(Card card) {
+	public void addCard(Card card) {
 		hand.add(card);
 	}
 

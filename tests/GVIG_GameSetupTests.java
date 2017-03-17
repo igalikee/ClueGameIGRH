@@ -4,6 +4,8 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -86,6 +88,8 @@ public class GVIG_GameSetupTests {
 		ArrayList<Card> cards = new ArrayList<Card>();
 		cards = board.getCards();
 		
+		assertEquals(NUM_CARDS, cards.size());
+		
 		//test individual card names
 		assertEquals(cards.get(0).getCardName(),"CryoChamber");
 		assertEquals(cards.get(6).getCardName(),"Observatory");
@@ -113,20 +117,28 @@ public class GVIG_GameSetupTests {
 		assertEquals(9, numRooms);
 		assertEquals(6, numPlayers);
 		assertEquals(6, numWeapons);
-		
-		//test solution
-		
-		
-		
-		
-		assertEquals(NUM_CARDS, cards.size());
-		
-		//TODO check individual cards
-		
 	}
 	
 	@Test
-	public void testDeal() {
-		fail("Do this");
+	public void testDeal() { //tests how the cards are dealt
+		ArrayList<Player> players = new ArrayList<Player>();
+		players = board.getPlayers();
+		
+		assertEquals(players.get(0).getHand().size(), 3);  //makes sure every player gets dealt 3 cards
+		assertEquals(players.get(1).getHand().size(), 3); 
+		assertEquals(players.get(2).getHand().size(), 3);
+		assertEquals(players.get(3).getHand().size(), 3);
+		assertEquals(players.get(4).getHand().size(), 3);
+		assertEquals(players.get(5).getHand().size(), 3);
+		
+		
+		Set<Card> test = new HashSet<Card>();
+		for (Player p : players) {
+			test.addAll(p.getHand());
+		}
+		
+		assertEquals(test.size(), NUM_CARDS - 3); //tests that there are no duplicates in the deal
+		
+		
 	}
 }

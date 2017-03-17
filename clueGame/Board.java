@@ -1,6 +1,5 @@
 package clueGame;
 
-import java.awt.Color;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -17,16 +16,16 @@ import clueGame.BoardCell;
 
 
 public class Board {
-	
+
 	//========================================================================================
 	// VARIABLES
 	//========================================================================================
-	
+
 	//constants
 	public static final int MAX_ROWS = 50;
 	public static final int MAX_COLUMNS = 50;
 	public static final int NUM_PLAYERS = 6;
-	
+
 	//data structures
 	private static BoardCell[][] grid;
 	private static Set<BoardCell> targets;
@@ -39,9 +38,9 @@ public class Board {
 
 	private static ArrayList<Player> players;
 	private static ArrayList<String> weapons;
-	
-	
-	
+
+
+
 	private static int rows;
 	private static int columns;
 
@@ -83,8 +82,8 @@ public class Board {
 		players = new ArrayList<Player>();
 		weapons = new ArrayList<String>();
 		cards = new ArrayList<Card>();
-		
-	
+
+
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
@@ -97,11 +96,10 @@ public class Board {
 			e.getStackTrace();
 		}
 		calcAdjacencies();
-		populateSolution();
-		dealCards();
+		setSolution_dealCards();
 	}
-	
-	
+
+
 	@SuppressWarnings("resource")
 	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
 
@@ -159,7 +157,7 @@ public class Board {
 		while (in.hasNextLine()){
 
 			String[] temp = in.nextLine().split(", ");
-			
+
 			symbol = temp[0];
 			room = temp[1];
 			type = temp[2];
@@ -167,7 +165,7 @@ public class Board {
 			if (type.equals("Card")) {
 				cards.add(new Card(temp[1], CardType.ROOM));
 			}
-			
+
 			legend.put(symbol.charAt(0), room);
 			//System.out.println(legend.size());
 			if((!type.equals("Card") && !type.equals("Other"))) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
@@ -175,9 +173,9 @@ public class Board {
 		}
 		in.close();
 	}
-	
+
 	public static void loadPlayerConfig() throws FileNotFoundException {
-			
+
 		Scanner in = new Scanner(new File(PlayerString));
 		while (in.hasNextLine()) {
 			String[] temp = in.nextLine().split(", ");
@@ -187,7 +185,7 @@ public class Board {
 		}
 		in.close();
 	}
-	
+
 	public static void loadWeaponConfig() throws FileNotFoundException {
 		String weaponName;
 		Scanner in = new Scanner(new File(WeaponString));
@@ -196,8 +194,9 @@ public class Board {
 			weapons.add(weaponName);
 			cards.add(new Card(weaponName, CardType.WEAPON));
 		}
+		in.close();
 	}
-	
+
 	//=========================================================================================
 	// MOVEMENT: ADJECENCY AND TARGET CALCULATIONS
 	//=========================================================================================
@@ -262,7 +261,7 @@ public class Board {
 		}
 	}
 
-	
+
 	public void calcTargets(int i, int j, int numSteps){
 		targets.clear();
 		BoardCell startCell = new BoardCell();
@@ -287,53 +286,60 @@ public class Board {
 
 	}
 
-	private static void populateSolution() {
+	private static void setSolution_dealCards() {
+		deck = new ArrayList<Card>(cards); //deck to shuffle
+
 		Random rand = new Random();
-		
 		solution = new Solution();
-		
+
 		int n = rand.nextInt(9);
-		solution.room = cards.get(n).getCardName() ;
+		solution.room = cards.get(n).getCardName();
+		Collections.swap(deck, 0, n); //moving to front of deck for removal
+
 
 		n = rand.nextInt(6) + 9;
 		solution.person = cards.get(n).getCardName();
-		
+		Collections.swap(deck, 1, n); //moving to first index for removal
+
+
 		n = rand.nextInt(6) + 15;
 		solution.weapon = cards.get(n).getCardName();
+		Collections.swap(deck, 2, n); //same as above 
+
+
+		for (int i = 0; i < 3; i++) { //removing them from deck
+			deck.remove(i);
+		}
+
+
+
+		Collections.shuffle(deck); //shuffles the deck randomly
+
+		int playerNum = 0;
+		
+		for (Card c: deck) { //dealing the cards
+			Card t = new Card(c.getCardName(), c.getCardType());
+			if (playerNum >= players.size()) playerNum = 0; 
+
+			players.get(playerNum).addCard(t);
+			playerNum++;
+		}
 		
 
 	}
-	
-	private static void dealCards() {
-		deck = new ArrayList<Card>(cards);
-		deck.remove(solution.person);
-		deck.remove(solution.room);
-		deck.remove(solution.weapon);
-		
-		Collections.shuffle(deck);
-		while (!deck.isEmpty()) {
-			
-			//fix. Not sure how to implement
-			Player.addCard(deck.get(0));
-			deck.remove(0);
-		}
-		
-		
-		
-	}
-	
+
+
 	//========================================================================================
 	// GETTERS & SETTERS 
 	//========================================================================================
-	
-	
+
 	public void setConfigFiles(String string, String string2, String string3, String string4) {
 		layoutString = string;
 		legendString = string2;
 		PlayerString = string3;
 		WeaponString = string4;
 	}
-	
+
 	public Set<BoardCell> getTargets(){
 		return targets;
 	}
