@@ -343,6 +343,7 @@ public class Board {
 	public Set<BoardCell> getTargets(){
 		return targets;
 	}
+	
 
 	public static Set<BoardCell> getAdjList(BoardCell cell){
 		Set<BoardCell> adj = new HashSet<BoardCell>();

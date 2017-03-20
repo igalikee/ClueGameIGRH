@@ -108,4 +108,5 @@ public class GVIG_FileInitTests {
 			// Test the closet
 			assertEquals('X', board.getCellAt(6,9).getInitial());
 		}
+		
 }

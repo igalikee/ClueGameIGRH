@@ -18,7 +18,7 @@ import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
-public class GVIG_GameSetupTests {
+public class GVIG_gameSetupTests {
 	
 
 	//constants to use for tests
@@ -137,8 +137,6 @@ public class GVIG_GameSetupTests {
 			test.addAll(p.getHand());
 		}
 		
-		assertEquals(test.size(), NUM_CARDS - 3); //tests that there are no duplicates in the deal
-		
-		
+		assertEquals(test.size(), NUM_CARDS - 3); //tests that there are no duplicates in the deal	
 	}
 }

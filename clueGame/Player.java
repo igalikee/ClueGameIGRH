@@ -62,6 +62,16 @@ public class Player {
 	public String toString() {
 		return "Player [playerName=" + playerName + ", color=" + color + "]";
 	}
+
+	public void setRow(int row) {
+		this.row = row;
+	}
+
+	public void setCol(int col) {
+		this.col = col;
+	}
+	
+	
 	
 //	public Card disproveSuggestion(Solution suggestion) {
 //		//TODO - implement this shit
