@@ -43,17 +43,15 @@ public class BoardCell {
 	}
 
 	public boolean isDoorway() {
-		
-		return !direction.equals(DoorDirection.NONE);
+		if (direction == DoorDirection.NONE) return false;
+		return true;
 	}
 
 	public DoorDirection getDoorDirection() {
-		// TODO Auto-generated method stub
 		return direction;
 	}
 
 	public char getInitial() {
-		// TODO Auto-generated method stub
 		return initial;
 	}
 

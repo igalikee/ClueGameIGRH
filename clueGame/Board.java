@@ -362,7 +362,7 @@ public class Board {
 	public int getNumColumns() {
 		return columns;
 	}
-	public BoardCell getCellAt(int i, int j) {
+	public static BoardCell getCellAt(int i, int j) {
 		return grid[i][j];
 	}
 	public Set<BoardCell> getAdjList(int i, int j) {

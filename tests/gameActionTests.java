@@ -35,50 +35,63 @@ public class gameActionTests {
 		players = board.getPlayers();
 		
 	
-		Set<BoardCell> targets1 = new HashSet<BoardCell>(); //holds possible target locations
-		Set<BoardCell> targets2 = new HashSet<BoardCell>();
-		//Set<BoardCell> targets3 = new HashSet<BoardCell>();
+		Set<BoardCell> targets = new HashSet<BoardCell>(); //holds possible target locations
 		
-		ComputerPlayer computer1 = new ComputerPlayer();
-		ComputerPlayer computer2 = new ComputerPlayer();
-		computer1 = (ComputerPlayer) players.get(1); //tests the first computer player, WOOKIE SLAVE for random movement
-		computer2 = (ComputerPlayer) players.get(2); //tests Bruce Willis to make sure he enters a room
-		computer2.setRow(7); //change the location to 7,3 to test door entry 
-		computer2.setCol(3);
+		ComputerPlayer computer = new ComputerPlayer();
+		computer = (ComputerPlayer) players.get(1); //tests the first computer player, WOOKIE SLAVE for random movement
+		board.calcTargets(computer.getRow(), computer.getCol(), 2); //generates targets with 2 steps for computer1
+		targets = board.getTargets();
 		
+		BoardCell targetCell = new BoardCell();  //gets the target cell by calling pickLocation
 		
-		board.calcTargets(computer1.getRow(), computer1.getCol(), 2); //generates targets with 2 steps for computer1
-		targets1 = board.getTargets();
-		BoardCell targetCell1 = new BoardCell();  //gets the target cell by calling pickLocation
-		
-		
-		
-		board.calcTargets(computer2.getRow(), computer2.getCol(), 2); //targets with 6 steps for computer2
-		targets2 = board.getTargets();
-		BoardCell targetCell2 = new BoardCell(); //gets target cell for computer2
-		
-		int C1counter1 = 0; //holds the amount of times each cell is visited for computer1   
-		int C1counter2 = 0; 
-		int C1counter3 = 0;
-		
-		int C2counter = 0;
-		
+		int counter1 = 0; //holds the amount of times each cell is visited for computer1   
+		int counter2 = 0; 
+		int counter3 = 0;
+				
 		for (int i = 0; i < 100; i++) {  //calcs the targets 100 times 
-			targetCell1 = computer1.pickLocation(targets1);
-			targetCell2 = computer2.pickLocation(targets2);
+			targetCell = computer.pickLocation(targets);
 	
-			if (targetCell1 == board.getCellAt(16, 4)) C1counter1++;
-			if (targetCell1 == board.getCellAt(15, 5)) C1counter2++;
-			if (targetCell1 == board.getCellAt(14, 6)) C1counter3++;
-			
-			if (targetCell2 == board.getCellAt(5,3)) C2counter++;
+			if (targetCell == board.getCellAt(16, 4)) counter1++;
+			if (targetCell == board.getCellAt(15, 5)) counter2++;
+			if (targetCell == board.getCellAt(14, 6)) counter3++;
 		}
 		
-		assertTrue(C1counter1 > 5);
-		assertTrue(C1counter2 > 5);
-		assertTrue(C1counter3 > 5);
+		assertTrue(counter1 > 5);
+		assertTrue(counter2 > 5);
+		assertTrue(counter3 > 5);
 		
-		assertEquals(C2counter, 100); //ensures computer goes into room everytime 
+		
+		counter1 = 0;
+		counter2 = 0; 
+		counter3 = 0;
+		//now test entry into room
+		computer = (ComputerPlayer) players.get(2); //tests Bruce Willis to make sure he enters a room
+		computer.setRow(7); //change the location to 7,3 to test door entry 
+		computer.setCol(3);
+		board.calcTargets(computer.getRow(), computer.getCol(), 2); //generates targets with 2 steps for computer1
+		targets = board.getTargets() ;
+
+		
+		
+		for (int i = 0; i < 10; i++) {  //calcs the targets 10 times 
+			computer.setVisited(board.getCellAt(7, 3));
+			targetCell = computer.pickLocation(targets);
+			System.out.println(targetCell);
+			if (targetCell == board.getCellAt(5,3)) counter1++;
+		}
+		
+		assertEquals(10, counter1); //ensures computer goes into room everytime 
+		
+		
+		counter1 = 0;
+		counter2 = 0; 
+		counter3 = 0;
+		//now test entry into room
+		computer = (ComputerPlayer) players.get(2); //tests Bruce Willis to make sure he enters a room
+		computer.setRow(7); //change the location to 7,3 to test door entry 
+		computer.setCol(3);
+		board.calcTargets(computer.getRow(), computer.getCol(), 2); //generates targets with 2 steps for computer1
+		targets = board.getTargets() ;
 		
 		//TODO check it doesn't go into room 
 	}
