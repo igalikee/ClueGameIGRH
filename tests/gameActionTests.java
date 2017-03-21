@@ -14,6 +14,7 @@ import clueGame.BoardCell;
 import clueGame.Card;
 import clueGame.CardType;
 import clueGame.ComputerPlayer;
+import clueGame.HumanPlayer;
 import clueGame.Player;
 import clueGame.Solution;
 
@@ -234,7 +235,48 @@ public class gameActionTests {
 	
 	@Test
 	public void handleSuggestion() {
+		HumanPlayer player1 = new HumanPlayer();
+		ComputerPlayer player2 = new ComputerPlayer();
+		ComputerPlayer player3 = new ComputerPlayer();
+		ArrayList<Card> hand = new ArrayList<Card>();
+		ArrayList<Card> cards = new ArrayList<Card>(board.getCards()); 
+		hand.add(cards.get(14)); //Mark Watney
+		hand.add(cards.get(18)); //Poison
+		hand.add(cards.get(6)); // Observatory
+		player1.setHand(hand);
+		hand.clear();
+		hand.add(cards.get(13)); //Murph
+		hand.add(cards.get(19)); //Bullying
+		hand.add(cards.get(12)); // Leeloo
+		player2.setHand(hand);
+		hand.clear();
+		hand.add(cards.get(3)); //Galaxy Bar
+		hand.add(cards.get(0)); //Cryochamber
+		hand.add(cards.get(11)); // Bruce Willis
+		player3.setHand(hand);
 		
+		ArrayList<Player> playerList = new ArrayList<>();
+		playerList.add(player1);
+		playerList.add(player2);
+		playerList.add(player3);
+		
+		//still need to fix this shit.
+//		Solution suggestion = new Solution();
+//		suggestion.person = "Wookie Slave";
+//		suggestion.room = "Gravity Room";
+//		suggestion.weapon = "High Energy Laser";
+//		
+//		//tests if no one can disprove
+//		assertEquals(null, board.handleSuggestion(suggestion, player1));
+//		
+//		//tests only human can disprove, returns null
+//		suggestion.person = "Mark Watney";
+//		assertEquals(null, board.handleSuggestion(suggestion, player2));
+//		
+//		//tests a proven suggestion
+//		suggestion.person = "Galaxy Bar";
+//		assertEquals("Galaxy Bar", board.handleSuggestion(suggestion, player3));
+	
 	}
 	
 }
