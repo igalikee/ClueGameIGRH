@@ -20,6 +20,10 @@ public class Player {
 		hand = new ArrayList<>();
 	}
 
+	public void setHand(ArrayList<Card> hand) {
+		this.hand = hand;
+	}
+
 	private Color convertStringtoColor(String string) { //converts the String from the file read in to color
 		switch(string) {
 		case "RED": return Color.RED;
@@ -77,9 +81,8 @@ public class Player {
 	public Card disproveSuggestion(Solution suggestion) {
 		ArrayList<Card> suggestions = new ArrayList<Card>();
 		
-		
 		for (Card card : hand) {
-			if (card.equals(suggestion.person) || card.equals(suggestion.weapon) || card.equals(suggestion.room)) {
+			if (card.getCardName().equals(suggestion.person) || card.getCardName().equals(suggestion.weapon) || card.getCardName().equals(suggestion.room)) {
 				suggestions.add(card);
 			}
 		}

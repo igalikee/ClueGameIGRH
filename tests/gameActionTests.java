@@ -11,6 +11,8 @@ import org.junit.Test;
 
 import clueGame.Board;
 import clueGame.BoardCell;
+import clueGame.Card;
+import clueGame.CardType;
 import clueGame.ComputerPlayer;
 import clueGame.Player;
 import clueGame.Solution;
@@ -77,7 +79,6 @@ public class gameActionTests {
 		for (int i = 0; i < 10; i++) {  //calcs the targets 10 times 
 			computer.setVisited(board.getCellAt(7, 3));
 			targetCell = computer.pickLocation(targets);
-			System.out.println(targetCell);
 			if (targetCell == board.getCellAt(5,3)) counter1++;
 		}
 		
@@ -134,9 +135,106 @@ public class gameActionTests {
 	
 	@Test
 	public void testCreateSuggestion() {
-		BoardCell currentCell = new BoardCell(2, 18, "A");
+		ComputerPlayer testPlayer = new ComputerPlayer();
+		testPlayer.setRow(0);
+		testPlayer.setCol(14);
+				
+		testPlayer.createSuggestion();
+		Solution testSuggestion = testPlayer.getSuggestion();
+		char roomInit = board.getCellAt(testPlayer.getRow(), testPlayer.getCol()).getInitial();
+		String room = board.legend.get(roomInit);
 		
+		assertEquals(room,testSuggestion.room);  // tests that suggestion is the same room
+		
+		ArrayList<String> seen = new ArrayList<String>();
+		
+		for (Card c : board.getCards()) {
+			seen.add(c.getCardName());
+		}
+
+		testPlayer.setSeenCards(seen);
+		seen.remove("Captain Zapp");
+		seen.remove("Poison");
+		
+
+		
+		testPlayer.createSuggestion();
+		testSuggestion = testPlayer.getSuggestion();
+		
+		assertEquals("Captain Zapp", testSuggestion.person); //if only one person not seen it's selected	
+		assertEquals("Poison", testSuggestion.weapon); //if only one weapon not seen it's selected
+		
+		seen.remove("Butter Knife");
+		seen.remove("Mark Watney");
+		seen.remove("Wookie Slave");
+		
+		int Mark = 0;
+		int Knife = 0;
+		
+		for (int i = 0; i < 100; i++) {
+			testPlayer.createSuggestion();
+			testSuggestion = testPlayer.getSuggestion();
+			
+			if (testSuggestion.person.equals("Mark Watney")) Mark++;
+			if (testSuggestion.weapon.equals("Butter Knife")) Knife++;
+		}
+		
+		assertTrue(Mark > 0);
+		assertTrue(Knife > 0);
+	}
+	
+	@Test
+	public void disproveSuggestion() {
+		ComputerPlayer testPlayer = new ComputerPlayer();
+		
+		ArrayList<Card> cards = new ArrayList<Card>(board.getCards()); 
+		
+		ArrayList<Card> hand = new ArrayList<Card>();
+		hand.add(cards.get(14));
+		hand.add(cards.get(18));
+		hand.add(cards.get(6));
+		
+		testPlayer.setHand(hand);
+		
+		Solution suggestion = new Solution();
+		suggestion.person = "Mark Watney";
+		suggestion.room = "Cryochamber";
+		suggestion.weapon = "Bullying";
+		
+		testPlayer.disproveSuggestion(suggestion);
+		
+		//testing when player has only one matching card
+		assertEquals(cards.get(14) ,testPlayer.disproveSuggestion(suggestion));
+		suggestion.person = "Wookie Slave";
+		
+		//testing when player has no matching cards
+		assertEquals(null,testPlayer.disproveSuggestion(suggestion));
+		
+		suggestion.person = cards.get(14).getCardName();
+		suggestion.room = cards.get(18).getCardName();
+		suggestion.weapon = cards.get(6).getCardName();
+		
+		int person = 0; 
+		int room = 0; 
+		int weapon = 0;
+		
+		
+		//testint to see if >1 matching card, the card is returned randomly
+		for (int i = 0; i < 100; i++) {
+			if (testPlayer.disproveSuggestion(suggestion).getCardName().equals(suggestion.person)) person++;
+			if (testPlayer.disproveSuggestion(suggestion).getCardName().equals(suggestion.room)) room++;
+			if (testPlayer.disproveSuggestion(suggestion).getCardName().equals(suggestion.weapon)) weapon++;
+		}
+		
+		assertTrue(person > 5);
+		assertTrue(room > 5);
+		assertTrue(weapon > 5);
 		
 	}
-
+	
+	@Test
+	public void handleSuggestion() {
+		
+	}
+	
 }
