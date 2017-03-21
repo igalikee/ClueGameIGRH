@@ -2,6 +2,7 @@ package clueGame;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Player {
 	private String playerName;
@@ -73,9 +74,24 @@ public class Player {
 	
 	
 	
-//	public Card disproveSuggestion(Solution suggestion) {
-//		//TODO - implement this shit
-//	}
+	public Card disproveSuggestion(Solution suggestion) {
+		ArrayList<Card> suggestions = new ArrayList<Card>();
+		
+		
+		for (Card card : hand) {
+			if (card.equals(suggestion.person) || card.equals(suggestion.weapon) || card.equals(suggestion.room)) {
+				suggestions.add(card);
+			}
+		}
+		if (suggestions.size() != 0) {
+			Random rand = new Random();
+			return suggestions.get(rand.nextInt(suggestions.size()));
+		}
+		else {
+			return null;
+		}
+		
+	}
 	
 	
 }

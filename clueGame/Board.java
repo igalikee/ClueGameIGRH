@@ -324,9 +324,22 @@ public class Board {
 			players.get(playerNum).addCard(t);
 			playerNum++;
 		}
-		
-
+	
 	}
+		public static Card handleSuggestion(Solution suggestion) {
+			
+			return null;
+			
+		}
+		
+		public static boolean checkAccusation(Solution accusation) {
+			if (solution.person == accusation.person && solution.room == accusation.room && solution.weapon == accusation.weapon){
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 
 
 	//========================================================================================
@@ -370,14 +383,14 @@ public class Board {
 		return adjMtx.get(grid[i][j]);
 	}
 
-	public ArrayList<Player> getPlayers() {
+	public static ArrayList<Player> getPlayers() {
 		return players;
 	}
 
-	public ArrayList<String> getWeapons() {
+	public static ArrayList<String> getWeapons() {
 		return weapons;
 	}
-	public ArrayList<Card> getCards() {
+	public static ArrayList<Card> getCards() {
 		return cards;
 	}
 

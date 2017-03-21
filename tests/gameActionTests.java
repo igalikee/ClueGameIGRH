@@ -13,6 +13,7 @@ import clueGame.Board;
 import clueGame.BoardCell;
 import clueGame.ComputerPlayer;
 import clueGame.Player;
+import clueGame.Solution;
 
 
 public class gameActionTests {
@@ -94,6 +95,48 @@ public class gameActionTests {
 		targets = board.getTargets() ;
 		
 		//TODO check it doesn't go into room 
+	}
+	
+	@Test
+	public void testAccusation(){
+		//Testing to see if accusation is true
+		Solution accusation = new Solution();
+		accusation.person = "Bruce Willis";
+		accusation.room = "Cryochamber";
+		accusation.weapon = "Bullying";
+		
+		Solution solution = new Solution();
+		Board.solution.person = "Bruce Willis";
+		Board.solution.room = "Cryochamber";
+		Board.solution.weapon = "Bullying";
+		assertTrue(Board.checkAccusation(accusation));
+
+		
+		//testing to see if accusation returns false with 1 person wrong
+		accusation.person = "Murph";
+		accusation.room = "Cryochamber";
+		accusation.weapon = "Bullying";
+		assertFalse(Board.checkAccusation(accusation));
+		
+		//testing to see if accusation returns false with 1 room wrong
+		accusation.person = "Bruce Willis";
+		accusation.room = "Observatory";
+		accusation.weapon = "Bullying";
+		assertFalse(Board.checkAccusation(accusation));
+		
+		//testing to see if accusation returns false with 1 weapon wrong
+		accusation.person = "Bruce Willis";
+		accusation.room = "Cryochamber";
+		accusation.weapon = "Poison";
+		assertFalse(Board.checkAccusation(accusation));
+	
+	}
+	
+	@Test
+	public void testCreateSuggestion() {
+		BoardCell currentCell = new BoardCell(2, 18, "A");
+		
+		
 	}
 
 }
