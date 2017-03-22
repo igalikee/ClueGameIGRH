@@ -261,33 +261,46 @@ public class gameActionTests {
 		tempHand.clear();
 		tempHand.add(cards.get(3)); //Galaxy Bar
 		tempHand.add(cards.get(0)); //Cryochamber
-		tempHand.add(cards.get(11)); // Bruce Willis
+		tempHand.add(cards.get(9)); // Captain Zapp
 		player3.setHand(new ArrayList<Card>(tempHand));
 		
 		
 		
+		ArrayList<Player> testList = new ArrayList<>();
+		testList.add(player1);
+		testList.add(player2);
+		testList.add(player3);
 		
-//		playerList.add(player1);
-//		playerList.add(player2);
-//		playerList.add(player3);
 		
-		//still need to fix this shit.
 		Solution suggestion = new Solution();
 		suggestion.person = cards.get(12).getCardName(); //Leeloo
 		suggestion.room = cards.get(1).getCardName(); //Space Basketball court
 		suggestion.weapon = cards.get(20).getCardName(); //Butter Knife
 		
-		//tests if no one can disprove
-		assertEquals(null, board.handleSuggestion(suggestion, player1, playerList));
 		
-		//tests only human can disprove, returns null
+		//tests if no one can disprove - returns null
+		suggestion.person = cards.get(12).getCardName();
+		assertEquals(null, board.handleSuggestion(suggestion, player1, testList));
+		
+		//tests only human can disprove, but human is the accuser, so it returns null
 		suggestion.person = cards.get(14).getCardName(); //Mark Watney
-		assertEquals(null, board.handleSuggestion(suggestion, player1, playerList));
+		assertEquals(null, board.handleSuggestion(suggestion, player1, testList));
 		
-		//tests a proven suggestion
-		suggestion.person = cards.get(3).getCardName();
-		assertEquals(cards.get(3), board.handleSuggestion(suggestion, player2, playerList));
+		//tests only computer accuser can disprove - returns null
+		suggestion.person = cards.get(12).getCardName();
+		assertEquals(null, board.handleSuggestion(suggestion, player2, testList));
+		
+		//tests that computer player is the only one who can disprove, and player is not accuser
+		suggestion.room = cards.get(3).getCardName(); //Galaxy Bar
+		suggestion.person = cards.get(12).getCardName(); //Leeloo
+		assertEquals(cards.get(3), board.handleSuggestion(suggestion, player2, testList));
 	
+		//tests that the human (not accuser) is the only one who can disprove
+		suggestion.person = cards.get(14).getCardName(); //Mark Watney
+		assertEquals(cards.get(14), board.handleSuggestion(suggestion, player2, testList));
+		
+		
+		
 	}
 	
 }

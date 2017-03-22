@@ -327,16 +327,58 @@ public class Board {
 	
 	}
 	
-		//FIXME
-		public static Card handleSuggestion(Solution suggestion, Player player, ArrayList<Player> playerList) {
-			for (Player person : playerList) {
-				for (int i = 0; i < playerList.size(); i++) {
-				if (!person.getPlayerName().equals(playerList.get(i).getPlayerName())) {
-					if (person.disproveSuggestion(suggestion) != null) {
-					return person.disproveSuggestion(suggestion);
-					}
+		
+		
+	public static Card handleSuggestion(Solution suggestion, Player player, ArrayList<Player> playerList) {	
+//  public static Card handleSuggestion(Solution suggestion, Player player, ArrayList<Player> playerList, int index) {		
+			
+		//tried making handleSuggestion with 4 parameters, 4th one being index. Used for querying. (the last 2 tests)
+		
+//			int counter = 0;
+//			for (int i = index; i < playerList.size(); i++) {
+//				Player tempPlayer = null;
+//				tempPlayer = playerList.get(i);
+//				
+//				if (!player.getPlayerName().equals(tempPlayer.getPlayerName())) {
+//					tempCard = tempPlayer.disproveSuggestion(suggestion);
+//					if (tempCard != null) {
+//						return tempCard;
+//					}
+//				}
+//				counter++;
+//			}
+//			
+//			
+//			if (counter != playerList.size()) {
+//				for (int i = 0; i < index; i++) {
+//					Player tempPlayer = null;
+//					tempPlayer = playerList.get(i);
+//
+//					if (!player.getPlayerName().equals(tempPlayer.getPlayerName())) {
+//						tempCard = tempPlayer.disproveSuggestion(suggestion);
+//						if (tempCard != null) {
+//							return tempCard;
+//						}
+//					}
+//				}
+//			}
+		
+		//this stuff is what I had before I tried to implement the last two tests
+		Card tempCard = null;
+		for (int i = 0; i < playerList.size(); i++) {
+			Player tempPlayer = null;
+			tempPlayer = playerList.get(i);
+			
+			if (!player.getPlayerName().equals(tempPlayer.getPlayerName())) {
+				tempCard = tempPlayer.disproveSuggestion(suggestion);
+				if (tempCard != null) {
+					return tempCard;
 				}
-				}
+			}
+		}
+			
+			if (tempCard != null) {
+				return tempCard;
 			}
 			return null;
 			
