@@ -1,67 +1,426 @@
-dabde11aeb66bf6bffcae0d6a9372cb1da0cda84 Added Git Log
-d39ee47535b6a552359972784c113b0d5b95fc42 Passing tests for Suggestions
-71e921372ce42d4d0773ace4620deba82bb51568 Started Accusation/SuggestionTests
-f999511040a26584c08d651999d7eb8f48c4ae3e Finished Target tests
-ef5261bb4fe6017022ce7699f2898010b098459c Failing tests for target
-436f9514dbacb88338bce58030e826b27041ee20 Finished dealing cards test
-eaca0838fd8e6c79db9430790a8c152053917027 Figured out how to do the solution
-b1de826516f08074f7f2eb5ee15484ed8209e943 Passed some card tests
-17986211e59afa7e79208f1fb13408b4963f4945 Forgot to save before commit
-2e4eccc7d5ce0264845df51c31c97277a7aa73f0 Started Solution
-0a891462d8a20622f22eb249b6f5d10878d948b9 Passing Card Tests
-c368e32746066e85573702df33d0ddb127ba532b Failing Card Tests
-453663b91b26581a846573b59963a26eecbd524b added Cards
-60979575bb5dcda7acda74f42fd57fb6a0d61641 Weapons test Passing
-397562243963e9f776d71923f90950dc606e03c3 Refactored GameSetup Test
-f15e4144adaa043c1664e2238946c1ab40d70c9d Passing Tests for People
-694678247a6be1b2ce59af3909362e199f6fdc8d Failing Test for People
-902069bcd9b2abcd6242189a34ba8fc8c36b5449 More OCD action
-b48cf7e1f2471f4bd7fbecdb8e28237d61039274 Fixed Unit tests and Cleaned up Code
-86e015bf0ff0a9afd5c41874d999502f9e02a422 Fixing Mixtakes v1
-691e070b134e6457611e3a94a4c527858f6103b4 Fixing Directory v3
-2049581b1cede8aa0041ccb4cfda1ab2927cefa2 Cleaned up Directory
-4755008bef6f45e09b4574fc6991ca1a78149c88 renamed log file
-02947ae1dabfbbdd6cdec09c5e4413c123db568a added log for submission
-e09001f93faa4633b5aa4be28930139463bdde12 part 4 done
-bbedbc6c3118c2caa3cb0baff45da6b7921310b7 Finished part 4
-dc2cc5043226d273711038a539b55ff9a3f9b7b9 Finished all adjacency tests
-1577a97cb17d127edb64a11042ab3ed4cbbfa1a4 adjacencies are close to working
-fc9eda9515b0b5c945c07fcad6f1ac3ec52d491f fixed some conditionals
-0b3e1e8908793239db3fe3bd6814ed994192dca0 Fixed null pointer exception
-2af6499e4478eaf1743ad7b383c3c0c786351784 Set Up calcAdj which should work
-583bd0795f335768b49c4616ed072aad95c21ab9 Sam owes me 5 bucks
-4a67b6fe8e0044161be7e2a5ec72e9c79b054f5c Finish Part 3
-3fe0344dd236be6977448d78d566475bf7b6fb48 Added legend to layout
-fac6fbc2fa8f5b89732733296b5a353899d1008f color coded clue layout
-e8e774fc80be460e71c6a92f280ad593fac73c36 Changed the name of some things
-1195c2f25e1be37866de32bcdbdba965225f4473 downloaded CR Board tests
-8e76012b32c2165bc8760770b72d6705c579a4e5 Finished
-cf1a3d17827a9f829fa776346805573f9bdacb32 Added exception file
-1cc9795f263d79d8d3004fc7454221ac5796b701 All but exceptions works
-d82d4da3a3090f661790ee5e62d1d79274c8b225 Added Exceptions test
-ba86a18cce825067d7b00de1ea7e4b77b3e53a40 Tests Working
-5d4e649bbdaad7cb8c3d9a93b031e410ea0d2e95 test Works
-f1cac3b328ed3a336e6afbacd175213dfcce350c Fixed conflicts again
-0f16610d7ad9dfc43affe3d3e562c1fa80555864 Fixed conflict
-acd8d1fef7864b45d6428459517d969176fd2176 implement initialize
-dc0628f2c2da0642e68fff7adcce92adc7330b3e Made some changes
-b9175796bec44e7a99c8693a05cbbf3122d95214 Added stuff to board, createLayout function
-542e325fc3e90245d5d8f4919f8566e277e8324b Deleted numbers in csv file
-25122ef42d38f599d05676adc35fb40afc617093 Added csv file
-9200fdf66c7e0e983ceb92529c643ddf76a52ea4 Made some new edits for Part 2
-96ad0c26b6a2df6fa0f200b86548afd818afbd52 Added our files and changed to static
-3e60cc571b963e34d253da3648dc3f07617a8f46 Now actually done
-25bf7c45169636ff2f1a1a9368cdb704353c727a All tests failed
-a06fff78093049f12b8ded31c45663f1ed2eeda7 Part 1 should be done, won't run
-820b0b06007ad65b45cbb2686056b8b386681907 Implemented to our initial skeleton
-e3650d8f014bf8644c870b54b91e86ab2f849fa8 Trying again
-e3e8a8efaeafda7cc18ff501034f1d3ef0302bc6 Created our test file skeleton
-caeb3cfb77a2adb5ef2327c942ec8df546b94f34 Added files
-7df76307c0b374a0b547410837e83b6e7990e73a Part 2 complete baby!
-635ddf47b0168fa2b3638a2553c9dcd85287c784 Adjacency tests passed
-e641a7a1305be6b1ebf51c59443e8e7fb4f1e797 Update calcAdjacencies
-eae8b1d9ef28a85d378adbeb23ec52a390c26d41 Working on calcAdjacencies
-cb480edaef9d4797c62a811e5fdc2484c1228230 Fixed
-402e5921292ecf977af2156449e18832ae09ebc9 Testing
-8c910931f24b4dbc86f2164977f24feb8706e3f8 Initial Commit
-63551069923df219cb117e562bc245c89079f762 Initial commit
+commit f5becd173be320165bbdd3e677e5cf0403fd6c0d
+Author: Ivan Galikeev <Ivan Galikeev>
+Date:   Wed Mar 22 10:45:22 2017 -0600
+
+    Fixed Spaghetti Code and all tests pass
+
+commit 89bfd7ef36c1352979699ab902a7d7e837a3af38
+Author: Gett Villanueva <gvillanueva@Getts-MacBook-Air.local>
+Date:   Wed Mar 22 01:31:10 2017 -0600
+
+    Passed some handleSuggestionTests
+
+commit 5c4149606df7c5d8413e8f4ee3cda1d1f8a301e7
+Author: Gett Villanueva <gvillanueva@Getts-MacBook-Air.local>
+Date:   Tue Mar 21 23:20:04 2017 -0600
+
+    Still failing handleSuggestion
+
+commit c306e42d8fc2f6c005b6041a06cbce8cf198aa3d
+Author: skeerus <igalikee@mines.edu>
+Date:   Tue Mar 21 00:14:37 2017 -0600
+
+    Attempted Handle Suggestion
+
+commit dabde11aeb66bf6bffcae0d6a9372cb1da0cda84
+Author: skeerus <igalikee@mines.edu>
+Date:   Mon Mar 20 23:32:41 2017 -0600
+
+    Added Git Log
+
+commit d39ee47535b6a552359972784c113b0d5b95fc42
+Author: skeerus <igalikee@mines.edu>
+Date:   Mon Mar 20 23:31:38 2017 -0600
+
+    Passing tests for Suggestions
+
+commit 71e921372ce42d4d0773ace4620deba82bb51568
+Author: Gett Villanueva <gvillanueva@Getts-MacBook-Air.local>
+Date:   Mon Mar 20 21:29:37 2017 -0600
+
+    Started Accusation/SuggestionTests
+
+commit f999511040a26584c08d651999d7eb8f48c4ae3e
+Author: skeerus <igalikee@mines.edu>
+Date:   Mon Mar 20 08:57:53 2017 -0600
+
+    Finished Target tests
+
+commit ef5261bb4fe6017022ce7699f2898010b098459c
+Author: skeerus <igalikee@mines.edu>
+Date:   Sun Mar 19 21:33:09 2017 -0600
+
+    Failing tests for target
+
+commit 436f9514dbacb88338bce58030e826b27041ee20
+Author: skeerus <igalikee@mines.edu>
+Date:   Thu Mar 16 20:15:19 2017 -0600
+
+    Finished dealing cards test
+
+commit eaca0838fd8e6c79db9430790a8c152053917027
+Author: Gett Villanueva <gvillanueva@Getts-MacBook-Air.local>
+Date:   Thu Mar 16 15:03:30 2017 -0600
+
+    Figured out how to do the solution
+
+commit b1de826516f08074f7f2eb5ee15484ed8209e943
+Author: Gett Villanueva <gvillanueva@Getts-MacBook-Air.local>
+Date:   Thu Mar 16 14:36:16 2017 -0600
+
+    Passed some card tests
+
+commit 17986211e59afa7e79208f1fb13408b4963f4945
+Author: skeerus <igalikee@mines.edu>
+Date:   Thu Mar 16 12:23:28 2017 -0600
+
+    Forgot to save before commit
+
+commit 2e4eccc7d5ce0264845df51c31c97277a7aa73f0
+Author: skeerus <igalikee@mines.edu>
+Date:   Thu Mar 16 12:20:57 2017 -0600
+
+    Started Solution
+
+commit 0a891462d8a20622f22eb249b6f5d10878d948b9
+Author: skeerus <igalikee@mines.edu>
+Date:   Thu Mar 16 12:05:18 2017 -0600
+
+    Passing Card Tests
+
+commit c368e32746066e85573702df33d0ddb127ba532b
+Author: skeerus <igalikee@mines.edu>
+Date:   Thu Mar 16 12:04:29 2017 -0600
+
+    Failing Card Tests
+
+commit 453663b91b26581a846573b59963a26eecbd524b
+Author: Gett Villanueva <gvillanueva@Getts-MacBook-Air.local>
+Date:   Thu Mar 16 10:55:13 2017 -0600
+
+    added Cards
+
+commit 60979575bb5dcda7acda74f42fd57fb6a0d61641
+Author: skeerus <igalikee@mines.edu>
+Date:   Wed Mar 15 17:44:30 2017 -0600
+
+    Weapons test Passing
+
+commit 397562243963e9f776d71923f90950dc606e03c3
+Author: skeerus <igalikee@mines.edu>
+Date:   Wed Mar 15 00:17:38 2017 -0600
+
+    Refactored GameSetup Test
+
+commit f15e4144adaa043c1664e2238946c1ab40d70c9d
+Author: skeerus <igalikee@mines.edu>
+Date:   Wed Mar 15 00:15:49 2017 -0600
+
+    Passing Tests for People
+
+commit 694678247a6be1b2ce59af3909362e199f6fdc8d
+Author: skeerus <igalikee@mines.edu>
+Date:   Tue Mar 14 23:44:23 2017 -0600
+
+    Failing Test for People
+
+commit 902069bcd9b2abcd6242189a34ba8fc8c36b5449
+Author: skeerus <igalikee@mines.edu>
+Date:   Tue Mar 14 22:08:11 2017 -0600
+
+    More OCD action
+
+commit b48cf7e1f2471f4bd7fbecdb8e28237d61039274
+Author: Ivan Galikeev <Ivan Galikeev>
+Date:   Fri Mar 10 13:05:42 2017 -0700
+
+    Fixed Unit tests and Cleaned up Code
+
+commit 86e015bf0ff0a9afd5c41874d999502f9e02a422
+Author: Ivan Galikeev <Ivan Galikeev>
+Date:   Thu Mar 9 22:13:03 2017 -0700
+
+    Fixing Mixtakes v1
+
+commit 691e070b134e6457611e3a94a4c527858f6103b4
+Author: Ivan Galikeev <igalikee@mines.edu>
+Date:   Thu Mar 9 11:38:40 2017 -0700
+
+    Fixing Directory v3
+
+commit 2049581b1cede8aa0041ccb4cfda1ab2927cefa2
+Author: Ivan Galikeev <igalikee@mines.edu>
+Date:   Thu Mar 9 11:24:16 2017 -0700
+
+    Cleaned up Directory
+
+commit 4755008bef6f45e09b4574fc6991ca1a78149c88
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Tue Mar 7 22:21:45 2017 -0700
+
+    renamed log file
+
+commit 02947ae1dabfbbdd6cdec09c5e4413c123db568a
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Tue Mar 7 22:20:40 2017 -0700
+
+    added log for submission
+
+commit e09001f93faa4633b5aa4be28930139463bdde12
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Tue Mar 7 22:19:37 2017 -0700
+
+    part 4 done
+
+commit bbedbc6c3118c2caa3cb0baff45da6b7921310b7
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Tue Mar 7 22:16:33 2017 -0700
+
+    Finished part 4
+
+commit dc2cc5043226d273711038a539b55ff9a3f9b7b9
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Tue Mar 7 21:37:57 2017 -0700
+
+    Finished all adjacency tests
+
+commit 1577a97cb17d127edb64a11042ab3ed4cbbfa1a4
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Tue Mar 7 21:29:17 2017 -0700
+
+    adjacencies are close to working
+
+commit fc9eda9515b0b5c945c07fcad6f1ac3ec52d491f
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Tue Mar 7 21:18:25 2017 -0700
+
+    fixed some conditionals
+
+commit 0b3e1e8908793239db3fe3bd6814ed994192dca0
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Tue Mar 7 21:07:44 2017 -0700
+
+    Fixed null pointer exception
+
+commit 2af6499e4478eaf1743ad7b383c3c0c786351784
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Tue Mar 7 15:37:51 2017 -0700
+
+    Set Up calcAdj which should work
+
+commit 583bd0795f335768b49c4616ed072aad95c21ab9
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Tue Mar 7 15:05:42 2017 -0700
+
+    Sam owes me 5 bucks
+
+commit 4a67b6fe8e0044161be7e2a5ec72e9c79b054f5c
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Mon Mar 6 21:32:55 2017 -0700
+
+    Finish Part 3
+
+commit 3fe0344dd236be6977448d78d566475bf7b6fb48
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Mon Mar 6 20:55:30 2017 -0700
+
+    Added legend to layout
+
+commit fac6fbc2fa8f5b89732733296b5a353899d1008f
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Mon Mar 6 20:00:40 2017 -0700
+
+    color coded clue layout
+
+commit e8e774fc80be460e71c6a92f280ad593fac73c36
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Mon Mar 6 19:42:54 2017 -0700
+
+    Changed the name of some things
+
+commit 1195c2f25e1be37866de32bcdbdba965225f4473
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Mon Mar 6 19:30:45 2017 -0700
+
+    downloaded CR Board tests
+
+commit 8e76012b32c2165bc8760770b72d6705c579a4e5
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 23:50:45 2017 -0700
+
+    Finished
+
+commit cf1a3d17827a9f829fa776346805573f9bdacb32
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 21:46:37 2017 -0700
+
+    Added exception file
+
+commit 1cc9795f263d79d8d3004fc7454221ac5796b701
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 21:45:19 2017 -0700
+
+    All but exceptions works
+
+commit d82d4da3a3090f661790ee5e62d1d79274c8b225
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 21:27:22 2017 -0700
+
+    Added Exceptions test
+
+commit ba86a18cce825067d7b00de1ea7e4b77b3e53a40
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 21:21:24 2017 -0700
+
+    Tests Working
+
+commit 5d4e649bbdaad7cb8c3d9a93b031e410ea0d2e95
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Thu Mar 2 21:05:13 2017 -0700
+
+    test Works
+
+commit f1cac3b328ed3a336e6afbacd175213dfcce350c
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 20:31:53 2017 -0700
+
+    Fixed conflicts again
+
+commit 0f16610d7ad9dfc43affe3d3e562c1fa80555864
+Merge: acd8d1f dc0628f
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 20:30:07 2017 -0700
+
+    Fixed conflict
+
+commit acd8d1fef7864b45d6428459517d969176fd2176
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 20:15:01 2017 -0700
+
+    implement initialize
+
+commit dc0628f2c2da0642e68fff7adcce92adc7330b3e
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Thu Mar 2 19:59:28 2017 -0700
+
+    Made some changes
+
+commit b9175796bec44e7a99c8693a05cbbf3122d95214
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 19:47:21 2017 -0700
+
+    Added stuff to board, createLayout function
+
+commit 542e325fc3e90245d5d8f4919f8566e277e8324b
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 19:25:03 2017 -0700
+
+    Deleted numbers in csv file
+
+commit 25122ef42d38f599d05676adc35fb40afc617093
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Thu Mar 2 12:11:05 2017 -0700
+
+    Added csv file
+
+commit 9200fdf66c7e0e983ceb92529c643ddf76a52ea4
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Thu Mar 2 12:09:47 2017 -0700
+
+    Made some new edits for Part 2
+
+commit 96ad0c26b6a2df6fa0f200b86548afd818afbd52
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Wed Mar 1 20:36:03 2017 -0700
+
+    Added our files and changed to static
+
+commit 3e60cc571b963e34d253da3648dc3f07617a8f46
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Wed Mar 1 20:23:46 2017 -0700
+
+    Now actually done
+
+commit 25bf7c45169636ff2f1a1a9368cdb704353c727a
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Wed Mar 1 20:21:10 2017 -0700
+
+    All tests failed
+
+commit a06fff78093049f12b8ded31c45663f1ed2eeda7
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Wed Mar 1 20:06:34 2017 -0700
+
+    Part 1 should be done, won't run
+
+commit 820b0b06007ad65b45cbb2686056b8b386681907
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Tue Feb 28 12:10:18 2017 -0700
+
+    Implemented to our initial skeleton
+
+commit e3650d8f014bf8644c870b54b91e86ab2f849fa8
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Tue Feb 28 11:48:57 2017 -0700
+
+    Trying again
+
+commit e3e8a8efaeafda7cc18ff501034f1d3ef0302bc6
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Tue Feb 28 11:45:12 2017 -0700
+
+    Created our test file skeleton
+
+commit caeb3cfb77a2adb5ef2327c942ec8df546b94f34
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Tue Feb 28 11:30:14 2017 -0700
+
+    Added files
+
+commit 7df76307c0b374a0b547410837e83b6e7990e73a
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Sun Feb 26 20:03:23 2017 -0700
+
+    Part 2 complete baby!
+
+commit 635ddf47b0168fa2b3638a2553c9dcd85287c784
+Author: Ali Zarrini <adzarrini@mymail.mines.edu>
+Date:   Sun Feb 26 19:49:47 2017 -0700
+
+    Adjacency tests passed
+
+commit e641a7a1305be6b1ebf51c59443e8e7fb4f1e797
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Sun Feb 26 19:29:20 2017 -0700
+
+    Update calcAdjacencies
+
+commit eae8b1d9ef28a85d378adbeb23ec52a390c26d41
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Sun Feb 26 19:26:35 2017 -0700
+
+    Working on calcAdjacencies
+
+commit cb480edaef9d4797c62a811e5fdc2484c1228230
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Sun Feb 26 19:10:34 2017 -0700
+
+    Fixed
+
+commit 402e5921292ecf977af2156449e18832ae09ebc9
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Sun Feb 26 18:46:15 2017 -0700
+
+    Testing
+
+commit 8c910931f24b4dbc86f2164977f24feb8706e3f8
+Author: Sam Nichols <sanichol@mines.edu>
+Date:   Sun Feb 26 18:40:28 2017 -0700
+
+    Initial Commit
+
+commit 63551069923df219cb117e562bc245c89079f762
+Author: Sam-Nichols <sanichol@mines.edu>
+Date:   Sun Feb 26 18:31:42 2017 -0700
+
+    Initial commit
