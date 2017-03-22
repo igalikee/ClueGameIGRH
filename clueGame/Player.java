@@ -90,6 +90,7 @@ public class Player {
 			Random rand = new Random();
 			return suggestions.get(rand.nextInt(suggestions.size()));
 		}
+		
 		else {
 			return null;
 		}

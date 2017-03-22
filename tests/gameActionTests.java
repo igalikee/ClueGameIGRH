@@ -236,70 +236,88 @@ public class gameActionTests {
 	@Test
 	public void handleSuggestion() {
 		
-		
-		
-		ArrayList<Player> playerList = new ArrayList<>();
-		playerList.addAll(Board.getPlayers());
-		
-		Player player1 = playerList.get(0);
-		Player player2 = playerList.get(1);
-		Player player3 = playerList.get(2);
-		
-		
-		
+		ArrayList<Player> players = new ArrayList<Player>();
+		players = board.getPlayers();
+				
 		ArrayList<Card> tempHand = new ArrayList<Card>();
 		ArrayList<Card> cards = new ArrayList<Card>(board.getCards()); 
 		tempHand.add(cards.get(14)); //Mark Watney
 		tempHand.add(cards.get(18)); //Poison
 		tempHand.add(cards.get(6)); // Observatory
-		player1.setHand(new ArrayList<Card>(tempHand));
+		players.get(0).setHand(new ArrayList<Card>(tempHand));
+		
 		tempHand.clear();
 		tempHand.add(cards.get(13)); //Murph
 		tempHand.add(cards.get(19)); //Bullying
 		tempHand.add(cards.get(8)); // Space Pool
-		player2.setHand(new ArrayList<Card>(tempHand));
+		players.get(1).setHand(new ArrayList<Card>(tempHand));
+		
 		tempHand.clear();
 		tempHand.add(cards.get(3)); //Galaxy Bar
 		tempHand.add(cards.get(0)); //Cryochamber
 		tempHand.add(cards.get(9)); // Captain Zapp
-		player3.setHand(new ArrayList<Card>(tempHand));
+		players.get(2).setHand(new ArrayList<Card>(tempHand));
 		
+		tempHand.clear();
+		tempHand.add(cards.get(2)); //Abduction Chamber
+		tempHand.add(cards.get(10)); //Wookie Slave
+		tempHand.add(cards.get(15)); //Red Light Saber
+		players.get(3).setHand(new ArrayList<Card>(tempHand));
 		
+		tempHand.clear();
+		tempHand.add(cards.get(4)); //Captains Quarters 
+		tempHand.add(cards.get(11)); //Bruce Willis
+		tempHand.add(cards.get(16)); //Anxiety and Depression
+		players.get(4).setHand(new ArrayList<Card>(tempHand));
 		
-		ArrayList<Player> testList = new ArrayList<>();
-		testList.add(player1);
-		testList.add(player2);
-		testList.add(player3);
-		
+		tempHand.clear();
+		tempHand.add(cards.get(5)); //Gravity Room 
+		tempHand.add(cards.get(7)); //Wookie Slave Chambers
+		tempHand.add(cards.get(17)); //High Energy Laser
+		players.get(5).setHand(new ArrayList<Card>(tempHand));
 		
 		Solution suggestion = new Solution();
 		suggestion.person = cards.get(12).getCardName(); //Leeloo
 		suggestion.room = cards.get(1).getCardName(); //Space Basketball court
 		suggestion.weapon = cards.get(20).getCardName(); //Butter Knife
 		
-		
 		//tests if no one can disprove - returns null
-		suggestion.person = cards.get(12).getCardName();
-		assertEquals(null, board.handleSuggestion(suggestion, player1, testList));
+		assertEquals(null, board.handleSuggestion(suggestion, players.get(0)));
+		assertEquals(null, board.handleSuggestion(suggestion, players.get(1)));
+		assertEquals(null, board.handleSuggestion(suggestion, players.get(2)));
+		assertEquals(null, board.handleSuggestion(suggestion, players.get(3)));
+		assertEquals(null, board.handleSuggestion(suggestion, players.get(4)));
+		assertEquals(null, board.handleSuggestion(suggestion, players.get(5)));
+
+		//Suggestion only accusing player can disprove returns null
+		suggestion.room = cards.get(5).getCardName(); //change room to something players[5] has 
+		assertEquals(null, board.handleSuggestion(suggestion, players.get(5)));
+
+		suggestion.room = cards.get(1).getCardName(); //Space Basketball court (changed it back) 
+
+		//Suggestion only human can disprove returns answer (i.e., card that disproves suggestion)
+		suggestion.person = cards.get(14).getCardName(); //change person to something human has 
 		
-		//tests only human can disprove, but human is the accuser, so it returns null
-		suggestion.person = cards.get(14).getCardName(); //Mark Watney
-		assertEquals(null, board.handleSuggestion(suggestion, player1, testList));
+		assertEquals(cards.get(14), board.handleSuggestion(suggestion,players.get(1)));
 		
-		//tests only computer accuser can disprove - returns null
-		suggestion.person = cards.get(12).getCardName();
-		assertEquals(null, board.handleSuggestion(suggestion, player2, testList));
+		//Suggestion only human can disprove, but human is accuser, returns null
+		assertEquals(null, board.handleSuggestion(suggestion,players.get(0)));
+
+		//Suggestion that two players can disprove, correct player (based on starting with next player in list) returns answer
+		suggestion.person = cards.get(13).getCardName();  //players[1] has this card
+		suggestion.room = cards.get(3).getCardName(); //players[2] has this card 
 		
-		//tests that computer player is the only one who can disprove, and player is not accuser
-		suggestion.room = cards.get(3).getCardName(); //Galaxy Bar
-		suggestion.person = cards.get(12).getCardName(); //Leeloo
-		assertEquals(cards.get(3), board.handleSuggestion(suggestion, player2, testList));
-	
-		//tests that the human (not accuser) is the only one who can disprove
-		suggestion.person = cards.get(14).getCardName(); //Mark Watney
-		assertEquals(cards.get(14), board.handleSuggestion(suggestion, player2, testList));
+		//should only return room that players[2] has, NOT players[1] cards
+		assertEquals(cards.get(3), board.handleSuggestion(suggestion,players.get(0))); 
 		
+		//Suggestion that human and another player can disprove
+		suggestion.room = cards.get(1).getCardName(); //change back so it won't interfere 
+		suggestion.person = cards.get(14).getCardName(); //human player has this card
+		suggestion.weapon = cards.get(19).getCardName(); //players[1] has this card
 		
+		//should only return card players[1] has, since he is ahead in query 
+		assertEquals(cards.get(19), board.handleSuggestion(suggestion, players.get(4)));
+
 		
 	}
 	
