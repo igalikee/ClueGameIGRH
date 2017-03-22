@@ -235,47 +235,58 @@ public class gameActionTests {
 	
 	@Test
 	public void handleSuggestion() {
-		HumanPlayer player1 = new HumanPlayer();
-		ComputerPlayer player2 = new ComputerPlayer();
-		ComputerPlayer player3 = new ComputerPlayer();
-		ArrayList<Card> hand = new ArrayList<Card>();
-		ArrayList<Card> cards = new ArrayList<Card>(board.getCards()); 
-		hand.add(cards.get(14)); //Mark Watney
-		hand.add(cards.get(18)); //Poison
-		hand.add(cards.get(6)); // Observatory
-		player1.setHand(hand);
-		hand.clear();
-		hand.add(cards.get(13)); //Murph
-		hand.add(cards.get(19)); //Bullying
-		hand.add(cards.get(12)); // Leeloo
-		player2.setHand(hand);
-		hand.clear();
-		hand.add(cards.get(3)); //Galaxy Bar
-		hand.add(cards.get(0)); //Cryochamber
-		hand.add(cards.get(11)); // Bruce Willis
-		player3.setHand(hand);
+		
+		
 		
 		ArrayList<Player> playerList = new ArrayList<>();
-		playerList.add(player1);
-		playerList.add(player2);
-		playerList.add(player3);
+		playerList.addAll(Board.getPlayers());
+		
+		Player player1 = playerList.get(0);
+		Player player2 = playerList.get(1);
+		Player player3 = playerList.get(2);
+		
+		
+		
+		ArrayList<Card> tempHand = new ArrayList<Card>();
+		ArrayList<Card> cards = new ArrayList<Card>(board.getCards()); 
+		tempHand.add(cards.get(14)); //Mark Watney
+		tempHand.add(cards.get(18)); //Poison
+		tempHand.add(cards.get(6)); // Observatory
+		player1.setHand(new ArrayList<Card>(tempHand));
+		tempHand.clear();
+		tempHand.add(cards.get(13)); //Murph
+		tempHand.add(cards.get(19)); //Bullying
+		tempHand.add(cards.get(8)); // Space Pool
+		player2.setHand(new ArrayList<Card>(tempHand));
+		tempHand.clear();
+		tempHand.add(cards.get(3)); //Galaxy Bar
+		tempHand.add(cards.get(0)); //Cryochamber
+		tempHand.add(cards.get(11)); // Bruce Willis
+		player3.setHand(new ArrayList<Card>(tempHand));
+		
+		
+		
+		
+//		playerList.add(player1);
+//		playerList.add(player2);
+//		playerList.add(player3);
 		
 		//still need to fix this shit.
-//		Solution suggestion = new Solution();
-//		suggestion.person = "Wookie Slave";
-//		suggestion.room = "Gravity Room";
-//		suggestion.weapon = "High Energy Laser";
-//		
-//		//tests if no one can disprove
-//		assertEquals(null, board.handleSuggestion(suggestion, player1));
-//		
-//		//tests only human can disprove, returns null
-//		suggestion.person = "Mark Watney";
-//		assertEquals(null, board.handleSuggestion(suggestion, player2));
-//		
-//		//tests a proven suggestion
-//		suggestion.person = "Galaxy Bar";
-//		assertEquals("Galaxy Bar", board.handleSuggestion(suggestion, player3));
+		Solution suggestion = new Solution();
+		suggestion.person = cards.get(12).getCardName(); //Leeloo
+		suggestion.room = cards.get(1).getCardName(); //Space Basketball court
+		suggestion.weapon = cards.get(20).getCardName(); //Butter Knife
+		
+		//tests if no one can disprove
+		assertEquals(null, board.handleSuggestion(suggestion, player1, playerList));
+		
+		//tests only human can disprove, returns null
+		suggestion.person = cards.get(14).getCardName(); //Mark Watney
+		assertEquals(null, board.handleSuggestion(suggestion, player1, playerList));
+		
+		//tests a proven suggestion
+		suggestion.person = cards.get(3).getCardName();
+		assertEquals(cards.get(3), board.handleSuggestion(suggestion, player2, playerList));
 	
 	}
 	

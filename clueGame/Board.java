@@ -326,13 +326,16 @@ public class Board {
 		}
 	
 	}
-	//FIXME
-		public static Card handleSuggestion(Solution suggestion, Player player) {
-			for (Player person : players) {
-				if (person != player) {
-					if (person.disproveSuggestion(solution) != null) {
+	
+		//FIXME
+		public static Card handleSuggestion(Solution suggestion, Player player, ArrayList<Player> playerList) {
+			for (Player person : playerList) {
+				for (int i = 0; i < playerList.size(); i++) {
+				if (!person.getPlayerName().equals(playerList.get(i).getPlayerName())) {
+					if (person.disproveSuggestion(suggestion) != null) {
 					return person.disproveSuggestion(suggestion);
 					}
+				}
 				}
 			}
 			return null;
@@ -394,6 +397,11 @@ public class Board {
 	public static ArrayList<Player> getPlayers() {
 		return players;
 	}
+	
+//	public static void setPlayers(ArrayList<Player> players) {
+//		players.clear();
+//		Board.players = players;
+//	}
 	
 
 	public static ArrayList<String> getWeapons() {
