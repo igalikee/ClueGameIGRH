@@ -39,12 +39,8 @@ public class Board {
 	private static ArrayList<Player> players;
 	private static ArrayList<String> weapons;
 
-
-
 	private static int rows;
 	private static int columns;
-
-
 
 	// Text File Names
 	private static String legendString;
@@ -54,17 +50,9 @@ public class Board {
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
+
 	// ctor is private to ensure only one can be created
-	private Board() {
-		targets = new HashSet<BoardCell>();
-		visited = new HashSet<BoardCell>();
-		grid = new BoardCell[MAX_ROWS][MAX_COLUMNS];
-		legend = new HashMap<Character, String>();
-		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		players = new ArrayList<Player>();
-		weapons = new ArrayList<String>();
-		cards = new ArrayList<Card>();
-	}
+	private Board() {}
 	// this method returns the only Board
 	public static Board getInstance() {
 		return theInstance;
@@ -106,9 +94,7 @@ public class Board {
 		FileReader reader = null;
 		Scanner in = null;
 
-
 		reader = new FileReader(layoutString);
-
 
 		in = new Scanner(reader);
 
@@ -120,18 +106,13 @@ public class Board {
 			if(counter == 0) c = temp.length;
 			for(int i = 0; i < temp.length; i++){
 				grid[counter][i] = new BoardCell(counter,i,temp[i]);
-				//System.out.println(legend.size());
-				//System.out.println(legend.containsKey(grid[counter][i].getInitial()));
 				if (!legend.containsKey(grid[counter][i].getInitial()))  throw new BadConfigFormatException("Wrong legend in board");
 			}
 			counter++;
 			if (temp.length != c) throw new BadConfigFormatException("Number of columns is not consistent");
 			columns = temp.length;
-
 		}
-
 		rows = counter;
-
 		in.close();
 	}
 
@@ -167,9 +148,7 @@ public class Board {
 			}
 
 			legend.put(symbol.charAt(0), room);
-			//System.out.println(legend.size());
 			if((!type.equals("Card") && !type.equals("Other"))) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
-			//if(type.equals("X")) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 		}
 		in.close();
 	}
@@ -264,6 +243,7 @@ public class Board {
 
 	public void calcTargets(int i, int j, int numSteps){
 		targets.clear();
+		visited.clear();
 		BoardCell startCell = new BoardCell();
 		startCell = grid[i][j];
 		calculateTargets(startCell, numSteps);
@@ -283,7 +263,6 @@ public class Board {
 			}
 			visited.remove(adjCell);
 		}
-
 	}
 
 	private static void setSolution_dealCards() {
@@ -316,7 +295,7 @@ public class Board {
 		Collections.shuffle(deck); //shuffles the deck randomly
 
 		int playerNum = 0;
-		
+
 		for (Card c: deck) { //dealing the cards
 			Card t = new Card(c.getCardName(), c.getCardType());
 			if (playerNum >= players.size()) playerNum = 0; 
@@ -324,34 +303,32 @@ public class Board {
 			players.get(playerNum).addCard(t);
 			playerNum++;
 		}
-	
+
 	}
-	
-		
-		
-	public static Card handleSuggestion(Solution suggestion, Player player) {	
-		
+
+
+
+	public static Card handleSuggestion(Solution suggestion, Player player) {		
 		Card tempCard = null;
-		
-		for (Player p : players) {
-			if (player != p) {
-				if (p.disproveSuggestion(suggestion) != null) tempCard = p.disproveSuggestion(suggestion);
-			}
-		}
-		
-		return tempCard;
-					
-		}
-			
-		public static boolean checkAccusation(Solution accusation) {
-			if (solution.person == accusation.person && solution.room == accusation.room && solution.weapon == accusation.weapon){
-				return true;
-			}
-			else {
-				return false;
-			}
+
+		int index = players.indexOf(player) + 1; //counter to ensure correct queuing 
+
+		for (int i = 0; i < players.size() - 1; i++) { //iterate through players.size() - 1 b/c don't want to disprove the accuser
+			if (index > players.size() - 1) index = 0;
+			if (players.get(index).disproveSuggestion(suggestion) != null) tempCard = players.get(index).disproveSuggestion(suggestion);
+			index++;
 		}
 
+		return tempCard;
+
+	}
+
+	public static boolean checkAccusation(Solution accusation) {
+		if (solution.person == accusation.person && solution.room == accusation.room && solution.weapon == accusation.weapon){
+			return true;
+		}
+		return false;
+	}
 
 	//========================================================================================
 	// GETTERS & SETTERS 
@@ -367,12 +344,9 @@ public class Board {
 	public Set<BoardCell> getTargets(){
 		return targets;
 	}
-	
 
 	public static Set<BoardCell> getAdjList(BoardCell cell){
-		Set<BoardCell> adj = new HashSet<BoardCell>();
-		adj = adjMtx.get(cell);
-		return adj;
+		return adjMtx.get(cell);
 	}
 
 	public Map<Character, String> getLegend() {
@@ -386,9 +360,11 @@ public class Board {
 	public int getNumColumns() {
 		return columns;
 	}
+
 	public static BoardCell getCellAt(int i, int j) {
 		return grid[i][j];
 	}
+
 	public Set<BoardCell> getAdjList(int i, int j) {
 
 		return adjMtx.get(grid[i][j]);
@@ -397,12 +373,6 @@ public class Board {
 	public static ArrayList<Player> getPlayers() {
 		return players;
 	}
-	
-//	public static void setPlayers(ArrayList<Player> players) {
-//		players.clear();
-//		Board.players = players;
-//	}
-	
 
 	public static ArrayList<String> getWeapons() {
 		return weapons;
@@ -410,6 +380,5 @@ public class Board {
 	public static ArrayList<Card> getCards() {
 		return cards;
 	}
-	
 
 }

@@ -17,13 +17,9 @@ public class Player {
 		this.row = row;
 		this.col = col;	
 		
-		hand = new ArrayList<>();
+		hand = new ArrayList<Card>();
 	}
-
-	public void setHand(ArrayList<Card> hand) {
-		this.hand = hand;
-	}
-
+	
 	private Color convertStringtoColor(String string) { //converts the String from the file read in to color
 		switch(string) {
 		case "RED": return Color.RED;
@@ -36,6 +32,29 @@ public class Player {
 		
 		System.out.println("Failure in Color Read in, exited switch case: " + string);
 		return null;
+	}
+
+	public Card disproveSuggestion(Solution suggestion) {
+		ArrayList<Card> suggestions = new ArrayList<Card>();
+		
+		for (Card card : hand) {
+			if (card.getCardName().equals(suggestion.person) || card.getCardName().equals(suggestion.weapon) || card.getCardName().equals(suggestion.room)) {
+				suggestions.add(card);
+			}
+		}
+		if (suggestions.size() != 0) {
+			Random rand = new Random();
+			return suggestions.get(rand.nextInt(suggestions.size()));
+		}
+		
+		else {
+			return null;
+		}
+		
+	}
+	
+	public void setHand(ArrayList<Card> hand) {
+		this.hand = hand;
 	}
 
 	public String getPlayerName() {
@@ -54,7 +73,6 @@ public class Player {
 		return col;
 	}
 	
-
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
@@ -74,27 +92,6 @@ public class Player {
 
 	public void setCol(int col) {
 		this.col = col;
-	}
-	
-	
-	
-	public Card disproveSuggestion(Solution suggestion) {
-		ArrayList<Card> suggestions = new ArrayList<Card>();
-		
-		for (Card card : hand) {
-			if (card.getCardName().equals(suggestion.person) || card.getCardName().equals(suggestion.weapon) || card.getCardName().equals(suggestion.room)) {
-				suggestions.add(card);
-			}
-		}
-		if (suggestions.size() != 0) {
-			Random rand = new Random();
-			return suggestions.get(rand.nextInt(suggestions.size()));
-		}
-		
-		else {
-			return null;
-		}
-		
 	}
 	
 	

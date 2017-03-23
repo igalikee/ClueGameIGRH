@@ -28,9 +28,7 @@ public class ComputerPlayer extends Player {
 
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 
-		BoardCell currentCell = new BoardCell();
-		currentCell = Board.getCellAt(getRow(),getCol());
-
+		BoardCell currentCell = Board.getCellAt(getRow(),getCol());
 
 		for (BoardCell c : targets) {
 			if (c.isDoorway() && !currentCell.isDoorway() && !visited.isDoorway()) {

@@ -75,28 +75,42 @@ public class gameActionTests {
 		board.calcTargets(computer.getRow(), computer.getCol(), 2); //generates targets with 2 steps for computer1
 		targets = board.getTargets() ;
 
-		
-		
 		for (int i = 0; i < 10; i++) {  //calcs the targets 10 times 
 			computer.setVisited(board.getCellAt(7, 3));
 			targetCell = computer.pickLocation(targets);
 			if (targetCell == board.getCellAt(5,3)) counter1++;
 		}
 		
-		assertEquals(10, counter1); //ensures computer goes into room everytime 
+		assertEquals(10, counter1); //ensures computer goes into room every time 
 		
+		
+		//now spawn computer in room and move him to ensure he chooses randomly 
+		computer.setRow(4);
+		computer.setCol(10);
+		board.calcTargets(computer.getRow(), computer.getCol(), 1);
+		computer.setRow(4);
+		computer.setCol(11);
+		
+		board.calcTargets(computer.getRow(), computer.getCol(), 2);
+		targets = board.getTargets();
 		
 		counter1 = 0;
 		counter2 = 0; 
 		counter3 = 0;
-		//now test entry into room
-		computer = (ComputerPlayer) players.get(2); //tests Bruce Willis to make sure he enters a room
-		computer.setRow(7); //change the location to 7,3 to test door entry 
-		computer.setCol(3);
-		board.calcTargets(computer.getRow(), computer.getCol(), 2); //generates targets with 2 steps for computer1
-		targets = board.getTargets() ;
+		int counter4 = 0;
 		
-		//TODO check it doesn't go into room 
+		for (int i = 0; i < 100; i++) {  //calcs the targets 10 times 
+			targetCell = computer.pickLocation(targets);
+			if (targetCell == board.getCellAt(4,10)) counter1++;
+			if (targetCell == board.getCellAt(5,10)) counter2++;
+			if (targetCell == board.getCellAt(5,12)) counter3++;
+			if (targetCell == board.getCellAt(4,13)) counter4++;
+		}
+		
+		assertTrue(counter1 > 5);
+		assertTrue(counter2 > 5);
+		assertTrue(counter3 > 5);
+		assertTrue(counter4 > 5);
 	}
 	
 	@Test
@@ -134,6 +148,7 @@ public class gameActionTests {
 	
 	}
 	
+
 	@Test
 	public void testCreateSuggestion() {
 		ComputerPlayer testPlayer = new ComputerPlayer();
@@ -317,8 +332,5 @@ public class gameActionTests {
 		
 		//should only return card players[1] has, since he is ahead in query 
 		assertEquals(cards.get(19), board.handleSuggestion(suggestion, players.get(4)));
-
-		
-	}
-	
+	}	
 }
