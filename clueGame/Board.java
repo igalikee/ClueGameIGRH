@@ -62,8 +62,6 @@ public class Board {
 	public static void initialize() {
 		targets = new HashSet<BoardCell>();
 		grid = new BoardCell[MAX_ROWS][MAX_COLUMNS];
-		roomLegend = new HashMap<Character, String>();
-		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		players = new ArrayList<Player>();
 		weapons = new ArrayList<String>();
 		cards = new ArrayList<Card>();
@@ -74,7 +72,7 @@ public class Board {
 			loadPlayerConfig();
 			loadWeaponConfig();	
 		} catch (BadConfigFormatException e) {
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 		catch (FileNotFoundException e) {
 			System.err.println("Error - File Not Found!");;
@@ -173,6 +171,7 @@ public class Board {
 	public static void calcAdjacencies(){
 
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
+		
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
 				Set<BoardCell> tempSet = new HashSet<BoardCell>();
@@ -194,34 +193,34 @@ public class Board {
 
 				else {
 					if(i > 0){
-						if(grid[i-1][j].getInitial() == 'W' || (grid[i-1][j].isDoorway() && grid[i-1][j].getDoorDirection().equals(DoorDirection.DOWN))) tempSet.add(grid[i-1][j]);
+						
+						if(checkAdjacency(grid[i-1][j], DoorDirection.DOWN)) tempSet.add(grid[i-1][j]);
 						if (j > 0){
-							if(grid[i][j-1].getInitial() == 'W' || (grid[i][j-1].isDoorway() && grid[i][j-1].getDoorDirection().equals(DoorDirection.RIGHT))) tempSet.add(grid[i][j - 1]);
+							if(checkAdjacency(grid[i][j-1], DoorDirection.RIGHT)) tempSet.add(grid[i][j-1]);
 						}
-
-						if(grid[i-1][j].getInitial() == 'W' || (grid[i-1][j].isDoorway() && grid[i-1][j].getDoorDirection().equals(DoorDirection.DOWN))) tempSet.add(grid[i-1][j]);
 						if (j < columns - 1){
-							if(grid[i][j+1].getInitial() == 'W' || (grid[i][j+1].isDoorway() && grid[i][j+1].getDoorDirection().equals(DoorDirection.LEFT))) tempSet.add(grid[i][j + 1]);
+							if(checkAdjacency(grid[i][j+1], DoorDirection.LEFT)) tempSet.add(grid[i][j+1]);
 						}
-
 					}
+					
 					if(i < rows - 1){
-						if(grid[i+1][j].getInitial() == 'W' || (grid[i+1][j].isDoorway() && grid[i+1][j].getDoorDirection().equals(DoorDirection.UP))) tempSet.add(grid[i+1][j]);
+						if(checkAdjacency(grid[i+1][j], DoorDirection.UP)) tempSet.add(grid[i+1][j]);
 						if (j > 0){
-							if(grid[i][j-1].getInitial() == 'W' || (grid[i][j-1].isDoorway() && grid[i][j-1].getDoorDirection().equals(DoorDirection.RIGHT))) tempSet.add(grid[i][j - 1]);
+							if(checkAdjacency(grid[i][j-1], DoorDirection.RIGHT)) tempSet.add(grid[i][j-1]);
 						}
 
-						if(grid[i+1][j].getInitial() == 'W' || (grid[i+1][j].isDoorway() && grid[i+1][j].getDoorDirection().equals(DoorDirection.UP))) tempSet.add(grid[i+1][j]);
 						if (j < columns - 1){
-							if(grid[i][j+1].getInitial() == 'W' || (grid[i][j+1].isDoorway() && grid[i][j+1].getDoorDirection().equals(DoorDirection.LEFT))) tempSet.add(grid[i][j + 1]);
+							if(checkAdjacency(grid[i][j+1], DoorDirection.LEFT)) tempSet.add(grid[i][j + 1]);
 						}
-
 					}
 				}
-
 				adjMtx.put(grid[i][j], tempSet);
 			}
 		}
+	}
+	
+	private static boolean checkAdjacency(BoardCell cell, DoorDirection direction) {
+		return (cell.getInitial() == 'W' || cell.getDoorDirection().equals(direction));
 	}
 
 
