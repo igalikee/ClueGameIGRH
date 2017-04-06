@@ -158,7 +158,7 @@ public class gameActionTests {
 		testPlayer.createSuggestion();
 		Solution testSuggestion = testPlayer.getSuggestion();
 		char roomInit = board.getCellAt(testPlayer.getRow(), testPlayer.getCol()).getInitial();
-		String room = board.legend.get(roomInit);
+		String room = board.roomLegend.get(roomInit);
 		
 		assertEquals(room,testSuggestion.room);  // tests that suggestion is the same room
 		

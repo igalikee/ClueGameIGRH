@@ -72,7 +72,7 @@ public class ComputerPlayer extends Player {
 		
 		suggestion = new Solution(); //clears suggestion
 		BoardCell currentCell = Board.getCellAt(getRow(), getCol());
-		String room = Board.legend.get(currentCell.getInitial());
+		String room = Board.roomLegend.get(currentCell.getInitial());
 		seenCards.add(room);
 		
 		ArrayList<Card> cards = Board.getCards();

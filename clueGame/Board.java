@@ -27,13 +27,11 @@ public class Board {
 	public static final int NUM_PLAYERS = 6;
 
 	//data structures
-	private static BoardCell[][] grid;
+	private static BoardCell[][] grid; 
 	private static Set<BoardCell> targets;
-	private static Set<BoardCell> visited;
 	private static Map<BoardCell, Set<BoardCell>> adjMtx;
-	public static Map<Character, String> legend ;
+	public static Map<Character, String> roomLegend ;
 	public static ArrayList<Card> cards;
-	private static ArrayList<Card> deck;
 	public static Solution solution;
 
 	private static ArrayList<Player> players;
@@ -63,9 +61,8 @@ public class Board {
 	//=========================================================================================
 	public static void initialize() {
 		targets = new HashSet<BoardCell>();
-		visited = new HashSet<BoardCell>();
 		grid = new BoardCell[MAX_ROWS][MAX_COLUMNS];
-		legend = new HashMap<Character, String>();
+		roomLegend = new HashMap<Character, String>();
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		players = new ArrayList<Player>();
 		weapons = new ArrayList<String>();
@@ -106,7 +103,7 @@ public class Board {
 			if(counter == 0) c = temp.length;
 			for(int i = 0; i < temp.length; i++){
 				grid[counter][i] = new BoardCell(counter,i,temp[i]);
-				if (!legend.containsKey(grid[counter][i].getInitial()))  throw new BadConfigFormatException("Wrong legend in board");
+				if (!roomLegend.containsKey(grid[counter][i].getInitial()))  throw new BadConfigFormatException("Wrong legend in board");
 			}
 			counter++;
 			if (temp.length != c) throw new BadConfigFormatException("Number of columns is not consistent");
@@ -118,7 +115,7 @@ public class Board {
 
 	@SuppressWarnings("resource")
 	public static void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException{
-		legend = new HashMap<Character, String>();
+		roomLegend = new HashMap<Character, String>();
 
 		FileReader reader = null;
 		Scanner in = null;
@@ -147,7 +144,7 @@ public class Board {
 				cards.add(new Card(temp[1], CardType.ROOM));
 			}
 
-			legend.put(symbol.charAt(0), room);
+			roomLegend.put(symbol.charAt(0), room);
 			if((!type.equals("Card") && !type.equals("Other"))) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 		}
 		in.close();
@@ -180,6 +177,7 @@ public class Board {
 	// MOVEMENT: ADJECENCY AND TARGET CALCULATIONS
 	//=========================================================================================
 	public static void calcAdjacencies(){
+
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
@@ -188,17 +186,13 @@ public class Board {
 				if(grid[i][j].getInitial() != 'W'){
 					switch (grid[i][j].getDoorDirection()) {
 					case UP:
-						tempSet.add(grid[i-1][j]);
-						break;
+						tempSet.add(grid[i-1][j]); break;
 					case DOWN:
-						tempSet.add(grid[i+1][j]);
-						break;
+						tempSet.add(grid[i+1][j]); break;
 					case LEFT:
-						tempSet.add(grid[i][j-1]);
-						break;
+						tempSet.add(grid[i][j-1]); break;
 					case RIGHT:
-						tempSet.add(grid[i][j+1]);
-						break;
+						tempSet.add(grid[i][j+1]); break;
 					default:
 						break;
 					}				
@@ -211,8 +205,6 @@ public class Board {
 							if(grid[i][j-1].getInitial() == 'W' || (grid[i][j-1].isDoorway() && grid[i][j-1].getDoorDirection().equals(DoorDirection.RIGHT))) tempSet.add(grid[i][j - 1]);
 						}
 
-					}
-					if(i > 0){
 						if(grid[i-1][j].getInitial() == 'W' || (grid[i-1][j].isDoorway() && grid[i-1][j].getDoorDirection().equals(DoorDirection.DOWN))) tempSet.add(grid[i-1][j]);
 						if (j < columns - 1){
 							if(grid[i][j+1].getInitial() == 'W' || (grid[i][j+1].isDoorway() && grid[i][j+1].getDoorDirection().equals(DoorDirection.LEFT))) tempSet.add(grid[i][j + 1]);
@@ -225,8 +217,6 @@ public class Board {
 							if(grid[i][j-1].getInitial() == 'W' || (grid[i][j-1].isDoorway() && grid[i][j-1].getDoorDirection().equals(DoorDirection.RIGHT))) tempSet.add(grid[i][j - 1]);
 						}
 
-					}
-					if(i < rows - 1){
 						if(grid[i+1][j].getInitial() == 'W' || (grid[i+1][j].isDoorway() && grid[i+1][j].getDoorDirection().equals(DoorDirection.UP))) tempSet.add(grid[i+1][j]);
 						if (j < columns - 1){
 							if(grid[i][j+1].getInitial() == 'W' || (grid[i][j+1].isDoorway() && grid[i][j+1].getDoorDirection().equals(DoorDirection.LEFT))) tempSet.add(grid[i][j + 1]);
@@ -243,13 +233,14 @@ public class Board {
 
 	public void calcTargets(int i, int j, int numSteps){
 		targets.clear();
-		visited.clear();
+		Set<BoardCell> visited = new HashSet<BoardCell>();
+
 		BoardCell startCell = new BoardCell();
 		startCell = grid[i][j];
-		calculateTargets(startCell, numSteps);
+		calculateTargets(startCell, numSteps, visited);
 	}
 
-	private void calculateTargets(BoardCell startCell, int numSteps){
+	private void calculateTargets(BoardCell startCell, int numSteps, Set<BoardCell> visited){
 
 		visited.add(startCell);
 
@@ -259,14 +250,14 @@ public class Board {
 			if(adjCell.isDoorway()) targets.add(adjCell);
 			if(numSteps == 1) targets.add(adjCell);
 			else{
-				calculateTargets(adjCell, numSteps-1);
+				calculateTargets(adjCell, numSteps-1, visited);
 			}
 			visited.remove(adjCell);
 		}
 	}
 
 	private static void setSolution_dealCards() {
-		deck = new ArrayList<Card>(cards); //deck to shuffle
+		ArrayList<Card> deck = new ArrayList<Card>(cards); //deck to shuffle
 
 		Random rand = new Random();
 		solution = new Solution();
@@ -350,7 +341,7 @@ public class Board {
 	}
 
 	public Map<Character, String> getLegend() {
-		return legend;
+		return roomLegend;
 	}
 
 	public int getNumRows() {
