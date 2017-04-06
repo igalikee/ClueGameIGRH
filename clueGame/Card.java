@@ -18,6 +18,13 @@ public class Card {
 		return false;
 	}
 	
+	public boolean equals(Card otherCard) {
+		if (otherCard.getCardName() == this.cardName && otherCard.getCardType() == this.cardType) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public String getCardName() {
 		return cardName;
