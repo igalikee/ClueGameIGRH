@@ -10,7 +10,4 @@ public class Solution {
 	public String toString() {
 		return "Solution [person=" + person + ", room=" + room + ", weapon=" + weapon + "]";
 	}
-	
-
-	
 }

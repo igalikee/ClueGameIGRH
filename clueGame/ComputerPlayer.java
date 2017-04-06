@@ -1,33 +1,26 @@
 package clueGame;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-
-import com.sun.prism.paint.Color;
 
 public class ComputerPlayer extends Player {
 
 	private BoardCell visited;
 	private ArrayList<String> seenCards = new ArrayList<String>();
 
-
-	Solution suggestion = new Solution();
+	private Solution suggestion = new Solution();
 
 	public ComputerPlayer(String playerName, String color, int row, int col) {
 		super(playerName, color, row, col);
-
-		visited = new BoardCell();
+		visited = null;
 	}
 
 	public ComputerPlayer() {
 		super("Empty", "RED", 0, 0); //DO NOT USE THIS CONSTRUCTOR
 	}
 
-
 	public BoardCell pickLocation(Set<BoardCell> targets) {
-
 		BoardCell currentCell = Board.getCellAt(getRow(),getCol());
 
 		for (BoardCell c : targets) {
@@ -68,7 +61,6 @@ public class ComputerPlayer extends Player {
 	}
 
 	public void createSuggestion() {
-		//seenCards.addAll(getHand());
 		
 		suggestion = new Solution(); //clears suggestion
 		BoardCell currentCell = Board.getCellAt(getRow(), getCol());
@@ -80,9 +72,7 @@ public class ComputerPlayer extends Player {
 
 		String person = null;
 		String weapon = null;
-
-
-			
+	
 			do {
 				person = cards.get(rand.nextInt(6) + 9).getCardName();
 			} while (seenCards.contains(person)); 
@@ -91,8 +81,6 @@ public class ComputerPlayer extends Player {
 			do {
 				weapon = cards.get(rand.nextInt(6) + 15).getCardName();
 			} while (seenCards.contains(weapon)); 
-
-	
 
 		suggestion.person = person;
 		suggestion.room = room;

@@ -46,7 +46,7 @@ public class gameActionTests {
 		board.calcTargets(computer.getRow(), computer.getCol(), 2); //generates targets with 2 steps for computer1
 		targets = board.getTargets();
 		
-		BoardCell targetCell = new BoardCell();  //gets the target cell by calling pickLocation
+		BoardCell targetCell = null;  //gets the target cell by calling pickLocation
 		
 		int counter1 = 0; //holds the amount of times each cell is visited for computer1   
 		int counter2 = 0; 

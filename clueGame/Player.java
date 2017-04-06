@@ -30,7 +30,7 @@ public class Player {
 		case "BLACK": return Color.BLACK;
 		}
 		
-		System.out.println("Failure in Color Read in, exited switch case: " + string);
+		System.err.println("Failure in Color Read in, exited switch case: " + string);
 		return null;
 	}
 
@@ -49,8 +49,7 @@ public class Player {
 		
 		else {
 			return null;
-		}
-		
+		}	
 	}
 	
 	public void setHand(ArrayList<Card> hand) {

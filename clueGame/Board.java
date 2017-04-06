@@ -192,8 +192,7 @@ public class Board {
 				}
 
 				else {
-					if(i > 0){
-						
+					if(i > 0){	
 						if(checkAdjacency(grid[i-1][j], DoorDirection.DOWN)) tempSet.add(grid[i-1][j]);
 						if (j > 0){
 							if(checkAdjacency(grid[i][j-1], DoorDirection.RIGHT)) tempSet.add(grid[i][j-1]);
@@ -208,7 +207,6 @@ public class Board {
 						if (j > 0){
 							if(checkAdjacency(grid[i][j-1], DoorDirection.RIGHT)) tempSet.add(grid[i][j-1]);
 						}
-
 						if (j < columns - 1){
 							if(checkAdjacency(grid[i][j+1], DoorDirection.LEFT)) tempSet.add(grid[i][j + 1]);
 						}
@@ -223,12 +221,11 @@ public class Board {
 		return (cell.getInitial() == 'W' || cell.getDoorDirection().equals(direction));
 	}
 
-
 	public void calcTargets(int i, int j, int numSteps){
 		targets.clear();
 		Set<BoardCell> visited = new HashSet<BoardCell>();
 
-		BoardCell startCell = new BoardCell();
+		BoardCell startCell = null;
 		startCell = grid[i][j];
 		calculateTargets(startCell, numSteps, visited);
 	}

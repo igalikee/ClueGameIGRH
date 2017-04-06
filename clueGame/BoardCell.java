@@ -6,9 +6,6 @@ public class BoardCell {
 	private char initial;
 	private DoorDirection direction;
 
-	public BoardCell(){
-		
-	}
 	
 	public BoardCell(int r, int c, String i) {
 		row = r;
