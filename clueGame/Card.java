@@ -4,6 +4,7 @@ public class Card {
 	private String cardName;
 	private CardType cardType;
 	
+	// Constructors
 	public Card(String cardName, CardType cardType)  {
 		this.cardName = cardName;
 		this.cardType = cardType;
@@ -13,7 +14,8 @@ public class Card {
 		cardName = null;
 		cardType = null;
 	}
-
+	
+	// Check equivalence b/w cards
 	public boolean equals() {
 		return false;
 	}
@@ -25,7 +27,7 @@ public class Card {
 		return false;
 	}
 	
-	
+	// Getters and setters
 	public String getCardName() {
 		return cardName;
 	}
@@ -44,7 +46,8 @@ public class Card {
 	public void setCardType(CardType cardType) {
 		this.cardType = cardType;
 	}
-
+	
+	// Properly print card information
 	@Override
 	public String toString() {
 		return "Card [cardName=" + cardName + ", cardType=" + cardType + "]" + "\n";

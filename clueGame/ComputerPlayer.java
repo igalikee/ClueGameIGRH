@@ -8,18 +8,20 @@ public class ComputerPlayer extends Player {
 
 	private BoardCell visited;
 	private ArrayList<String> seenCards = new ArrayList<String>();
-
 	private Solution suggestion = new Solution();
 
+	// Constructor
 	public ComputerPlayer(String playerName, String color, int row, int col) {
 		super(playerName, color, row, col);
 		visited = null;
 	}
-
+	
+	//DO NOT USE THIS CONSTRUCTOR, FOR TESTING PURPOSES
 	public ComputerPlayer() {
-		super("Empty", "RED", 0, 0); //DO NOT USE THIS CONSTRUCTOR
+		super("Empty", "RED", 0, 0);
 	}
 
+	// Picks where to go given viable options
 	public BoardCell pickLocation(Set<BoardCell> targets) {
 		BoardCell currentCell = Board.getCellAt(getRow(),getCol());
 
@@ -46,6 +48,7 @@ public class ComputerPlayer extends Player {
 		return null;
 	}
 
+	// Makes accusation
 	public void makeAccusation() {
 
 		ArrayList<Card> cards = Board.getCards();
@@ -60,6 +63,7 @@ public class ComputerPlayer extends Player {
 		Board.checkAccusation(accusation);
 	}
 
+	// Creates a suggestion
 	public void createSuggestion() {
 		
 		suggestion = new Solution(); //clears suggestion
@@ -89,6 +93,7 @@ public class ComputerPlayer extends Player {
 		//Board.handleSuggestion(suggestion);
 	}
 
+	// Getters and setters
 	public void setVisited(BoardCell b) {
 		visited = b;
 	}

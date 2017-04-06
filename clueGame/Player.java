@@ -11,6 +11,7 @@ public class Player {
 	private int col;
 	private ArrayList<Card> hand;
 
+	// Constructor
 	public Player(String playerName, String color, int row, int col) {
 		this.playerName = playerName;
 		this.color = convertStringtoColor(color);
@@ -19,8 +20,9 @@ public class Player {
 
 		hand = new ArrayList<Card>();
 	}
-
-	private Color convertStringtoColor(String string) { //converts the String from the file read in to color
+	
+	// Converts strings to color given a string
+	private Color convertStringtoColor(String string) {
 		switch(string) {
 		case "RED": return Color.RED;
 		case "DARK_GRAY": return Color.DARK_GRAY;
@@ -33,7 +35,8 @@ public class Player {
 		System.err.println("Failure in Color Read in, exited switch case: " + string);
 		return null;
 	}
-
+	
+	// Disproves suggestions given a suggestion
 	public Card disproveSuggestion(Solution suggestion) {
 		ArrayList<Card> suggestions = new ArrayList<Card>();
 
@@ -52,6 +55,7 @@ public class Player {
 		}	
 	}
 
+	// Getters and setters
 	public void setHand(ArrayList<Card> hand) {
 		this.hand = hand;
 	}
@@ -80,11 +84,6 @@ public class Player {
 		hand.add(card);
 	}
 
-	@Override
-	public String toString() {
-		return "Player [playerName=" + playerName + ", color=" + color + "]";
-	}
-
 	public void setRow(int row) {
 		this.row = row;
 	}
@@ -93,5 +92,10 @@ public class Player {
 		this.col = col;
 	}
 
+	// Prints player information
+	@Override
+	public String toString() {
+		return "Player [playerName=" + playerName + ", color=" + color + "]";
+	}
 
 }
