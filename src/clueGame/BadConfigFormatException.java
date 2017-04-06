@@ -5,18 +5,17 @@ import java.io.PrintWriter;
 
 @SuppressWarnings("serial")
 public class BadConfigFormatException extends Exception {
-	
-	public BadConfigFormatException(){
+
+	public BadConfigFormatException() {
 		super("Error Bad Config Format");
-		
+
 	}
-	
-	public BadConfigFormatException(String message) throws FileNotFoundException{
+
+	public BadConfigFormatException(String message) throws FileNotFoundException {
 		super(message);
-		PrintWriter p = new PrintWriter ("ExceptionLog.txt");
+		PrintWriter p = new PrintWriter("ExceptionLog.txt");
 		p.println(super.getMessage());
 		p.close();
 	}
-	
 
 }

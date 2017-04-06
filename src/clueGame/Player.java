@@ -16,32 +16,39 @@ public class Player {
 		this.playerName = playerName;
 		this.color = convertStringtoColor(color);
 		this.row = row;
-		this.col = col;	
+		this.col = col;
 
 		hand = new ArrayList<Card>();
 	}
-	
+
 	// Converts strings to color given a string
 	private Color convertStringtoColor(String string) {
-		switch(string) {
-		case "RED": return Color.RED;
-		case "DARK_GRAY": return Color.DARK_GRAY;
-		case "YELLOW": return Color.YELLOW;
-		case "ORANGE": return Color.ORANGE;
-		case "BLUE": return Color.BLUE;
-		case "BLACK": return Color.BLACK;
+		switch (string) {
+		case "RED":
+			return Color.RED;
+		case "DARK_GRAY":
+			return Color.DARK_GRAY;
+		case "YELLOW":
+			return Color.YELLOW;
+		case "ORANGE":
+			return Color.ORANGE;
+		case "BLUE":
+			return Color.BLUE;
+		case "BLACK":
+			return Color.BLACK;
 		}
 
 		System.err.println("Failure in Color Read in, exited switch case: " + string);
 		return null;
 	}
-	
+
 	// Disproves suggestions given a suggestion
 	public Card disproveSuggestion(Solution suggestion) {
 		ArrayList<Card> suggestions = new ArrayList<Card>();
 
 		for (Card card : hand) {
-			if (card.getCardName().equals(suggestion.person) || card.getCardName().equals(suggestion.weapon) || card.getCardName().equals(suggestion.room)) {
+			if (card.getCardName().equals(suggestion.person) || card.getCardName().equals(suggestion.weapon)
+					|| card.getCardName().equals(suggestion.room)) {
 				suggestions.add(card);
 			}
 		}
@@ -52,7 +59,7 @@ public class Player {
 
 		else {
 			return null;
-		}	
+		}
 	}
 
 	// Getters and setters

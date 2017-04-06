@@ -15,15 +15,15 @@ public class ComputerPlayer extends Player {
 		super(playerName, color, row, col);
 		visited = null;
 	}
-	
-	//DO NOT USE THIS CONSTRUCTOR, FOR TESTING PURPOSES
+
+	// DO NOT USE THIS CONSTRUCTOR, FOR TESTING PURPOSES
 	public ComputerPlayer() {
 		super("Empty", "RED", 0, 0);
 	}
 
 	// Picks where to go given viable options
 	public BoardCell pickLocation(Set<BoardCell> targets) {
-		BoardCell currentCell = Board.getCellAt(getRow(),getCol());
+		BoardCell currentCell = Board.getCellAt(getRow(), getCol());
 
 		for (BoardCell c : targets) {
 			if (c.isDoorway() && !currentCell.isDoorway() && !visited.isDoorway()) {
@@ -65,32 +65,31 @@ public class ComputerPlayer extends Player {
 
 	// Creates a suggestion
 	public void createSuggestion() {
-		
-		suggestion = new Solution(); //clears suggestion
+
+		suggestion = new Solution(); // clears suggestion
 		BoardCell currentCell = Board.getCellAt(getRow(), getCol());
 		String room = Board.roomLegend.get(currentCell.getInitial());
 		seenCards.add(room);
-		
+
 		ArrayList<Card> cards = Board.getCards();
 		Random rand = new Random();
 
 		String person = null;
 		String weapon = null;
-	
-			do {
-				person = cards.get(rand.nextInt(6) + 9).getCardName();
-			} while (seenCards.contains(person)); 
 
+		do {
+			person = cards.get(rand.nextInt(6) + 9).getCardName();
+		} while (seenCards.contains(person));
 
-			do {
-				weapon = cards.get(rand.nextInt(6) + 15).getCardName();
-			} while (seenCards.contains(weapon)); 
+		do {
+			weapon = cards.get(rand.nextInt(6) + 15).getCardName();
+		} while (seenCards.contains(weapon));
 
 		suggestion.person = person;
 		suggestion.room = room;
 		suggestion.weapon = weapon;
 
-		//Board.handleSuggestion(suggestion);
+		// Board.handleSuggestion(suggestion);
 	}
 
 	// Getters and setters

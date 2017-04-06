@@ -6,31 +6,30 @@ public class BoardCell {
 	private char initial;
 	private DoorDirection direction;
 
-	
 	public BoardCell(int r, int c, String i) {
 		row = r;
 		column = c;
 		initial = i.charAt(0);
-		if(i.length() > 1){
-			switch(i.charAt(1)){
-				case 'U':
-					direction = DoorDirection.UP;
-					break;
-				case 'D':
-					direction = DoorDirection.DOWN;
-					break;
-				case 'L':
-					direction = DoorDirection.LEFT;
-					break;
-				case 'R':
-					direction = DoorDirection.RIGHT;
-					break;
-				default:
-					direction = DoorDirection.NONE;
-					break;
+		if (i.length() > 1) {
+			switch (i.charAt(1)) {
+			case 'U':
+				direction = DoorDirection.UP;
+				break;
+			case 'D':
+				direction = DoorDirection.DOWN;
+				break;
+			case 'L':
+				direction = DoorDirection.LEFT;
+				break;
+			case 'R':
+				direction = DoorDirection.RIGHT;
+				break;
+			default:
+				direction = DoorDirection.NONE;
+				break;
 			}
-		}
-		else direction = DoorDirection.NONE;
+		} else
+			direction = DoorDirection.NONE;
 	}
 
 	@Override
@@ -40,7 +39,8 @@ public class BoardCell {
 	}
 
 	public boolean isDoorway() {
-		if (direction == DoorDirection.NONE) return false;
+		if (direction == DoorDirection.NONE)
+			return false;
 		return true;
 	}
 
@@ -51,6 +51,5 @@ public class BoardCell {
 	public char getInitial() {
 		return initial;
 	}
-
 
 }
