@@ -27,12 +27,12 @@ public class Board {
 	public static final int NUM_PLAYERS = 6;
 
 	//data structures
-	private static BoardCell[][] grid; 
-	private static Set<BoardCell> targets;
+	private static BoardCell[][] grid; //holds the board layout  
+	private static Set<BoardCell> targets;  //holds possible moves 
 	private static Map<BoardCell, Set<BoardCell>> adjMtx;
-	public static Map<Character, String> roomLegend ;
-	public static ArrayList<Card> cards;
-	public static Solution solution;
+	public static Map<Character, String> roomLegend ; 
+	public static ArrayList<Card> cards; //cards of rooms, players, weapons 
+	public static Solution solution; //holds the solution
 
 	private static ArrayList<Player> players;
 	private static ArrayList<String> weapons;
@@ -68,7 +68,6 @@ public class Board {
 		weapons = new ArrayList<String>();
 		cards = new ArrayList<Card>();
 
-
 		try {
 			loadRoomConfig();
 			loadBoardConfig();
@@ -78,7 +77,7 @@ public class Board {
 			System.out.println(e.getMessage());
 		}
 		catch (FileNotFoundException e) {
-			e.getStackTrace();
+			System.err.println("Error - File Not Found!");;
 		}
 		calcAdjacencies();
 		setSolution_dealCards();
@@ -120,11 +119,7 @@ public class Board {
 		FileReader reader = null;
 		Scanner in = null;
 
-		try {
-			reader = new FileReader(legendString);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
+		reader = new FileReader(legendString);
 
 		in = new Scanner(reader);
 
@@ -143,7 +138,6 @@ public class Board {
 			if (type.equals("Card")) {
 				cards.add(new Card(temp[1], CardType.ROOM));
 			}
-
 			roomLegend.put(symbol.charAt(0), room);
 			if((!type.equals("Card") && !type.equals("Other"))) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 		}
@@ -266,22 +260,17 @@ public class Board {
 		solution.room = cards.get(n).getCardName();
 		Collections.swap(deck, 0, n); //moving to front of deck for removal
 
-
 		n = rand.nextInt(6) + 9;
 		solution.person = cards.get(n).getCardName();
 		Collections.swap(deck, 1, n); //moving to first index for removal
-
 
 		n = rand.nextInt(6) + 15;
 		solution.weapon = cards.get(n).getCardName();
 		Collections.swap(deck, 2, n); //same as above 
 
-
 		for (int i = 0; i < 3; i++) { //removing them from deck
 			deck.remove(i);
 		}
-
-
 
 		Collections.shuffle(deck); //shuffles the deck randomly
 
@@ -294,24 +283,22 @@ public class Board {
 			players.get(playerNum).addCard(t);
 			playerNum++;
 		}
-
 	}
-
 
 
 	public static Card handleSuggestion(Solution suggestion, Player player) {		
 		Card tempCard = null;
-
 		int index = players.indexOf(player) + 1; //counter to ensure correct queuing 
 
 		for (int i = 0; i < players.size() - 1; i++) { //iterate through players.size() - 1 b/c don't want to disprove the accuser
 			if (index > players.size() - 1) index = 0;
-			if (players.get(index).disproveSuggestion(suggestion) != null) tempCard = players.get(index).disproveSuggestion(suggestion);
+			if (players.get(index).disproveSuggestion(suggestion) != null) {
+				tempCard = players.get(index).disproveSuggestion(suggestion);
+			}
 			index++;
 		}
 
 		return tempCard;
-
 	}
 
 	public static boolean checkAccusation(Solution accusation) {
@@ -324,7 +311,6 @@ public class Board {
 	//========================================================================================
 	// GETTERS & SETTERS 
 	//========================================================================================
-
 	public void setConfigFiles(String string, String string2, String string3, String string4) {
 		layoutString = string;
 		legendString = string2;
@@ -357,7 +343,6 @@ public class Board {
 	}
 
 	public Set<BoardCell> getAdjList(int i, int j) {
-
 		return adjMtx.get(grid[i][j]);
 	}
 
@@ -371,5 +356,4 @@ public class Board {
 	public static ArrayList<Card> getCards() {
 		return cards;
 	}
-
 }
