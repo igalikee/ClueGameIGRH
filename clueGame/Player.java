@@ -10,16 +10,16 @@ public class Player {
 	private int row;
 	private int col;
 	private ArrayList<Card> hand;
-	
+
 	public Player(String playerName, String color, int row, int col) {
 		this.playerName = playerName;
 		this.color = convertStringtoColor(color);
 		this.row = row;
 		this.col = col;	
-		
+
 		hand = new ArrayList<Card>();
 	}
-	
+
 	private Color convertStringtoColor(String string) { //converts the String from the file read in to color
 		switch(string) {
 		case "RED": return Color.RED;
@@ -29,14 +29,14 @@ public class Player {
 		case "BLUE": return Color.BLUE;
 		case "BLACK": return Color.BLACK;
 		}
-		
+
 		System.err.println("Failure in Color Read in, exited switch case: " + string);
 		return null;
 	}
 
 	public Card disproveSuggestion(Solution suggestion) {
 		ArrayList<Card> suggestions = new ArrayList<Card>();
-		
+
 		for (Card card : hand) {
 			if (card.getCardName().equals(suggestion.person) || card.getCardName().equals(suggestion.weapon) || card.getCardName().equals(suggestion.room)) {
 				suggestions.add(card);
@@ -46,12 +46,12 @@ public class Player {
 			Random rand = new Random();
 			return suggestions.get(rand.nextInt(suggestions.size()));
 		}
-		
+
 		else {
 			return null;
 		}	
 	}
-	
+
 	public void setHand(ArrayList<Card> hand) {
 		this.hand = hand;
 	}
@@ -63,7 +63,7 @@ public class Player {
 	public Color getColor() {
 		return color;
 	}
-	
+
 	public int getRow() {
 		return row;
 	}
@@ -71,7 +71,7 @@ public class Player {
 	public int getCol() {
 		return col;
 	}
-	
+
 	public ArrayList<Card> getHand() {
 		return hand;
 	}
@@ -92,6 +92,6 @@ public class Player {
 	public void setCol(int col) {
 		this.col = col;
 	}
-	
-	
+
+
 }

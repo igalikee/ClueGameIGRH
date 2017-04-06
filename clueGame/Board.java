@@ -82,87 +82,81 @@ public class Board {
 	}
 
 
-	@SuppressWarnings("resource")
 	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException{
 
 		FileReader reader = null;
-		Scanner in = null;
 
 		reader = new FileReader(layoutString);
 
-		in = new Scanner(reader);
+		try(Scanner in = new Scanner(reader)) {
+			int counter = 0;
+			int c = 0;
 
-		int counter = 0;
-		int c = 0;
-
-		while (in.hasNextLine()){
-			String[] temp = in.nextLine().split(",");
-			if(counter == 0) c = temp.length;
-			for(int i = 0; i < temp.length; i++){
-				grid[counter][i] = new BoardCell(counter,i,temp[i]);
-				if (!roomLegend.containsKey(grid[counter][i].getInitial()))  throw new BadConfigFormatException("Wrong legend in board");
+			while (in.hasNextLine()){
+				String[] temp = in.nextLine().split(",");
+				if(counter == 0) c = temp.length;
+				for(int i = 0; i < temp.length; i++){
+					grid[counter][i] = new BoardCell(counter,i,temp[i]);
+					if (!roomLegend.containsKey(grid[counter][i].getInitial()))  throw new BadConfigFormatException("Wrong legend in board");
+				}
+				counter++;
+				if (temp.length != c) throw new BadConfigFormatException("Number of columns is not consistent");
+				columns = temp.length;
 			}
-			counter++;
-			if (temp.length != c) throw new BadConfigFormatException("Number of columns is not consistent");
-			columns = temp.length;
+			rows = counter;
 		}
-		rows = counter;
-		in.close();
 	}
 
-	@SuppressWarnings("resource")
+
 	public static void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException{
 		roomLegend = new HashMap<Character, String>();
 
-		FileReader reader = null;
-		Scanner in = null;
+		FileReader reader = new FileReader(legendString);
 
-		reader = new FileReader(legendString);
+		try(Scanner in = new Scanner(reader)) {
+			String symbol;
+			String room;
+			String type;
 
-		in = new Scanner(reader);
+			while (in.hasNextLine()){
 
-		String symbol;
-		String room;
-		String type;
+				String[] temp = in.nextLine().split(", ");
 
-		while (in.hasNextLine()){
-
-			String[] temp = in.nextLine().split(", ");
-
-			symbol = temp[0];
-			room = temp[1];
-			type = temp[2];
-			//add room cards
-			if (type.equals("Card")) {
-				cards.add(new Card(temp[1], CardType.ROOM));
+				symbol = temp[0];
+				room = temp[1];
+				type = temp[2];
+				//add room cards
+				if (type.equals("Card")) {
+					cards.add(new Card(temp[1], CardType.ROOM));
+				}
+				roomLegend.put(symbol.charAt(0), room);
+				if((!type.equals("Card") && !type.equals("Other"))) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 			}
-			roomLegend.put(symbol.charAt(0), room);
-			if((!type.equals("Card") && !type.equals("Other"))) throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 		}
-		in.close();
+
 	}
 
 	public static void loadPlayerConfig() throws FileNotFoundException {
 
-		Scanner in = new Scanner(new File(PlayerString));
-		while (in.hasNextLine()) {
-			String[] temp = in.nextLine().split(", ");
-			cards.add(new Card(temp[0], CardType.PLAYER));
-			if (temp[2].equals("P")) players.add(new HumanPlayer(temp[0], temp[1], Integer.parseInt(temp[3]), Integer.parseInt(temp[4])));
-			else players.add(new ComputerPlayer(temp[0], temp[1], Integer.parseInt(temp[3]), Integer.parseInt(temp[4])));
+		try(Scanner in = new Scanner(new File(PlayerString))) {
+			while (in.hasNextLine()) {
+				String[] temp = in.nextLine().split(", ");
+				cards.add(new Card(temp[0], CardType.PLAYER));
+				if (temp[2].equals("P")) players.add(new HumanPlayer(temp[0], temp[1], Integer.parseInt(temp[3]), Integer.parseInt(temp[4])));
+				else players.add(new ComputerPlayer(temp[0], temp[1], Integer.parseInt(temp[3]), Integer.parseInt(temp[4])));
+			}
 		}
-		in.close();
 	}
 
 	public static void loadWeaponConfig() throws FileNotFoundException {
 		String weaponName;
-		Scanner in = new Scanner(new File(WeaponString));
-		while (in.hasNextLine()) {
-			weaponName = in.nextLine();
-			weapons.add(weaponName);
-			cards.add(new Card(weaponName, CardType.WEAPON));
+		try(Scanner in = new Scanner(new File(WeaponString))) {
+			while (in.hasNextLine()) {
+				weaponName = in.nextLine();
+				weapons.add(weaponName);
+				cards.add(new Card(weaponName, CardType.WEAPON));
+			}
 		}
-		in.close();
 	}
 
 	//=========================================================================================
@@ -171,7 +165,7 @@ public class Board {
 	public static void calcAdjacencies(){
 
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
-		
+
 		for(int i = 0; i < rows; i++){
 			for(int j = 0; j < columns; j++){
 				Set<BoardCell> tempSet = new HashSet<BoardCell>();
@@ -201,7 +195,7 @@ public class Board {
 							if(checkAdjacency(grid[i][j+1], DoorDirection.LEFT)) tempSet.add(grid[i][j+1]);
 						}
 					}
-					
+
 					if(i < rows - 1){
 						if(checkAdjacency(grid[i+1][j], DoorDirection.UP)) tempSet.add(grid[i+1][j]);
 						if (j > 0){
@@ -216,7 +210,7 @@ public class Board {
 			}
 		}
 	}
-	
+
 	private static boolean checkAdjacency(BoardCell cell, DoorDirection direction) {
 		return (cell.getInitial() == 'W' || cell.getDoorDirection().equals(direction));
 	}
