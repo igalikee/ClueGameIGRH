@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -12,14 +13,17 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JPanel;
+
 import clueGame.BoardCell;
 
-public class Board {
+public class Board extends JPanel {
 
 	// ========================================================================================
 	// VARIABLES
 	// ========================================================================================
-
+	
+	
 	// constants
 	public static final int MAX_ROWS = 50;
 	public static final int MAX_COLUMNS = 50;
@@ -323,7 +327,19 @@ public class Board {
 		}
 		return false;
 	}
-
+	// =========================================================================================
+	// GUI
+	// =========================================================================================
+	public void paintComponent(Graphics g) {
+		for (int i = 0; i < getNumRows(); i++) {
+			for (int j = 0; j < getNumColumns(); j++) {
+				grid[i][j].draw(g);			//draws the board 
+			}
+		}
+		
+	}
+	
+	
 	// ========================================================================================
 	// GETTERS & SETTERS
 	// ========================================================================================
