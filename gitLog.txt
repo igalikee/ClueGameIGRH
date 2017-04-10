@@ -1,3 +1,75 @@
+commit 5115f004628b06b43119f667946d73b599044395
+Author: Robert Hudson <kingdomkid.gamer@gmail.com>
+Date:   Wed Apr 5 22:50:18 2017 -0600
+
+    Commented and minorly reformatted Card.java, Player.java, HumanPlayer.java and ComputerPlayer.java (8/8)
+
+commit 39eb2aba87f0f8bb65958f2e02e5812743146a91
+Author: Robert Hudson <kingdomkid.gamer@gmail.com>
+Date:   Wed Apr 5 22:39:28 2017 -0600
+
+    Added equals() member function w/ appropriate parameter to Card.java to easily check equivalence between cards (7/8)
+
+commit cc5f3dcd7ad1346c3341ee0a5656bb3e04ef9759
+Author: Robert Hudson <kingdomkid.gamer@gmail.com>
+Date:   Wed Apr 5 22:36:34 2017 -0600
+
+    Made references to Board static, as appropriate since we're using a static instance of Board (6/8)
+
+commit 97fcd2c673da41457c867ea224fad463562c3868
+Author: Robert Hudson <kingdomkid.gamer@gmail.com>
+Date:   Wed Apr 5 22:22:16 2017 -0600
+
+    Used 'try' block for scanners to remove resource leaks in Board.java (5/8)
+
+commit e94328a3912343652f28bc918f455b1f4fb18783
+Author: skeerus <igalikee@mymail.mines.edu>
+Date:   Wed Apr 5 21:01:12 2017 -0600
+
+    Refactor - fixed several var initialized and cleaned up cluegame classes (4/8)
+
+commit 79f6e686e108b2dd32076c88349a97b7413d148a
+Author: skeerus <igalikee@mymail.mines.edu>
+Date:   Wed Apr 5 20:48:31 2017 -0600
+
+    Refactor - Cleaned up CalcAdjacencies (3/8)
+
+commit 46b447405978081ff3b7f8588ac86fcf0f261ef4
+Author: skeerus <igalikee@mymail.mines.edu>
+Date:   Wed Apr 5 20:20:20 2017 -0600
+
+    Refactor - Commented Board Class (2/8)
+
+commit f8f0a7ea8d1c4edb51ca43aedf74bcaa7f4ff016
+Author: skeerus <igalikee@mymail.mines.edu>
+Date:   Wed Apr 5 19:55:10 2017 -0600
+
+    Refactor - Fixed Variable Names (1/8)
+
+commit 05963617bd9c9559f32ee61dd6c03a85782240ca
+Author: skeerus <igalikee@mymail.mines.edu>
+Date:   Mon Apr 3 14:28:06 2017 -0600
+
+    Update ReadME
+
+commit 4eadbe9f51ae02ba8bf52d723bc56911578bf49a
+Author: skeerus <igalikee@mines.edu>
+Date:   Thu Mar 23 02:30:33 2017 -0600
+
+    Added GUI
+
+commit 06ee641bc44fc8c860cae7447cc83731ac5edc15
+Author: skeerus <igalikee@mines.edu>
+Date:   Wed Mar 22 23:44:03 2017 -0600
+
+    Cleaned up stuff probably last commit
+
+commit f306fc7789e47436afc3ec5df81f58b71b532512
+Author: Ivan Galikeev <Ivan Galikeev>
+Date:   Wed Mar 22 10:46:40 2017 -0600
+
+    Added gitLog
+
 commit f5becd173be320165bbdd3e677e5cf0403fd6c0d
 Author: Ivan Galikeev <Ivan Galikeev>
 Date:   Wed Mar 22 10:45:22 2017 -0600
