@@ -36,6 +36,8 @@ public class Player {
 			return Color.BLUE;
 		case "BLACK":
 			return Color.BLACK;
+		case "MAGENTA":
+			return Color.MAGENTA;
 		}
 
 		System.err.println("Failure in Color Read in, exited switch case: " + string);

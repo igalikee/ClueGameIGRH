@@ -1,6 +1,6 @@
 Captain Zapp, RED, P, 8, 20
 Wookie Slave, DARK_GRAY, C, 16, 6
-Bruce Willis, YELLOW, C, 16, 9
+Bruce Willis, MAGENTA, C, 16, 9
 Leeloo, ORANGE, C, 0, 5
 Murph, BLUE, C, 15, 15
 Mark Watney, BLACK, C, 4, 20

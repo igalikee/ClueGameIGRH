@@ -338,13 +338,31 @@ public class Board extends JPanel {
 			}
 		}
 		
-		Random rand = new Random();
-		
-		
 		for (Player p: players) {
-			g.setColor(Color.getHSBColor(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)).darker());
+			
+			g.setColor(p.getColor());
 			g.fillOval(p.getCol()*BoardCell.CELL_SIZE, p.getRow()*BoardCell.CELL_SIZE, BoardCell.CELL_SIZE, BoardCell.CELL_SIZE);
 		}
+		
+		//RoomNames 
+		g.setColor(Color.BLACK);
+		
+		g.drawString("Cryo", 5, 80);
+		g.drawString("Chamber", 2, 100);
+		
+		g.drawString("SpaceBasketball Court", 10, 400);
+		
+		g.drawString("Abduction Chamber", 330, 50);
+		g.drawString("Galaxy Bar", 320, 400);
+		g.drawString("Captains Quarters", 140, 30);
+		g.drawString("Gravity Room", 350, 250);
+		g.drawString("Observatory", 240, 235);
+		
+		g.drawString("Wookie", 370, 120);
+		g.drawString("Slave", 370, 135);
+		g.drawString("Chambers", 370, 150);
+		
+		g.drawString("Space Pool", 40, 200);
 		
 	}
 	
