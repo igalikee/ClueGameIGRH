@@ -9,7 +9,7 @@ public class BoardCell {
 	private char initial;
 	private DoorDirection direction;
 
-	public final int CELL_SIZE = 20;
+	public final static int CELL_SIZE = 20;
 	public final int DOOR_HEIGHT = 3;
 	public final int DOOR_OFFSET = CELL_SIZE - DOOR_HEIGHT;
 

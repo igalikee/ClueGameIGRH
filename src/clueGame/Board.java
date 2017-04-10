@@ -1,5 +1,6 @@
 package clueGame;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -335,6 +336,14 @@ public class Board extends JPanel {
 			for (int j = 0; j < getNumColumns(); j++) {
 				grid[i][j].draw(g);			//draws the board 
 			}
+		}
+		
+		Random rand = new Random();
+		
+		
+		for (Player p: players) {
+			g.setColor(Color.getHSBColor(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255)).darker());
+			g.fillOval(p.getCol()*BoardCell.CELL_SIZE, p.getRow()*BoardCell.CELL_SIZE, BoardCell.CELL_SIZE, BoardCell.CELL_SIZE);
 		}
 		
 	}

@@ -1,16 +1,17 @@
 package clueGame;
 
-import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+@SuppressWarnings("serial")
 public class ClueGame extends JFrame {
 	
+
 	private static Board board;
 	
 	ClueGame() {
 		setTitle("Clue Game");
-		setSize(500,500);
+		setSize(1000,1000);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		setUp();
@@ -29,7 +30,7 @@ public class ClueGame extends JFrame {
 	public static void main(String[] args) {
 		ClueGame game = new ClueGame();
 		game.setVisible(true);
-
+		
 	}
 	
 	
