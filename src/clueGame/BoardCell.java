@@ -47,6 +47,13 @@ public class BoardCell {
 			g.setColor(Color.GRAY);
 			g.drawRect(column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);	
 		}
+		
+		else {
+			g.setColor(Color.GRAY);
+			g.fillRect(column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+			g.setColor(Color.GRAY);
+			//g.drawRect(column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);	
+		}
 
 		g.setColor(Color.RED);
 		switch (getDoorDirection()) {

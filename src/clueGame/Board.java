@@ -338,13 +338,14 @@ public class Board extends JPanel {
 			}
 		}
 		
+		
 		for (Player p: players) {
 			
 			g.setColor(p.getColor());
 			g.fillOval(p.getCol()*BoardCell.CELL_SIZE, p.getRow()*BoardCell.CELL_SIZE, BoardCell.CELL_SIZE, BoardCell.CELL_SIZE);
 		}
 		
-		//RoomNames 
+		//RoomNames TODO fix these so they don't go to next screen 
 		g.setColor(Color.BLACK);
 		
 		g.drawString("Cryo", 5, 80);

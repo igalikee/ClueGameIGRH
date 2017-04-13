@@ -1,6 +1,7 @@
-package experiment;
+package clueGame;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
@@ -17,14 +18,22 @@ public class Control_GUI extends JPanel {
 
 	public Control_GUI()
 	{
+		JPanel topPanel = new JPanel();
+		topPanel.setLayout(new FlowLayout());
+		topPanel.add(whoseTurn());
+		topPanel.add(nextPlayerButton());
+		topPanel.add(AccuseButton());
 		
-		// Create a layout with 2 rows
-		setLayout(new GridLayout(2,3));
-		add(whoseTurn());
-		add(nextPlayerButton());
-		add(dieRoll());
-		add(guess());
-		add(guessResult());
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new FlowLayout());
+		bottomPanel.add(dieRoll());
+		bottomPanel.add(guess());
+		bottomPanel.add(guessResult());
+		
+		setLayout(new GridLayout(2,0));
+		add(topPanel);
+		add(bottomPanel);
+
 		
 	}
 
@@ -43,7 +52,7 @@ public class Control_GUI extends JPanel {
 		 JPanel panel = new JPanel();
 		 //panel.setLayout(new GridLayout(2, 1));
 		 JLabel nameLabel = new JLabel("Die");
-		 name = new JTextField(10);
+		 name = new JTextField(2);
 		 name.setEditable(false);
 		 panel.add(nameLabel);
 		 panel.add(name);
@@ -53,9 +62,9 @@ public class Control_GUI extends JPanel {
 	 
 	 private JPanel guess() {
 		 JPanel panel = new JPanel();
-		 panel.setLayout(new GridLayout(1, 2));
+		 panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 		 JLabel nameLabel = new JLabel("Guess");
-		 name = new JTextField(10);
+		 name = new JTextField(30);
 		 name.setEditable(false);
 		 panel.add(nameLabel);
 		 panel.add(name);
@@ -64,7 +73,6 @@ public class Control_GUI extends JPanel {
 	 
 	 private JPanel guessResult() {
 		 JPanel panel = new JPanel();
-		 panel.setLayout(new GridLayout(2, 2));
 		 JLabel nameLabel = new JLabel("Response");
 		 name = new JTextField(10);
 		 name.setEditable(false);
@@ -78,12 +86,15 @@ public class Control_GUI extends JPanel {
 	
 	private JPanel nextPlayerButton() {
 		JButton nextPlayer = new JButton("Next Player");
+		JPanel panel = new JPanel();
+		panel.add(nextPlayer);
+		return panel;
+	}
+	
+	private JPanel AccuseButton() {
 		JButton accusation = new JButton("Accuse!");
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(0,2));
-		panel.add(nextPlayer);
 		panel.add(accusation);
-		
 		return panel;
 	}
 	

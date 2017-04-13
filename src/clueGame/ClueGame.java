@@ -9,6 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 @SuppressWarnings("serial")
 public class ClueGame extends JFrame {
@@ -18,7 +19,7 @@ public class ClueGame extends JFrame {
 	
 	ClueGame() {
 		setTitle("Clue Game");
-		setSize(500,600); //actually call pack 
+		setSize(750,650); //actually call pack 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
@@ -29,6 +30,9 @@ public class ClueGame extends JFrame {
 		
 		setUp();
 		add(board, BorderLayout.CENTER);
+		
+		add(new Control_GUI(), BorderLayout.SOUTH);
+		add(new DisplayCardsGUI(), BorderLayout.EAST);	
 	}
 	
 	private JMenu createFileMenu() {
@@ -58,7 +62,6 @@ public class ClueGame extends JFrame {
 			}
 		}
 		item.addActionListener(new MenuItemListener());
-		
 		return item;
 	}
 
@@ -73,7 +76,7 @@ public class ClueGame extends JFrame {
 	public static void main(String[] args) {
 		ClueGame game = new ClueGame();
 		game.setVisible(true);
-		
+		JOptionPane.showMessageDialog(game,"You are Captain Zapp, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);	
 	}
 	
 	
