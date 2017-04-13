@@ -385,7 +385,7 @@ public class Board extends JPanel {
 		return adjMtx.get(cell);
 	}
 
-	public Map<Character, String> getLegend() {
+	public static Map<Character, String> getLegend() {
 		return roomLegend;
 	}
 

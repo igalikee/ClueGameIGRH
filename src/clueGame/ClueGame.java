@@ -1,7 +1,14 @@
 package clueGame;
 
 
+import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 @SuppressWarnings("serial")
 public class ClueGame extends JFrame {
@@ -11,14 +18,50 @@ public class ClueGame extends JFrame {
 	
 	ClueGame() {
 		setTitle("Clue Game");
-		setSize(1000,1000);
+		setSize(1000,1000); //actually call pack 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		setUp();
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
+		menuBar.add(createFileMenu());
 		
-		add(board);
+		add(menuBar, BorderLayout.NORTH);
+		
+		setUp();
+		add(board, BorderLayout.CENTER);
 	}
 	
+	private JMenu createFileMenu() {
+		JMenu menu = new JMenu("File");
+		menu.add(createFileExitItem());
+		menu.add(createFileDetectiveNotes());
+		return menu;
+	}
+	
+	private JMenuItem createFileExitItem() {
+		JMenuItem item = new JMenuItem("Exit");
+		class MenuItemListener implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		}
+		item.addActionListener(new MenuItemListener());
+		return item;
+	}
+	
+	private JMenuItem createFileDetectiveNotes() {
+		JMenuItem item = new JMenuItem("Detective Notes");
+		class MenuItemListener implements ActionListener {
+			public void actionPerformed(ActionEvent e) {
+				DetectiveNotesGUI notes = new DetectiveNotesGUI();
+				notes.setVisible(true);		
+			}
+		}
+		item.addActionListener(new MenuItemListener());
+		
+		return item;
+	}
+
 	public static void setUp() {
 		// Board is singleton, get the only instance and initialize it		
 		board = Board.getInstance();
