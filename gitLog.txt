@@ -1,3 +1,46 @@
+commit a745c09a3f2c863e1ee04e0a24040da9ab48f126
+Author: skeerus <igalikee@mines.edu>
+Date:   Wed Apr 12 21:58:11 2017 -0600
+
+    Detective notes finished
+
+commit e523cffa5f2f867663b4ffef362e9c962b487669
+Author: skeerus <igalikee@mines.edu>
+Date:   Mon Apr 10 16:11:51 2017 -0600
+
+    Fixed player color, added room names
+
+commit 7200cd80bae54b1425c225cb32ea216c87225c61
+Merge: 7553f4b 92e69ce
+Author: skeerus <igalikee@mines.edu>
+Date:   Sun Apr 9 21:24:40 2017 -0600
+
+    Merge branch 'master' of https://github.com/skeerus/ClueGameIGRH
+
+commit 7553f4b62602be3065d15073429f1a25e0a714fc
+Author: skeerus <igalikee@mines.edu>
+Date:   Sun Apr 9 21:23:12 2017 -0600
+
+    Players Drawn on game Board
+
+commit 560ff24070f968d8a8871107c98703a706cef321
+Author: skeerus <igalikee@mines.edu>
+Date:   Sun Apr 9 21:03:07 2017 -0600
+
+    Board Displays
+
+commit 92e69ce1561d45b2402bd4379976bcba393088a4
+Author: Robert Hudson <rhudson@mines.edu>
+Date:   Thu Apr 6 12:02:38 2017 -0600
+
+    Updated gitLog
+
+commit fe9f768ca85b50e384e11ed7caff287f3d588791
+Author: skeerus <igalikee@mines.edu>
+Date:   Thu Apr 6 11:57:40 2017 -0600
+
+    Fixing directory
+
 commit 5115f004628b06b43119f667946d73b599044395
 Author: Robert Hudson <kingdomkid.gamer@gmail.com>
 Date:   Wed Apr 5 22:50:18 2017 -0600

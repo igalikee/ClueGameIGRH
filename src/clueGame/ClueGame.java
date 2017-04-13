@@ -18,7 +18,7 @@ public class ClueGame extends JFrame {
 	
 	ClueGame() {
 		setTitle("Clue Game");
-		setSize(1000,1000); //actually call pack 
+		setSize(500,600); //actually call pack 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		JMenuBar menuBar = new JMenuBar();
