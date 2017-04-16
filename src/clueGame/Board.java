@@ -270,19 +270,29 @@ public class Board extends JPanel {
 	}
 
 	public void makeMove() {
-		targets.clear();
 
 		//TODO ensure player has ended turn
 		
 		Random rand = new Random();
 		int numSteps = rand.nextInt(6) + 1;
 		control.updateRoll(Integer.toString(numSteps));
+		calcTargets(players.get(currentPlayer).getRow(), players.get(currentPlayer).getCol(), numSteps);
+		
 		
 		if (currentPlayer != 0) {
 			ComputerPlayer p = (ComputerPlayer) players.get(currentPlayer);
-			calcTargets(p.getRow(), p.getCol(), numSteps);
+			
 			System.out.println(targets);
-			BoardCell b = p.pickLocation(targets);
+			
+			BoardCell b;
+			
+			do {
+			
+				b = p.pickLocation(targets);
+			
+			
+			} while (b == p.getVisited());
+			
 			players.get(currentPlayer).setRow(b.getRow());
 			players.get(currentPlayer).setCol(b.getColumn());
 			super.repaint();
@@ -362,12 +372,16 @@ public class Board extends JPanel {
 	// GUI
 	// =========================================================================================
 	public void paintComponent(Graphics g) {
+		
+		super.paintComponent(g);
+		super.setBackground(Color.LIGHT_GRAY);
+		
 		for (int i = 0; i < getNumRows(); i++) {
 			for (int j = 0; j < getNumColumns(); j++) {
 				grid[i][j].draw(g);			//draws the board 
 			}
 		}
-
+		
 
 		for (Player p: players) {
 			g.setColor(p.getColor());
