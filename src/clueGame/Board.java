@@ -2,6 +2,8 @@ package clueGame;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -76,6 +78,8 @@ public class Board extends JPanel {
 		weapons = new ArrayList<String>();
 		cards = new ArrayList<Card>();
 		currentPlayer = 0;
+		addMouseListener(new PlayerInputListener());
+	
 
 		try {
 			loadRoomConfig();
@@ -146,7 +150,6 @@ public class Board extends JPanel {
 					throw new BadConfigFormatException("Not of type 'Card' or 'Other'");
 			}
 		}
-
 	}
 
 	public static void loadPlayerConfig() throws FileNotFoundException {
@@ -276,32 +279,36 @@ public class Board extends JPanel {
 		Random rand = new Random();
 		int numSteps = rand.nextInt(6) + 1;
 		control.updateRoll(Integer.toString(numSteps));
+		control.updateTurnName(players.get(currentPlayer).getPlayerName());
+		
 		calcTargets(players.get(currentPlayer).getRow(), players.get(currentPlayer).getCol(), numSteps);
 		
+		if (currentPlayer == 0) {
+			
+			for (BoardCell b : targets) {
+				b.setPlayerHighlight(true);
+			}
+			
+		}
 		
-		if (currentPlayer != 0) {
+		else {
 			ComputerPlayer p = (ComputerPlayer) players.get(currentPlayer);
 			
-			System.out.println(targets);
-			
 			BoardCell b;
-			
-			do {
-			
-				b = p.pickLocation(targets);
-			
-			
+			do {	//TODO change this
+				b = p.pickLocation(targets);	
 			} while (b == p.getVisited());
 			
 			players.get(currentPlayer).setRow(b.getRow());
 			players.get(currentPlayer).setCol(b.getColumn());
-			super.repaint();
 		}
-
+		
+		super.repaint();
 		currentPlayer++;
 		if (currentPlayer == 6) currentPlayer = 0;
 		
 	}
+	
 	// =========================================================================================
 	// GAMEPLAY: DEALING CARDS, SUGGESTIONS, ACCUSATIONS
 	// =========================================================================================
@@ -467,3 +474,39 @@ public class Board extends JPanel {
 	}
 
 }
+
+public class PlayerInputListener implements MouseListener {
+	
+	
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}
+

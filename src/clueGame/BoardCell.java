@@ -11,6 +11,7 @@ public class BoardCell {
 	private int column;
 	private char initial;
 	private DoorDirection direction;
+	private boolean playerHighlight;
 
 	public final static int CELL_SIZE = 20;
 	public final int DOOR_HEIGHT = 3;
@@ -20,6 +21,8 @@ public class BoardCell {
 		row = r;
 		column = c;
 		initial = i.charAt(0);
+		playerHighlight = false;
+		
 		if (i.length() > 1) {
 			switch (i.charAt(1)) {
 			case 'U':
@@ -44,19 +47,28 @@ public class BoardCell {
 
 	public void draw(Graphics g) {
 
-		if (initial == 'W') {
+		if (initial == 'W' && playerHighlight == false) {
 			g.setColor(Color.YELLOW);
 			g.fillRect(column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);
 			g.setColor(Color.GRAY);
 			g.drawRect(column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);	
 		}
 		
+		else if (playerHighlight ==  true) {
+			g.setColor(Color.CYAN);
+			g.fillRect(column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+			g.setColor(Color.GRAY);
+			g.drawRect(column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);
+			
+			playerHighlight = false;
+		}
+		
 		else {
 			g.setColor(Color.GRAY);
 			g.fillRect(column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);
-			g.setColor(Color.GRAY);
-			//g.drawRect(column*CELL_SIZE, row*CELL_SIZE, CELL_SIZE, CELL_SIZE);	
 		}
+		
+
 
 		g.setColor(Color.RED);
 		switch (getDoorDirection()) {
@@ -73,6 +85,11 @@ public class BoardCell {
 		}
 
 	}
+	
+	public void setPlayerHighlight(boolean playerHighlight) {
+		this.playerHighlight = playerHighlight;
+	}
+
 
 	@Override
 	public String toString() {

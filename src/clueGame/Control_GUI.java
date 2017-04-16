@@ -53,6 +53,10 @@ public class Control_GUI extends JPanel {
 		roll.setText(n);
 	}
 	
+	public void updateTurnName(String n) {
+		name.setText(n);
+	}
+	
 	//=======================================================
 	// PANELS
 	//=======================================================
