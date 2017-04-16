@@ -42,7 +42,9 @@ public class Board extends JPanel {
 	public  Map<Character, String> roomLegend;
 	public  ArrayList<Card> cards; // cards of rooms, players, weapons
 	public  Solution solution; // holds the solution
+	
 	private Control_GUI control;
+	private boolean playerTurnDone;
 
 	private ArrayList<Player> players;
 	private  int currentPlayer;
@@ -80,8 +82,9 @@ public class Board extends JPanel {
 		weapons = new ArrayList<String>();
 		cards = new ArrayList<Card>();
 		currentPlayer = 0;
+		playerTurnDone = true;
 		addMouseListener(new PlayerInputListener());
-		
+
 
 		try {
 			loadRoomConfig();
@@ -276,40 +279,40 @@ public class Board extends JPanel {
 
 	public void makeMove() {
 
-		//TODO ensure player has ended turn
-		
 		Random rand = new Random();
 		int numSteps = rand.nextInt(6) + 1;
 		control.updateRoll(Integer.toString(numSteps));
 		control.updateTurnName(players.get(currentPlayer).getPlayerName());
-		
+
 		calcTargets(players.get(currentPlayer).getRow(), players.get(currentPlayer).getCol(), numSteps);
-		
+
 		if (currentPlayer == 0) {
 			for (BoardCell b : targets) {
 				b.setPlayerHighlight(true);
+				
 			}
-			
+			playerTurnDone = false;
 		}
-		
+
 		else {
 			ComputerPlayer p = (ComputerPlayer) players.get(currentPlayer);
-			
+
 			BoardCell b;
 			do {	//TODO change this
 				b = p.pickLocation(targets);	
 			} while (b == p.getVisited());
-			
+
 			players.get(currentPlayer).setRow(b.getRow());
 			players.get(currentPlayer).setCol(b.getColumn());
 		}
-		
+
 		super.repaint();
 		currentPlayer++;
-		if (currentPlayer == 6) currentPlayer = 0;
-		
+		if (currentPlayer == 6) {
+			currentPlayer = 0;
+		}
+
 	}
-	
 
 	// =========================================================================================
 	// GAMEPLAY: DEALING CARDS, SUGGESTIONS, ACCUSATIONS
@@ -381,21 +384,21 @@ public class Board extends JPanel {
 	// GUI
 	// =========================================================================================
 	public void paintComponent(Graphics g) {
-		
+
 		super.paintComponent(g);
 		super.setBackground(Color.LIGHT_GRAY);
-		
+
 		for (int i = 0; i < getNumRows(); i++) {
 			for (int j = 0; j < getNumColumns(); j++) {
 				grid[i][j].draw(g);			//draws the board 
 			}
 		}
-		
+
 
 		for (Player p: players) {
 			g.setColor(p.getColor());
 			g.fillOval(p.getCol()*BoardCell.CELL_SIZE, p.getRow()*BoardCell.CELL_SIZE, BoardCell.CELL_SIZE, BoardCell.CELL_SIZE);
-			
+
 		}
 
 		//RoomNames TODO fix these so they don't go to next screen 
@@ -470,7 +473,6 @@ public class Board extends JPanel {
 		return cards;
 	}
 
-
 	public void setGameControl(Control_GUI control) {
 		this.control = control;
 	}
@@ -480,62 +482,71 @@ public class Board extends JPanel {
 	}
 
 	public void movePlayer(int x, int y) {
-		players.get(0).setCol(x/20);
-		players.get(0).setRow(y/20);
+		players.get(0).setCol(x/BoardCell.CELL_SIZE);
+		players.get(0).setRow(y/BoardCell.CELL_SIZE);
 		repaint();
 	}
 
 	public boolean checkMouseClick(int x, int y) {
-		
-		if (targets.contains(Board.getInstance().getCellAt(y/20, x/20))) return true;
-		
+
+		if (targets.contains(Board.getInstance().getCellAt(y/BoardCell.CELL_SIZE, x/BoardCell.CELL_SIZE))) return true;
+
 		return false;
+	}
+
+	public void setPlayerTurnDone(boolean b) {
+		playerTurnDone = b;		
+	}
+
+	public boolean getPlayerTurnDone() {
+		return playerTurnDone;
 	}
 }
 
+
+//============================================================
+// MOUSE LISTENER
+//============================================================
 class PlayerInputListener implements MouseListener {
-		
-	
+
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		
-		
+
+
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void mousePressed(MouseEvent e) {
 		if (Board.getInstance().getCurrentPlayer() == 1 && Board.getInstance().checkMouseClick(e.getX(), e.getY())) {
-				
-			
+
+
 			Board.getInstance().movePlayer(e.getX(), e.getY());
+			Board.getInstance().setPlayerTurnDone(true);
 		}
-		
-		else if (!Board.getInstance().checkMouseClick(e.getX(), e.getY())) {
-			
+
+		else  {
 			JFrame frame = new JFrame();
-			System.out.println("No");
-			
-		JOptionPane.showMessageDialog(frame,"Not a Valid Square", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(frame,"Not a Valid Square", "Error", JOptionPane.INFORMATION_MESSAGE);
 		}
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }
 

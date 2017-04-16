@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
@@ -124,7 +126,18 @@ public class Control_GUI extends JPanel {
 
 	class NextPlayerButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			Board.getInstance().makeMove();
+			
+			if (Board.getInstance().getPlayerTurnDone()) {
+				Board.getInstance().makeMove();
+			}
+			
+			else {
+				JFrame frame = new JFrame();
+				JOptionPane.showMessageDialog(frame,"Please Complete Your Turn", "Error", JOptionPane.INFORMATION_MESSAGE);
+			}
+			
+	 
+			
 		}
 	}
 
