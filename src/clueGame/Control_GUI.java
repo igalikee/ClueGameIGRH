@@ -3,6 +3,11 @@ package clueGame;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,10 +19,15 @@ import javax.swing.border.TitledBorder;
 
 public class Control_GUI extends JPanel {
 
-	private JTextField name;
+	private static JTextField name;
+	
+	private JPanel Roll = dieRoll();
+	
+	static JFrame frame = new JFrame();
 
 	public Control_GUI()
 	{
+	
 		JPanel topPanel = new JPanel();
 		topPanel.setLayout(new FlowLayout());
 		topPanel.add(whoseTurn());
@@ -33,8 +43,24 @@ public class Control_GUI extends JPanel {
 		setLayout(new GridLayout(2,0));
 		add(topPanel);
 		add(bottomPanel);
-
+	}
+	
+	public void update() {
+		JPanel topPanel = new JPanel();
+		topPanel.setLayout(new FlowLayout());
+		topPanel.add(whoseTurn());
+		topPanel.add(nextPlayerButton());
+		topPanel.add(AccuseButton());
 		
+		JPanel bottomPanel = new JPanel();
+		bottomPanel.setLayout(new FlowLayout());
+		bottomPanel.add(Roll);
+		bottomPanel.add(guess());
+		bottomPanel.add(guessResult());
+		
+		setLayout(new GridLayout(2,0));
+		add(topPanel);
+		add(bottomPanel);
 	}
 
 	 private JPanel whoseTurn() {
@@ -48,7 +74,7 @@ public class Control_GUI extends JPanel {
 			return panel;
 	}
 	 
-	 private JPanel dieRoll() {
+	 private static JPanel dieRoll() {
 		 JPanel panel = new JPanel();
 		 //panel.setLayout(new GridLayout(2, 1));
 		 JLabel nameLabel = new JLabel("Die");
@@ -59,6 +85,8 @@ public class Control_GUI extends JPanel {
 		 panel.setBorder(new TitledBorder(new EtchedBorder(), "Roll"));
 		 return panel;
 	 }
+	 
+	 
 	 
 	 private JPanel guess() {
 		 JPanel panel = new JPanel();
@@ -83,10 +111,10 @@ public class Control_GUI extends JPanel {
 		 return panel;
 	 }
 	 
-	
 	private JPanel nextPlayerButton() {
 		JButton nextPlayer = new JButton("Next Player");
 		JPanel panel = new JPanel();
+		nextPlayer.addActionListener(new NextPlayerButtonListener());
 		panel.add(nextPlayer);
 		return panel;
 	}
@@ -94,21 +122,27 @@ public class Control_GUI extends JPanel {
 	private JPanel AccuseButton() {
 		JButton accusation = new JButton("Accuse!");
 		JPanel panel = new JPanel();
+		accusation.addActionListener(new AccuseButtonListener());
 		panel.add(accusation);
 		return panel;
 	}
 	
-	public static void main(String[] args) {
-		// Create a JFrame with all the normal functionality
-		JFrame frame = new JFrame();
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Clue Control GUI");	
-		// Create the JPanel and add it to the JFrame
-		Control_GUI gui = new Control_GUI();
-		gui.setVisible(true);
-		frame.add(gui, BorderLayout.EAST);
-		// Now let's view it
-		frame.pack();
-		frame.setVisible(true);
+	class NextPlayerButtonListener implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Next Player"); //TODO
+			name.setText("5");
+			Roll = dieRoll();
+			
+			Board.getInstance().makeMove();
+			
+		}
 	}
+	
+	class AccuseButtonListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			System.out.println("Accuse - TODO"); //TODO		
+		}	
+	}
+	
 }

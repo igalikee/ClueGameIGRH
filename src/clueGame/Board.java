@@ -23,8 +23,8 @@ public class Board extends JPanel {
 	// ========================================================================================
 	// VARIABLES
 	// ========================================================================================
-	
-	
+
+
 	// constants
 	public static final int MAX_ROWS = 50;
 	public static final int MAX_COLUMNS = 50;
@@ -37,8 +37,11 @@ public class Board extends JPanel {
 	public static Map<Character, String> roomLegend;
 	public static ArrayList<Card> cards; // cards of rooms, players, weapons
 	public static Solution solution; // holds the solution
+	private Control_GUI control = new Control_GUI();
 
 	private static ArrayList<Player> players;
+	private static int currentPlayer;
+
 	private static ArrayList<String> weapons;
 
 	private static int rows;
@@ -71,6 +74,7 @@ public class Board extends JPanel {
 		players = new ArrayList<Player>();
 		weapons = new ArrayList<String>();
 		cards = new ArrayList<Card>();
+		currentPlayer = 0;
 
 		try {
 			loadRoomConfig();
@@ -265,6 +269,25 @@ public class Board extends JPanel {
 		}
 	}
 
+	public void makeMove() {
+
+		//TODO ensure player has ended turn 
+		Random rand = new Random();
+
+		int numSteps = rand.nextInt(7);
+		
+		control.update();
+		
+		if (currentPlayer != 0) {
+
+		}
+
+		currentPlayer++;
+		if (currentPlayer == 6) currentPlayer = 0;
+	}
+	// =========================================================================================
+	// GAMEPLAY: DEALING CARDS, SUGGESTIONS, ACCUSATIONS
+	// =========================================================================================
 	private static void setSolution_dealCards() {
 		ArrayList<Card> deck = new ArrayList<Card>(cards); // deck to shuffle
 
@@ -304,12 +327,12 @@ public class Board extends JPanel {
 	public static Card handleSuggestion(Solution suggestion, Player player) {
 		Card tempCard = null;
 		int index = players.indexOf(player) + 1; // counter to ensure correct
-													// queuing
+		// queuing
 
 		for (int i = 0; i < players.size() - 1; i++) { // iterate through
-														// players.size() - 1
-														// b/c don't want to
-														// disprove the accuser
+			// players.size() - 1
+			// b/c don't want to
+			// disprove the accuser
 			if (index > players.size() - 1)
 				index = 0;
 			if (players.get(index).disproveSuggestion(suggestion) != null) {
@@ -337,37 +360,36 @@ public class Board extends JPanel {
 				grid[i][j].draw(g);			//draws the board 
 			}
 		}
-		
-		
+
+
 		for (Player p: players) {
-			
 			g.setColor(p.getColor());
 			g.fillOval(p.getCol()*BoardCell.CELL_SIZE, p.getRow()*BoardCell.CELL_SIZE, BoardCell.CELL_SIZE, BoardCell.CELL_SIZE);
+			
 		}
-		
+
 		//RoomNames TODO fix these so they don't go to next screen 
 		g.setColor(Color.BLACK);
-		
+
 		g.drawString("Cryo", 5, 80);
 		g.drawString("Chamber", 2, 100);
-		
+
 		g.drawString("SpaceBasketball Court", 10, 400);
-		
+
 		g.drawString("Abduction Chamber", 330, 50);
 		g.drawString("Galaxy Bar", 320, 400);
 		g.drawString("Captains Quarters", 140, 30);
 		g.drawString("Gravity Room", 350, 250);
 		g.drawString("Observatory", 240, 235);
-		
+
 		g.drawString("Wookie", 370, 120);
 		g.drawString("Slave", 370, 135);
 		g.drawString("Chambers", 370, 150);
-		
+
 		g.drawString("Space Pool", 40, 200);
-		
+
 	}
-	
-	
+
 	// ========================================================================================
 	// GETTERS & SETTERS
 	// ========================================================================================
@@ -417,4 +439,10 @@ public class Board extends JPanel {
 	public static ArrayList<Card> getCards() {
 		return cards;
 	}
+
+
+	public void setGameControl(Control_GUI control) {
+		this.control = control;
+	}
+
 }

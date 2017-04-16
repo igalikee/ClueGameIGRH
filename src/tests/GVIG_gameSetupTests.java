@@ -52,7 +52,7 @@ public class GVIG_gameSetupTests {
 		assertTrue(players.get(1).getRow() == 16 && players.get(1).getCol() == 6);
 		
 		assertEquals(players.get(2).getPlayerName(), "Bruce Willis");
-		assertEquals(players.get(2).getColor(), Color.YELLOW);
+		assertEquals(players.get(2).getColor(), Color.MAGENTA);
 		assertEquals(ComputerPlayer.class, players.get(2).getClass());
 		assertTrue(players.get(2).getRow() == 16 && players.get(2).getCol() == 9);
 

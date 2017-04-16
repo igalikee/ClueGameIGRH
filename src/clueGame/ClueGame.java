@@ -10,12 +10,15 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class ClueGame extends JFrame {
 	
 
 	private static Board board;
+	private Control_GUI control = new Control_GUI();
+	
 	
 	ClueGame() {
 		setTitle("Clue Game");
@@ -29,9 +32,10 @@ public class ClueGame extends JFrame {
 		add(menuBar, BorderLayout.NORTH);
 		
 		setUp();
+		board.setGameControl(control);
 		add(board, BorderLayout.CENTER);
 		
-		add(new Control_GUI(), BorderLayout.SOUTH);
+		add(control, BorderLayout.SOUTH);
 		add(new DisplayCardsGUI(), BorderLayout.EAST);	
 	}
 	
@@ -76,9 +80,7 @@ public class ClueGame extends JFrame {
 	public static void main(String[] args) {
 		ClueGame game = new ClueGame();
 		game.setVisible(true);
-		JOptionPane.showMessageDialog(game,"You are Captain Zapp, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);	
+		JOptionPane.showMessageDialog(game,"You are Captain Zapp, press Next Player to begin play", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		
 	}
-	
-	
-	
 }

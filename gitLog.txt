@@ -1,3 +1,15 @@
+commit b03176b6e9833928aceab3e5282a552a81863c48
+Author: skeerus <igalikee@mines.edu>
+Date:   Wed Apr 12 23:33:04 2017 -0600
+
+    Clue Displays done
+
+commit 18ba4a035e277c87f4e6c196e22e17d568b84432
+Author: skeerus <igalikee@mines.edu>
+Date:   Wed Apr 12 22:07:14 2017 -0600
+
+    Submittal
+
 commit a745c09a3f2c863e1ee04e0a24040da9ab48f126
 Author: skeerus <igalikee@mines.edu>
 Date:   Wed Apr 12 21:58:11 2017 -0600
