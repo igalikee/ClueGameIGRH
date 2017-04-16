@@ -16,6 +16,8 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
@@ -34,27 +36,27 @@ public class Board extends JPanel {
 	public static final int NUM_PLAYERS = 6;
 
 	// data structures
-	private static BoardCell[][] grid; // holds the board layout
-	private static Set<BoardCell> targets; // holds possible moves
-	private static Map<BoardCell, Set<BoardCell>> adjMtx;
-	public static Map<Character, String> roomLegend;
-	public static ArrayList<Card> cards; // cards of rooms, players, weapons
-	public static Solution solution; // holds the solution
+	private BoardCell[][] grid; // holds the board layout
+	private Set<BoardCell> targets; // holds possible moves
+	private Map<BoardCell, Set<BoardCell>> adjMtx;
+	public  Map<Character, String> roomLegend;
+	public  ArrayList<Card> cards; // cards of rooms, players, weapons
+	public  Solution solution; // holds the solution
 	private Control_GUI control;
 
-	private static ArrayList<Player> players;
-	private static int currentPlayer;
+	private ArrayList<Player> players;
+	private  int currentPlayer;
 
-	private static ArrayList<String> weapons;
+	private ArrayList<String> weapons;
 
-	private static int rows;
-	private static int columns;
+	private int rows;
+	private int columns;
 
 	// Text File Names
-	private static String legendString;
-	private static String layoutString;
-	private static String PlayerString;
-	private static String WeaponString;
+	private  String legendString;
+	private String layoutString;
+	private  String PlayerString;
+	private String WeaponString;
 
 	// variable used for singleton pattern
 	private static Board theInstance = new Board();
@@ -71,7 +73,7 @@ public class Board extends JPanel {
 	// =========================================================================================
 	// INITIALIZATION AND LOADING DATA
 	// =========================================================================================
-	public static void initialize() {
+	public void initialize() {
 		targets = new HashSet<BoardCell>();
 		grid = new BoardCell[MAX_ROWS][MAX_COLUMNS];
 		players = new ArrayList<Player>();
@@ -79,7 +81,7 @@ public class Board extends JPanel {
 		cards = new ArrayList<Card>();
 		currentPlayer = 0;
 		addMouseListener(new PlayerInputListener());
-	
+		
 
 		try {
 			loadRoomConfig();
@@ -96,7 +98,7 @@ public class Board extends JPanel {
 		setSolution_dealCards();
 	}
 
-	public static void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
+	public void loadBoardConfig() throws BadConfigFormatException, FileNotFoundException {
 
 		FileReader reader = null;
 
@@ -124,7 +126,7 @@ public class Board extends JPanel {
 		}
 	}
 
-	public static void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
+	public  void loadRoomConfig() throws BadConfigFormatException, FileNotFoundException {
 		roomLegend = new HashMap<Character, String>();
 
 		FileReader reader = new FileReader(legendString);
@@ -152,7 +154,7 @@ public class Board extends JPanel {
 		}
 	}
 
-	public static void loadPlayerConfig() throws FileNotFoundException {
+	public void loadPlayerConfig() throws FileNotFoundException {
 
 		try (Scanner in = new Scanner(new File(PlayerString))) {
 			while (in.hasNextLine()) {
@@ -168,7 +170,7 @@ public class Board extends JPanel {
 		}
 	}
 
-	public static void loadWeaponConfig() throws FileNotFoundException {
+	public void loadWeaponConfig() throws FileNotFoundException {
 		String weaponName;
 		try (Scanner in = new Scanner(new File(WeaponString))) {
 			while (in.hasNextLine()) {
@@ -182,7 +184,7 @@ public class Board extends JPanel {
 	// =========================================================================================
 	// MOVEMENT: ADJECENCY AND TARGET CALCULATIONS
 	// =========================================================================================
-	public static void calcAdjacencies() {
+	public void calcAdjacencies() {
 
 		adjMtx = new HashMap<BoardCell, Set<BoardCell>>();
 
@@ -241,7 +243,7 @@ public class Board extends JPanel {
 		}
 	}
 
-	private static boolean checkAdjacency(BoardCell cell, DoorDirection direction) {
+	private  boolean checkAdjacency(BoardCell cell, DoorDirection direction) {
 		return (cell.getInitial() == 'W' || cell.getDoorDirection().equals(direction));
 	}
 
@@ -284,7 +286,6 @@ public class Board extends JPanel {
 		calcTargets(players.get(currentPlayer).getRow(), players.get(currentPlayer).getCol(), numSteps);
 		
 		if (currentPlayer == 0) {
-			
 			for (BoardCell b : targets) {
 				b.setPlayerHighlight(true);
 			}
@@ -309,10 +310,11 @@ public class Board extends JPanel {
 		
 	}
 	
+
 	// =========================================================================================
 	// GAMEPLAY: DEALING CARDS, SUGGESTIONS, ACCUSATIONS
 	// =========================================================================================
-	private static void setSolution_dealCards() {
+	private  void setSolution_dealCards() {
 		ArrayList<Card> deck = new ArrayList<Card>(cards); // deck to shuffle
 
 		Random rand = new Random();
@@ -348,7 +350,7 @@ public class Board extends JPanel {
 		}
 	}
 
-	public static Card handleSuggestion(Solution suggestion, Player player) {
+	public  Card handleSuggestion(Solution suggestion, Player player) {
 		Card tempCard = null;
 		int index = players.indexOf(player) + 1; // counter to ensure correct
 		// queuing
@@ -368,7 +370,7 @@ public class Board extends JPanel {
 		return tempCard;
 	}
 
-	public static boolean checkAccusation(Solution accusation) {
+	public  boolean checkAccusation(Solution accusation) {
 		if (solution.person == accusation.person && solution.room == accusation.room
 				&& solution.weapon == accusation.weapon) {
 			return true;
@@ -432,11 +434,11 @@ public class Board extends JPanel {
 		return targets;
 	}
 
-	public static Set<BoardCell> getAdjList(BoardCell cell) {
+	public  Set<BoardCell> getAdjList(BoardCell cell) {
 		return adjMtx.get(cell);
 	}
 
-	public static Map<Character, String> getLegend() {
+	public  Map<Character, String> getLegend() {
 		return roomLegend;
 	}
 
@@ -448,7 +450,7 @@ public class Board extends JPanel {
 		return columns;
 	}
 
-	public static BoardCell getCellAt(int i, int j) {
+	public BoardCell getCellAt(int i, int j) {
 		return grid[i][j];
 	}
 
@@ -456,15 +458,15 @@ public class Board extends JPanel {
 		return adjMtx.get(grid[i][j]);
 	}
 
-	public static ArrayList<Player> getPlayers() {
+	public  ArrayList<Player> getPlayers() {
 		return players;
 	}
 
-	public static ArrayList<String> getWeapons() {
+	public  ArrayList<String> getWeapons() {
 		return weapons;
 	}
 
-	public static ArrayList<Card> getCards() {
+	public  ArrayList<Card> getCards() {
 		return cards;
 	}
 
@@ -473,10 +475,26 @@ public class Board extends JPanel {
 		this.control = control;
 	}
 
+	public int getCurrentPlayer() {
+		return currentPlayer;
+	}
+
+	public void movePlayer(int x, int y) {
+		players.get(0).setCol(x/20);
+		players.get(0).setRow(y/20);
+		repaint();
+	}
+
+	public boolean checkMouseClick(int x, int y) {
+		
+		if (targets.contains(Board.getInstance().getCellAt(y/20, x/20))) return true;
+		
+		return false;
+	}
 }
 
-public class PlayerInputListener implements MouseListener {
-	
+class PlayerInputListener implements MouseListener {
+		
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
@@ -498,8 +516,19 @@ public class PlayerInputListener implements MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		if (Board.getInstance().getCurrentPlayer() == 1 && Board.getInstance().checkMouseClick(e.getX(), e.getY())) {
+				
+			
+			Board.getInstance().movePlayer(e.getX(), e.getY());
+		}
 		
+		else if (!Board.getInstance().checkMouseClick(e.getX(), e.getY())) {
+			
+			JFrame frame = new JFrame();
+			System.out.println("No");
+			
+		JOptionPane.showMessageDialog(frame,"Not a Valid Square", "Welcome to Clue", JOptionPane.INFORMATION_MESSAGE);
+		}
 	}
 
 	@Override

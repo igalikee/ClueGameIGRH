@@ -122,29 +122,29 @@ public class gameActionTests {
 		accusation.weapon = "Bullying";
 		
 		Solution solution = new Solution();
-		Board.solution.person = "Bruce Willis";
-		Board.solution.room = "Cryochamber";
-		Board.solution.weapon = "Bullying";
-		assertTrue(Board.checkAccusation(accusation));
+		Board.getInstance().solution.person = "Bruce Willis";
+		Board.getInstance().solution.room = "Cryochamber";
+		Board.getInstance().solution.weapon = "Bullying";
+		assertTrue(Board.getInstance().checkAccusation(accusation));
 
 		
 		//testing to see if accusation returns false with 1 person wrong
 		accusation.person = "Murph";
 		accusation.room = "Cryochamber";
 		accusation.weapon = "Bullying";
-		assertFalse(Board.checkAccusation(accusation));
+		assertFalse(Board.getInstance().checkAccusation(accusation));
 		
 		//testing to see if accusation returns false with 1 room wrong
 		accusation.person = "Bruce Willis";
 		accusation.room = "Observatory";
 		accusation.weapon = "Bullying";
-		assertFalse(Board.checkAccusation(accusation));
+		assertFalse(Board.getInstance().checkAccusation(accusation));
 		
 		//testing to see if accusation returns false with 1 weapon wrong
 		accusation.person = "Bruce Willis";
 		accusation.room = "Cryochamber";
 		accusation.weapon = "Poison";
-		assertFalse(Board.checkAccusation(accusation));
+		assertFalse(Board.getInstance().checkAccusation(accusation));
 	
 	}
 	

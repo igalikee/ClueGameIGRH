@@ -13,7 +13,7 @@ public class ComputerPlayer extends Player {
 	// Constructor
 	public ComputerPlayer(String playerName, String color, int row, int col) {
 		super(playerName, color, row, col);
-		visited = Board.getCellAt(super.getRow(), super.getCol());
+		visited = Board.getInstance().getCellAt(super.getRow(), super.getCol());
 	}
 
 	// DO NOT USE THIS CONSTRUCTOR, FOR TESTING PURPOSES
@@ -23,7 +23,7 @@ public class ComputerPlayer extends Player {
 
 	// Picks where to go given viable options
 	public BoardCell pickLocation(Set<BoardCell> targets) {
-		BoardCell currentCell = Board.getCellAt(getRow(), getCol());
+		BoardCell currentCell = Board.getInstance().getCellAt(getRow(), getCol());
 
 		for (BoardCell c : targets) {
 			if (c.isDoorway() && !currentCell.isDoorway() && !visited.isDoorway()) {
@@ -51,7 +51,7 @@ public class ComputerPlayer extends Player {
 	// Makes accusation
 	public void makeAccusation() {
 
-		ArrayList<Card> cards = Board.getCards();
+		ArrayList<Card> cards = Board.getInstance().getCards();
 		Random rand = new Random();
 		String room = cards.get(rand.nextInt(6)).getCardName();
 		String person = cards.get(rand.nextInt(6) + 9).getCardName();
@@ -60,18 +60,18 @@ public class ComputerPlayer extends Player {
 		accusation.person = person;
 		accusation.room = room;
 		accusation.weapon = weapon;
-		Board.checkAccusation(accusation);
+		Board.getInstance().checkAccusation(accusation);
 	}
 
 	// Creates a suggestion
 	public void createSuggestion() {
 
 		suggestion = new Solution(); // clears suggestion
-		BoardCell currentCell = Board.getCellAt(getRow(), getCol());
-		String room = Board.roomLegend.get(currentCell.getInitial());
+		BoardCell currentCell = Board.getInstance().getCellAt(getRow(), getCol());
+		String room = Board.getInstance().roomLegend.get(currentCell.getInitial());
 		seenCards.add(room);
 
-		ArrayList<Card> cards = Board.getCards();
+		ArrayList<Card> cards = Board.getInstance().getCards();
 		Random rand = new Random();
 
 		String person = null;

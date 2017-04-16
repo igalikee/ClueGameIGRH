@@ -70,12 +70,12 @@ public class ClueGame extends JFrame {
 		return item;
 	}
 
-	public static void setUp() {
+	public void setUp() {
 		// Board is singleton, get the only instance and initialize it		
 		board = Board.getInstance();
 		// set the file names to use my config files
 		board.setConfigFiles("data/GVIG_ClueLayout.csv", "data/GVIG_ClueLegend.txt", "data/GVIG_Players.txt", "data/GVIG_Weapons.txt");		
-		Board.initialize();
+		Board.getInstance().initialize();
 	}
 	
 	public static void main(String[] args) {

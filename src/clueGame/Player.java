@@ -18,7 +18,7 @@ public class Player {
 		this.color = convertStringtoColor(color);
 		this.row = row;
 		this.col = col;
-		visited = Board.getCellAt(row, col);
+		//visited //TODO
 		hand = new ArrayList<Card>();
 	}
 

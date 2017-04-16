@@ -13,9 +13,9 @@ import javax.swing.border.TitledBorder;
 
 public class DetectiveNotesGUI extends JDialog {
 
-	ArrayList<String> weapons = Board.getWeapons();
-	ArrayList<Player> players = Board.getPlayers();
-	Map<Character, String> Rooms = Board.getLegend();
+	ArrayList<String> weapons = Board.getInstance().getWeapons();
+	ArrayList<Player> players = Board.getInstance().getPlayers();
+	Map<Character, String> Rooms = Board.getInstance().getLegend();
 
 	public DetectiveNotesGUI() {
 		setTitle("Detective Notes");

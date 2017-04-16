@@ -14,7 +14,7 @@ import javax.swing.border.TitledBorder;
 
 public class DisplayCardsGUI extends JPanel {
 	
-	ArrayList<Player> players = Board.getPlayers();
+	ArrayList<Player> players = Board.getInstance().getPlayers();
 	
 	JPanel mainPanel = new JPanel();
 	
