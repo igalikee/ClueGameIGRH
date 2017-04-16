@@ -19,6 +19,7 @@ public class Control_GUI extends JPanel {
 
 	private JTextField name = new JTextField(2);
 	private JTextField roll = new JTextField(2);
+	private JTextField guessResult = new JTextField();
 	
 
 	JPanel bottomPanel;
@@ -61,8 +62,7 @@ public class Control_GUI extends JPanel {
 	
 	//=======================================================
 	// PANELS
-	//=======================================================
-	
+	//=======================================================	
 	private JPanel whoseTurn() {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2,0));
@@ -99,8 +99,8 @@ public class Control_GUI extends JPanel {
 	private JPanel guessResult() {
 		JPanel panel = new JPanel();
 		JLabel nameLabel = new JLabel("Response");
-		name = new JTextField(10);
-		name.setEditable(false);
+		guessResult = new JTextField(10);
+		guessResult.setEditable(false);
 		panel.add(nameLabel);
 		panel.add(name);
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
@@ -135,9 +135,7 @@ public class Control_GUI extends JPanel {
 				JFrame frame = new JFrame();
 				JOptionPane.showMessageDialog(frame,"Please Complete Your Turn", "Error", JOptionPane.INFORMATION_MESSAGE);
 			}
-			
-	 
-			
+					
 		}
 	}
 
