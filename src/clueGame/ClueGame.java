@@ -17,8 +17,7 @@ public class ClueGame extends JFrame {
 	
 
 	private static Board board;
-	private Control_GUI control = new Control_GUI();
-	
+
 	
 	ClueGame() {
 		setTitle("Clue Game");
@@ -32,9 +31,11 @@ public class ClueGame extends JFrame {
 		add(menuBar, BorderLayout.NORTH);
 		
 		setUp();
-		board.setGameControl(control);
+
 		add(board, BorderLayout.CENTER);
 		
+		Control_GUI control = new Control_GUI();
+		board.setGameControl(control);
 		add(control, BorderLayout.SOUTH);
 		add(new DisplayCardsGUI(), BorderLayout.EAST);	
 	}

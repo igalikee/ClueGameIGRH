@@ -13,7 +13,7 @@ public class ComputerPlayer extends Player {
 	// Constructor
 	public ComputerPlayer(String playerName, String color, int row, int col) {
 		super(playerName, color, row, col);
-		visited = null;
+		visited = Board.getCellAt(super.getRow(), super.getCol());
 	}
 
 	// DO NOT USE THIS CONSTRUCTOR, FOR TESTING PURPOSES

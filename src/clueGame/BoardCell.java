@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class BoardCell {
+
+	
+
 	private int row;
 	private int column;
 	private char initial;
@@ -74,7 +77,7 @@ public class BoardCell {
 	@Override
 	public String toString() {
 		return "BoardCell [row=" + row + ", column=" + column + ", initial=" + initial + ", direction=" + direction
-				+ "]";
+				+ "]" + "\n";
 	}
 
 	public boolean isDoorway() {
@@ -89,6 +92,14 @@ public class BoardCell {
 
 	public char getInitial() {
 		return initial;
+	}
+	
+	public int getRow() {
+		return row;
+	}
+
+	public int getColumn() {
+		return column;
 	}
 
 }

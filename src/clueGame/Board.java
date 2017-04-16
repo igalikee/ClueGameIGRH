@@ -15,6 +15,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 import javax.swing.JPanel;
+import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import clueGame.BoardCell;
 
@@ -37,7 +38,7 @@ public class Board extends JPanel {
 	public static Map<Character, String> roomLegend;
 	public static ArrayList<Card> cards; // cards of rooms, players, weapons
 	public static Solution solution; // holds the solution
-	private Control_GUI control = new Control_GUI();
+	private Control_GUI control;
 
 	private static ArrayList<Player> players;
 	private static int currentPlayer;
@@ -245,8 +246,7 @@ public class Board extends JPanel {
 		targets.clear();
 		Set<BoardCell> visited = new HashSet<BoardCell>();
 
-		BoardCell startCell = null;
-		startCell = grid[i][j];
+		BoardCell startCell = grid[i][j];
 		calculateTargets(startCell, numSteps, visited);
 	}
 
@@ -270,20 +270,27 @@ public class Board extends JPanel {
 	}
 
 	public void makeMove() {
+		targets.clear();
 
-		//TODO ensure player has ended turn 
-		Random rand = new Random();
-
-		int numSteps = rand.nextInt(7);
+		//TODO ensure player has ended turn
 		
-		control.update();
+		Random rand = new Random();
+		int numSteps = rand.nextInt(6) + 1;
+		control.updateRoll(Integer.toString(numSteps));
 		
 		if (currentPlayer != 0) {
-
+			ComputerPlayer p = (ComputerPlayer) players.get(currentPlayer);
+			calcTargets(p.getRow(), p.getCol(), numSteps);
+			System.out.println(targets);
+			BoardCell b = p.pickLocation(targets);
+			players.get(currentPlayer).setRow(b.getRow());
+			players.get(currentPlayer).setCol(b.getColumn());
+			super.repaint();
 		}
 
 		currentPlayer++;
 		if (currentPlayer == 6) currentPlayer = 0;
+		
 	}
 	// =========================================================================================
 	// GAMEPLAY: DEALING CARDS, SUGGESTIONS, ACCUSATIONS
