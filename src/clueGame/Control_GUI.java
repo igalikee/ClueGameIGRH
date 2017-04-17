@@ -17,7 +17,7 @@ import javax.swing.border.TitledBorder;
 
 public class Control_GUI extends JPanel {
 
-	private JTextField name = new JTextField(2);
+	private JTextField name = new JTextField(10);
 	private JTextField roll = new JTextField(2);
 	private JTextField guessResult = new JTextField();
 	
@@ -67,7 +67,6 @@ public class Control_GUI extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2,0));
 		JLabel nameLabel = new JLabel("Whose Turn?");
-		name = new JTextField(10);
 		name.setEditable(false);
 		panel.add(nameLabel);
 		panel.add(name);
@@ -89,10 +88,10 @@ public class Control_GUI extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 		JLabel nameLabel = new JLabel("Guess");
-		name = new JTextField(30);
-		name.setEditable(false);
+//		name = new JTextField(30);
+//		name.setEditable(false);
 		panel.add(nameLabel);
-		panel.add(name);
+//		panel.add(name);
 		return panel;
 	}
 
@@ -102,7 +101,7 @@ public class Control_GUI extends JPanel {
 		guessResult = new JTextField(10);
 		guessResult.setEditable(false);
 		panel.add(nameLabel);
-		panel.add(name);
+		panel.add(guessResult);
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess Result"));
 
 		return panel;
