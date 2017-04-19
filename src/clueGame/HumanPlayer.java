@@ -3,6 +3,7 @@ package clueGame;
 public class HumanPlayer extends Player {
 	private BoardCell visited;
 	private Solution suggestion;
+	private boolean accusing;
 	
 	// Constructor, no different than Player class
 	public HumanPlayer(String playerName, String color, int row, int col) {
@@ -25,6 +26,14 @@ public class HumanPlayer extends Player {
 	
 	public Solution getSuggestion() {
 		return suggestion;
+	}
+	
+	public void setAccusing(boolean accusing) {
+		this.accusing = accusing;
+	}
+	
+	public boolean getAccusing() {
+		return accusing;
 	}
 	
 	

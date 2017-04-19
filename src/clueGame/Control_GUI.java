@@ -21,22 +21,22 @@ public class Control_GUI extends JPanel {
 	private JTextField roll = new JTextField(2);
 	private JTextField guessResult = new JTextField(10);
 	private JTextField guess = new JTextField(30);
-	
+
 
 	JPanel bottomPanel;
 	JPanel topPanel;
 
 	public Control_GUI()
 	{
-		
+
 		bottomPanel = new JPanel();
 		topPanel = new JPanel();
-		
+
 		setLayout(new GridLayout(2,0));
 		topPanel();
 		SetBottomPanel();	
 	}
-	
+
 	public void topPanel() {
 		topPanel.setLayout(new FlowLayout());
 		topPanel.add(whoseTurn());
@@ -44,7 +44,7 @@ public class Control_GUI extends JPanel {
 		topPanel.add(AccuseButton());	
 		add(topPanel);
 	}
-	
+
 	public void SetBottomPanel() {
 		bottomPanel.setLayout(new FlowLayout());
 		bottomPanel.add(dieRoll());
@@ -52,23 +52,23 @@ public class Control_GUI extends JPanel {
 		bottomPanel.add(guessResult());
 		add(bottomPanel);
 	}
-	
+
 	public void updateRoll(String n) {
 		roll.setText(n);
 	}
-	
+
 	public void updateTurnName(String n) {
 		name.setText(n);
 	}
-	
+
 	public void updateGuess(String a, String b, String c) {
 		guess.setText(a + " " + b + " " + c );
 	}
-	
+
 	public void updateGuessResult(String a) {
 		guessResult.setText(a);
 	}
-	
+
 	//=======================================================
 	// PANELS
 	//=======================================================	
@@ -131,24 +131,30 @@ public class Control_GUI extends JPanel {
 
 	class NextPlayerButtonListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
+
 			if (Board.getInstance().getPlayerTurnDone()) {
 				Board.getInstance().makeMove();
 			}
-			
+
 			else {
 				JFrame frame = new JFrame();
 				JOptionPane.showMessageDialog(frame,"Please Complete Your Turn", "Error", JOptionPane.INFORMATION_MESSAGE);
 			}
-					
+
 		}
 	}
 
 	class AccuseButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			System.out.println("Accuse - TODO"); //TODO		
-		}	
+
+			HumanPlayer h = (HumanPlayer)Board.getInstance().getPlayers().get(0);
+			h.setAccusing(true);
+			Solution suggestion = Board.getInstance().drawGuess();
+			if (h.getAccusing()) {
+				Board.getInstance().checkAccusation(suggestion);
+			}
+		}
 	}
 
 }

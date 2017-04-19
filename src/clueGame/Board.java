@@ -311,10 +311,15 @@ public class Board extends JPanel {
 			if (b.isDoorway()) {
 				p.createSuggestion();
 				Solution guess = p.getSuggestion();
-
-				String answer = handleSuggestion(guess, p).getCardName();
+				String answer = null;
+				boolean notWrong = false;
+				if (handleSuggestion(guess, p) != null) {
+					answer = handleSuggestion(guess, p).getCardName();
+				}
 				
-				//TODO set flag if suggestion can't be disproved
+				if (answer != null) {
+					notWrong = true;
+				}
 
 				control.updateGuess(guess.room, guess.person, guess.weapon);
 				control.updateGuessResult(answer);
@@ -402,8 +407,12 @@ public class Board extends JPanel {
 	public  boolean checkAccusation(Solution accusation) {
 		if (solution.person == accusation.person && solution.room == accusation.room
 				&& solution.weapon == accusation.weapon) {
+			JOptionPane.showMessageDialog(null, "Your accusation was correct!");
+			HumanPlayer h = (HumanPlayer)players.get(0);
+			h.setAccusing(false);
 			return true;
 		}
+		JOptionPane.showMessageDialog(null, "Your accusation was incorrect.");
 		return false;
 	}
 	// =========================================================================================
@@ -454,6 +463,7 @@ public class Board extends JPanel {
 		
 		return (thisGUI.getSuggestion());
 	}
+	
 
 	// ========================================================================================
 	// GETTERS & SETTERS
