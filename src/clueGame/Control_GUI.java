@@ -147,12 +147,16 @@ public class Control_GUI extends JPanel {
 	class AccuseButtonListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-
-			HumanPlayer h = (HumanPlayer)Board.getInstance().getPlayers().get(0);
-			h.setAccusing(true);
-			Solution suggestion = Board.getInstance().drawGuess();
-			if (h.getAccusing()) {
-				Board.getInstance().checkAccusation(suggestion);
+			if (!Board.getInstance().getPlayerTurnDone()){
+				HumanPlayer h = (HumanPlayer)Board.getInstance().getPlayers().get(0);
+				h.setAccusing(true);
+				Solution suggestion = Board.getInstance().drawGuess();
+				if (h.getAccusing()) {
+					Board.getInstance().checkAccusation(suggestion);
+				}
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Wait your turn");
 			}
 		}
 	}

@@ -45,6 +45,7 @@ public class Board extends JPanel {
 
 	private Control_GUI control;
 	private boolean playerTurnDone;
+	private boolean accusedThisTurn;
 
 	private ArrayList<Player> players;
 	private  int currentPlayer;
@@ -288,6 +289,7 @@ public class Board extends JPanel {
 		calcTargets(players.get(currentPlayer).getRow(), players.get(currentPlayer).getCol(), numSteps);
 
 		if (currentPlayer == 0) {
+			accusedThisTurn = false;
 			for (BoardCell b : targets) {
 				b.setPlayerHighlight(true);
 
@@ -405,14 +407,22 @@ public class Board extends JPanel {
 	}
 
 	public  boolean checkAccusation(Solution accusation) {
-		if (solution.person == accusation.person && solution.room == accusation.room
-				&& solution.weapon == accusation.weapon) {
+		if (accusedThisTurn) {
+			JOptionPane.showMessageDialog(null, "You've already made an accusation this turn.");
+			return false;
+		}
+		else if (solution.person == accusation.person && solution.room == accusation.room
+				&& solution.weapon == accusation.weapon && !accusedThisTurn) {
 			JOptionPane.showMessageDialog(null, "Your accusation was correct!");
 			HumanPlayer h = (HumanPlayer)players.get(0);
 			h.setAccusing(false);
+			accusedThisTurn = true;
 			return true;
 		}
-		JOptionPane.showMessageDialog(null, "Your accusation was incorrect.");
+		else if (!accusedThisTurn) {
+			JOptionPane.showMessageDialog(null, "Your accusation was incorrect.");
+			accusedThisTurn = true;
+		}
 		return false;
 	}
 	// =========================================================================================
