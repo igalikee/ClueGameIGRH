@@ -278,7 +278,6 @@ public class Board extends JPanel {
 	}
 
 	public void makeMove() {
-
 		Random rand = new Random();
 		int numSteps = rand.nextInt(6) + 1;
 		control.updateRoll(Integer.toString(numSteps));
@@ -293,6 +292,7 @@ public class Board extends JPanel {
 				b.setPlayerHighlight(true);
 
 			}
+			
 			playerTurnDone = false;
 		}
 
@@ -301,10 +301,7 @@ public class Board extends JPanel {
 
 			BoardCell b;
 
-			System.out.println(p.getVisited());
-
 			b = p.pickLocation(targets);
-
 
 			p.setVisited(b);
 
@@ -334,7 +331,12 @@ public class Board extends JPanel {
 			}
 
 		}
-
+		Solution suggestion = new Solution();
+		if (currentPlayer == 0 && grid[players.get(0).getRow()][players.get(0).getCol()].isDoorway()) {
+			players.get(0).setVisited(grid[players.get(0).getRow()][players.get(0).getCol()]);
+			suggestion = drawGuess();
+			handleSuggestion(suggestion, players.get(0));
+		}
 		super.repaint();
 		currentPlayer++;
 		if (currentPlayer == 6) {
@@ -450,6 +452,12 @@ public class Board extends JPanel {
 
 		g.drawString("Space Pool", 40, 200);
 
+	}
+	
+	public Solution drawGuess() {
+		MakeGuessGUI thisGUI = new MakeGuessGUI();
+		
+		return (thisGUI.getSuggestion());
 	}
 
 	// ========================================================================================

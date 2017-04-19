@@ -100,6 +100,22 @@ public class Player {
 	public void setCol(int col) {
 		this.col = col;
 	}
+	
+	public boolean isHuman() {
+		if (color == Color.RED) {
+			return true;
+		}
+		return false;
+	}
+	
+	// setVisited and getVisited incorporated here for HumanPlayer
+	public void setVisited(BoardCell b) {
+		return;
+	}
+	
+	public BoardCell getVisited() {
+		return null;
+	}
 
 	// Prints player information
 	@Override
