@@ -507,6 +507,10 @@ public class Board extends JPanel {
 	public int getNumColumns() {
 		return columns;
 	}
+	
+	public BoardCell[][] getGrid() {
+		return grid;
+	}
 
 	public BoardCell getCellAt(int i, int j) {
 		return grid[i][j];
