@@ -294,7 +294,7 @@ public class Board extends JPanel {
 				b.setPlayerHighlight(true);
 
 			}
-			
+
 			playerTurnDone = false;
 		}
 
@@ -318,15 +318,15 @@ public class Board extends JPanel {
 				if (handleSuggestion(guess, p) != null) {
 					answer = handleSuggestion(guess, p).getCardName();
 				}
-				
+
 				if (answer != null) {
 					notWrong = true;
 				}
 
 				control.updateGuess(guess.room, guess.person, guess.weapon);
 				control.updateGuessResult(answer);
-			
-				
+
+
 
 				for (int i = 0; i < players.size(); i++) {
 					if (players.get(i).getPlayerName().equals(guess.person)) {
@@ -411,6 +411,7 @@ public class Board extends JPanel {
 			JOptionPane.showMessageDialog(null, "You've already made an accusation this turn.");
 			return false;
 		}
+		
 		else if (solution.person == accusation.person && solution.room == accusation.room
 				&& solution.weapon == accusation.weapon && !accusedThisTurn) {
 			JOptionPane.showMessageDialog(null, "Your accusation was correct!");
@@ -419,11 +420,13 @@ public class Board extends JPanel {
 			accusedThisTurn = true;
 			return true;
 		}
+		
 		else if (!accusedThisTurn) {
 			JOptionPane.showMessageDialog(null, "Your accusation was incorrect.");
 			accusedThisTurn = true;
 		}
 		return false;
+		
 	}
 	// =========================================================================================
 	// GUI
@@ -467,13 +470,13 @@ public class Board extends JPanel {
 		g.drawString("Space Pool", 40, 200);
 
 	}
-	
+
 	public Solution drawGuess() {
 		MakeGuessGUI thisGUI = new MakeGuessGUI();
-		
+
 		return (thisGUI.getSuggestion());
 	}
-	
+
 
 	// ========================================================================================
 	// GETTERS & SETTERS
@@ -536,7 +539,7 @@ public class Board extends JPanel {
 	public void movePlayer(int x, int y) {
 		players.get(0).setCol(x/BoardCell.CELL_SIZE);
 		players.get(0).setRow(y/BoardCell.CELL_SIZE);
-		
+
 		if (grid[players.get(0).getRow()][players.get(0).getCol()].isDoorway()) {
 			players.get(0).setVisited(grid[players.get(0).getRow()][players.get(0).getCol()]);
 			Solution suggestion = drawGuess();
