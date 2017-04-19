@@ -96,6 +96,10 @@ public class ComputerPlayer extends Player {
 	public void setVisited(BoardCell b) {
 		visited = b;
 	}
+	
+	public BoardCell getVisited() {
+		return visited;
+	}
 
 	public Solution getSuggestion() {
 		return suggestion;
@@ -103,6 +107,10 @@ public class ComputerPlayer extends Player {
 
 	public void setSeenCards(ArrayList<String> seenCards) {
 		this.seenCards = seenCards;
+	}
+	
+	public void addSeenCard(String s) {
+		seenCards.add(s);
 	}
 
 }

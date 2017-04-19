@@ -19,7 +19,8 @@ public class Control_GUI extends JPanel {
 
 	private JTextField name = new JTextField(10);
 	private JTextField roll = new JTextField(2);
-	private JTextField guessResult = new JTextField();
+	private JTextField guessResult = new JTextField(10);
+	private JTextField guess = new JTextField(30);
 	
 
 	JPanel bottomPanel;
@@ -60,6 +61,14 @@ public class Control_GUI extends JPanel {
 		name.setText(n);
 	}
 	
+	public void updateGuess(String a, String b, String c) {
+		guess.setText(a + " " + b + " " + c );
+	}
+	
+	public void updateGuessResult(String a) {
+		guessResult.setText(a);
+	}
+	
 	//=======================================================
 	// PANELS
 	//=======================================================	
@@ -75,7 +84,6 @@ public class Control_GUI extends JPanel {
 
 	private JPanel dieRoll() {
 		JPanel panel = new JPanel();
-		//panel.setLayout(new GridLayout(2, 1));
 		JLabel nameLabel = new JLabel("Die");
 		roll.setEditable(false);
 		panel.add(nameLabel);
@@ -88,17 +96,15 @@ public class Control_GUI extends JPanel {
 		JPanel panel = new JPanel();
 		panel.setBorder(new TitledBorder(new EtchedBorder(), "Guess"));
 		JLabel nameLabel = new JLabel("Guess");
-//		name = new JTextField(30);
-//		name.setEditable(false);
+		guess.setEditable(false);
 		panel.add(nameLabel);
-//		panel.add(name);
+		panel.add(guess);
 		return panel;
 	}
 
 	private JPanel guessResult() {
 		JPanel panel = new JPanel();
 		JLabel nameLabel = new JLabel("Response");
-		guessResult = new JTextField(10);
 		guessResult.setEditable(false);
 		panel.add(nameLabel);
 		panel.add(guessResult);

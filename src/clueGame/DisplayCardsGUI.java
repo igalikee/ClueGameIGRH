@@ -48,6 +48,7 @@ public class DisplayCardsGUI extends JPanel {
 		
 		for (Card c: cards) {
 			JTextArea display = new JTextArea(2,20);
+			display.setEditable(false);
 			display.setText(c.getCardName());
 			switch (c.getCardType()) {
 			case WEAPON: weapons.add(display);  

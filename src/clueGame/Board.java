@@ -42,7 +42,7 @@ public class Board extends JPanel {
 	public  Map<Character, String> roomLegend;
 	public  ArrayList<Card> cards; // cards of rooms, players, weapons
 	public  Solution solution; // holds the solution
-	
+
 	private Control_GUI control;
 	private boolean playerTurnDone;
 
@@ -283,13 +283,15 @@ public class Board extends JPanel {
 		int numSteps = rand.nextInt(6) + 1;
 		control.updateRoll(Integer.toString(numSteps));
 		control.updateTurnName(players.get(currentPlayer).getPlayerName());
+		control.updateGuess("", "", "");
+		control.updateGuessResult("");
 
 		calcTargets(players.get(currentPlayer).getRow(), players.get(currentPlayer).getCol(), numSteps);
 
 		if (currentPlayer == 0) {
 			for (BoardCell b : targets) {
 				b.setPlayerHighlight(true);
-				
+
 			}
 			playerTurnDone = false;
 		}
@@ -298,12 +300,39 @@ public class Board extends JPanel {
 			ComputerPlayer p = (ComputerPlayer) players.get(currentPlayer);
 
 			BoardCell b;
-			do {	//TODO change this
-				b = p.pickLocation(targets);	
-			} while (b == p.getVisited());
+
+			System.out.println(p.getVisited());
+
+			b = p.pickLocation(targets);
+
+
+			p.setVisited(b);
 
 			players.get(currentPlayer).setRow(b.getRow());
 			players.get(currentPlayer).setCol(b.getColumn());
+
+			if (b.isDoorway()) {
+				p.createSuggestion();
+				Solution guess = p.getSuggestion();
+
+				String answer = handleSuggestion(guess, p).getCardName();
+				
+				//TODO set flag if suggestion can't be disproved
+
+				control.updateGuess(guess.room, guess.person, guess.weapon);
+				control.updateGuessResult(answer);
+			
+				
+
+				for (int i = 0; i < players.size(); i++) {
+					if (players.get(i).getPlayerName().equals(guess.person)) {
+						players.get(i).setRow(p.getRow());
+						players.get(i).setCol(p.getCol());
+					}
+
+				}
+			}
+
 		}
 
 		super.repaint();
@@ -401,7 +430,7 @@ public class Board extends JPanel {
 
 		}
 
-		//RoomNames TODO fix these so they don't go to next screen 
+		//RoomNames TODO put these in boardcell  
 		g.setColor(Color.BLACK);
 
 		g.drawString("Cryo", 5, 80);
@@ -512,18 +541,15 @@ class PlayerInputListener implements MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 
-
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 
@@ -544,7 +570,6 @@ class PlayerInputListener implements MouseListener {
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
 
 	}
 

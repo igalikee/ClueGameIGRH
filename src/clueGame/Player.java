@@ -10,7 +10,6 @@ public class Player {
 	private int row;
 	private int col;
 	private ArrayList<Card> hand;
-	private BoardCell visited; //TODO
 
 	// Constructor
 	public Player(String playerName, String color, int row, int col) {
@@ -18,16 +17,8 @@ public class Player {
 		this.color = convertStringtoColor(color);
 		this.row = row;
 		this.col = col;
-		//visited //TODO
-		hand = new ArrayList<Card>();
-	}
 
-	public BoardCell getVisited() {
-		return visited;
-	}
-	
-	public void setVisited(BoardCell b) {
-		visited = b;
+		hand = new ArrayList<Card>();
 	}
 
 	// Converts strings to color given a string
