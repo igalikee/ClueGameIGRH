@@ -331,12 +331,7 @@ public class Board extends JPanel {
 			}
 
 		}
-		Solution suggestion = new Solution();
-		if (currentPlayer == 0 && grid[players.get(0).getRow()][players.get(0).getCol()].isDoorway()) {
-			players.get(0).setVisited(grid[players.get(0).getRow()][players.get(0).getCol()]);
-			suggestion = drawGuess();
-			handleSuggestion(suggestion, players.get(0));
-		}
+
 		super.repaint();
 		currentPlayer++;
 		if (currentPlayer == 6) {
@@ -521,6 +516,12 @@ public class Board extends JPanel {
 	public void movePlayer(int x, int y) {
 		players.get(0).setCol(x/BoardCell.CELL_SIZE);
 		players.get(0).setRow(y/BoardCell.CELL_SIZE);
+		
+		if (grid[players.get(0).getRow()][players.get(0).getCol()].isDoorway()) {
+			players.get(0).setVisited(grid[players.get(0).getRow()][players.get(0).getCol()]);
+			Solution suggestion = drawGuess();
+			handleSuggestion(suggestion, players.get(0));
+		}
 		repaint();
 	}
 
